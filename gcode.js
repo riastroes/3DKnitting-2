@@ -26,11 +26,8 @@ Gcode.prototype.startCode = function(){
     append(this.commands, "G0 Z10             ;move the platform up 15mm");
     append(this.commands, "M117 Printing...");
 }
-Gcode.prototype.getCode = function(layer, patterncommands){
-    this.commands.concat(layer.commands);
-    for(var i = 0; i < patterncommands.length; i++){
-      append(this.commands, patterncommands[i]);
-    }
+Gcode.prototype.getCode = function(knitting){
+    this.commands  = concat(this.commands, knitting.commands);
 }
 Gcode.prototype.endCode = function(){
     append(this.commands, ";end code");
@@ -66,9 +63,6 @@ Gcode.prototype.save = function(name){
 }
 Gcode.prototype.generate = function(layers, knitting){
   this.startCode();
-  for(var i = 0; i < layers.length; i++){
-    this.getCode(layers[i], layers[i].commands);
-    this.getCode(layers[i], knitting.commands);
-  }
+  this.getCode(knitting);
   this.endCode();
 }

@@ -5,11 +5,9 @@ function Layer(layer, settings){
   this.speed = settings.speed;
   this.scale = settings.scale;
   this.commands = new Array(";Layer " + this.layer);
-  this.commands = append(this.commands, ";param layerheight: " + this.layerheight);
-  this.commands = append(this.commands, ";param thickness:   " + this.thickness);
-  this.commands = append(this.commands, ";param speed:       " + this.speed);
-  this.commands = append(this.commands, "G0 F" + this.speed);
-}
-Layer.prototype.gcode = function(){
-  return this.commands;
+  append(this.commands, ";param layerheight: " + this.layerheight);
+  append(this.commands, ";param thickness:   " + this.thickness);
+  append(this.commands, ";param speed:       " + this.speed);
+  append(this.commands, "G0 F" + this.speed);
+  this.p = [];
 }

@@ -4,7 +4,7 @@ function Settings(printer, material, style){
   this.style = style;
   this.width = width;
   this.height = height;
-  this.scale = 0.23;         //canvas = 1000 px, bed = 220 mm
+  this.scale = 0;
   this.layerheight = 0;
   this.thickness = 0;
   this.speed = 0;
@@ -19,16 +19,18 @@ Settings.prototype.init = function(){
   this.initMaterial();
   switch(this.printer){
     case "Anet":{
+      this.scale = 0.20;         //canvas = 1000 px, bed = 220 mm
       this.filement = 1.75;
       if(this.material == "PLA" && this.style == "fine"){
-        this.initStyle(1, 0.02, 1000); //not tested
+        this.initStyle(0.4, 0.09, 200); //not tested - TE DUN
       }
       else if(this.material == "PLA" && this.style == "normal"){
-        this.initStyle(1.5, 0.5, 800); //not tested
+        this.initStyle(0.4, 0.12, 800);//test OK
       }
       break;
     }
     case "Ultimaker2+":{
+      this.scale = 0.23;         //canvas = 1000 px, bed = 220 mm
       this.filement = 2.85;
       if(this.material == "PLA" && this.style == "fine"){
         this.initStyle(1, 0.02, 1000);   //test OK

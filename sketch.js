@@ -15,9 +15,11 @@ function setup() {
     gcode = new Gcode(settings);
     layers = [];
     layers[0] = new Layer(0, settings);
-    knitting = new Knitting();
-    knitting.createPattern("random50", createVector(100,100,0));
-    knitting.gcode(layers[0]);
+    layers[1] = new Layer(1, settings);
+    knitting = new Knitting(layers, "6xknoopje-random50", createVector(100,100,0));
+
+    knitting.generateGcode(layers);
+
     gcode.generate(layers, knitting);
     knitting.draw();
     //settings.report(gcode);

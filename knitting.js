@@ -1,31 +1,38 @@
-function Knitting(){
+function Knitting(layers, name, first){
   this.commands = new Array(";knitting");
-  this.p = [];
-
+  this.pattern = new Pattern(name, first);
+  this.layers = layers;
+  this.createPattern();
 }
-Knitting.prototype.createPattern = function(name, first){
-  var pattern = new Pattern(name, first);
-  this.p = concat(this.p, pattern.p);
-  console.log("0:" + this.p[0]);
-  console.log("1:" + this.p[1]);
+Knitting.prototype.createPattern = function(){
+    for(var i = 0; i < this.layers.length; i++){
+      this.layers[i].p = concat(this.layers[i].p, this.pattern.p);
+  }
+}
+Knitting.prototype.generateGcode = function(){
+
+  for(var i = 0; i < this.layers.length; i++){
+    this.commands = concat(this.commands, this.layers[i].commands);
+    this.gcode(this.layers[i]);
+  }
 }
 Knitting.prototype.gcode = function(layer){
-  append(this.commands, "G0 X" + this.p[0].x + " Y" + this.p[0].y  );
+
   var lz = ((layer.layer+1) * layer.layerheight);
   append(this.commands, "G0 Z" + lz);
+  append(this.commands, "G0 X" + layer.p[0].x * layer.scale + " Y" + layer.p[0].y * layer.scale  );
 
-
-  for(var i = 1; i < this.p.length; i++){
-    var x = this.p[i].x * layer.scale;
+  for(var i = 1; i < layer.p.length; i++){
+    var x = layer.p[i].x * layer.scale;
     x = floor(x * 100)/100;
-    var y = this.p[i].y * layer.scale;
+    var y = layer.p[i].y * layer.scale;
     y = floor(y * 100)/100;
-    var z = this.p[i].z;
+    var z = layer.p[i].z;
 
-    var dvector = p5.Vector.sub(this.p[i], this.p[i-1]);
+    var dvector = p5.Vector.sub(layer.p[i], layer.p[i-1]);
     var d = dvector.mag()* layer.scale;
 
-    gcode.extrude += (d * layer.layerheight * layer.thickness);
+    gcode.extrude += (d * layer.thickness);
 
 
     var kz = ((layer.layer+1) * layer.layerheight) + floor(z  * 100)/100;
@@ -40,16 +47,18 @@ Knitting.prototype.gcode = function(layer){
 Knitting.prototype.draw = function(){
     stroke(2);
     rect(0,0,width-1,height-1);
-    for(var i = 1; i < this.p.length; i++){
-    var x = this.p[i].x;
-    var y = this.p[i].y;
-    var z = this.p[i].z;
+    for(var l = 0; l < this.layers.length; l++){
+      for(var i = 1; i < this.layers[l].p.length; i++){
+      var x =  this.layers[l].p[i].x;
+      var y =  this.layers[l].p[i].y;
+      var z =  this.layers[l].p[i].z;
 
-    x = floor(x * 100)/100;
-    y = floor(y * 100)/100;
-    z = floor(z * 100)/100;
+      x = floor(x * 100)/100;
+      y = floor(y * 100)/100;
+      z = floor(z * 100)/100;
 
-    stroke(2);
-    line(this.p[i-1].x, this.p[i-1].y,x,y);
+      stroke(this.layers[l].thickness);
+      line( this.layers[l].p[i-1].x,  this.layers[l].p[i-1].y,x,y);
+    }
   }
 }
