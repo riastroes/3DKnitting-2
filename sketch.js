@@ -11,13 +11,13 @@ function setup() {
     createCanvas(1000,1000);
     background(255);
 
-    settings = new Settings("Anet","PLA","fine");
+    settings = new Settings("Anet","TPC FLEX","fine");
     gcode = new Gcode(settings);
     layers = [];
     layers[0] = new Layer(0, settings);
-    layers[1] = new Layer(1, settings);
-    knitting = new Knitting(layers, "6xknoopje-random50", createVector(100,100,0));
 
+    //knitting = new Knitting(layers, "6xknoopje-random50", createVector(100,100,0));
+    knitting = new Knitting(layers, "straight", createVector(20,150,0), 5, 48);
     knitting.generateGcode(layers);
 
     gcode.generate(layers, knitting);

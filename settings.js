@@ -22,7 +22,10 @@ Settings.prototype.init = function(){
       this.scale = 0.20;         //canvas = 1000 px, bed = 220 mm
       this.filement = 1.75;
       if(this.material == "PLA" && this.style == "fine"){
-        this.initStyle(0.4, 0.09, 200); //not tested - TE DUN
+        this.initStyle(0.4, 0.09, 200); //not tested - TE DUN 0.09 OK
+      }
+      else if(this.material == "TPC FLEX" && this.style == "fine"){
+        this.initStyle(0.4, 0.2, 200); //not tested - TE DUN 0.1 
       }
       else if(this.material == "PLA" && this.style == "normal"){
         this.initStyle(0.4, 0.12, 800);//test OK

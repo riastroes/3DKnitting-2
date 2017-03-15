@@ -1,6 +1,6 @@
-function Knitting(layers, name, first){
+function Knitting(layers, name, first, rows, stitches){
   this.commands = new Array(";knitting");
-  this.pattern = new Pattern(name, first);
+  this.pattern = new Pattern(name, first, rows, stitches);
   this.layers = layers;
   this.createPattern();
 }
