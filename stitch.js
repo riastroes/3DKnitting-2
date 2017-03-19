@@ -5,11 +5,16 @@ function Stitch(type){
 }
 Stitch.prototype.create =function(){
     switch(this.type){
-        case '-': {                         // overslaan
+      case '-': {                         // overslaan naar rechts
         this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(0,1,0,0);
+        this.stitch[1] = new Pos(4,0,0,0);
         break;
        }
+       case '_': {                         // overslaan naar links
+       this.stitch[0] = new Pos(0,0,0,0);
+       this.stitch[1] = new Pos(-4,0,0,0);
+       break;
+      }
        case '+': {                         // 1 plat
          this.stitch[0] = new Pos(0,0,0,0);
          this.stitch[1] = new Pos(0,1,0,2);

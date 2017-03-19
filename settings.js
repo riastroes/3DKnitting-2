@@ -19,13 +19,13 @@ Settings.prototype.init = function(){
   this.initMaterial();
   switch(this.printer){
     case "Anet":{
-      this.scale = 0.20;         //canvas = 1000 px, bed = 220 mm
+      this.scale = 0.2;         //canvas = 1000 px, bed = 220 mm
       this.filement = 1.75;
       if(this.material == "PLA" && this.style == "fine"){
-        this.initStyle(0.4, 0.09, 200); //not tested - TE DUN 0.09 OK
+        this.initStyle(0.4, 0.09, 200); //test OK
       }
       else if(this.material == "TPC FLEX" && this.style == "fine"){
-        this.initStyle(0.4, 0.2, 200); //not tested - TE DUN 0.1 
+        this.initStyle(0.4, 0.2, 800); //not tested - TE DUN 0.1
       }
       else if(this.material == "PLA" && this.style == "normal"){
         this.initStyle(0.4, 0.12, 800);//test OK
@@ -36,10 +36,11 @@ Settings.prototype.init = function(){
       this.scale = 0.23;         //canvas = 1000 px, bed = 220 mm
       this.filement = 2.85;
       if(this.material == "PLA" && this.style == "fine"){
-        this.initStyle(1, 0.02, 1000);   //test OK
+        this.initStyle(1, 0.03, 600);   //test // 1  0.05   1000 test OK
       }
-      else if(this.material == "PLA" && this.style == "normal" ){
-        this.initStyle(1.5, 0.5, 800);  //not tested
+      else if(this.material == "PLA" && this.style == "grof" ){
+        //nozzle 0.08
+        this.initStyle(1.5, 1, 800);  //not tested
       }
       break;
     }

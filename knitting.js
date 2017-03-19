@@ -1,8 +1,14 @@
 function Knitting(layers, name, first, rows, stitches){
   this.commands = new Array(";knitting");
-  this.pattern = new Pattern(name, first, rows, stitches);
   this.layers = layers;
-  this.createPattern();
+  if(name == "new"){
+    this.pattern = new Pattern(name, first, rows, stitches);
+    this.createPattern();
+  }
+  else{
+    this.pattern = "";
+  }
+
 }
 Knitting.prototype.createPattern = function(){
     for(var i = 0; i < this.layers.length; i++){
@@ -13,6 +19,7 @@ Knitting.prototype.generateGcode = function(){
 
   for(var i = 0; i < this.layers.length; i++){
     this.commands = concat(this.commands, this.layers[i].commands);
+    this.commands = concat(this.commands, this.pattern.commands);
     this.gcode(this.layers[i]);
   }
 }
@@ -45,8 +52,9 @@ Knitting.prototype.gcode = function(layer){
   }
 }
 Knitting.prototype.draw = function(){
-    stroke(2);
-    rect(0,0,width-1,height-1);
+    stroke(0);
+    fill(255);
+    rect(0,0,width-1, height-1);
     for(var l = 0; l < this.layers.length; l++){
       for(var i = 1; i < this.layers[l].p.length; i++){
       var x =  this.layers[l].p[i].x;
