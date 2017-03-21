@@ -70,6 +70,7 @@ Pattern.prototype.skirt = function(pos, len){
   this.p[next + 3].y =  ( this.p[next].y/2) -1;
   this.p[next + 4] = pos.copy();
 }
+
 Pattern.prototype.testDesign = function(strDesign){
   this.design=[];
   this.design[0] = strDesign;
@@ -100,7 +101,7 @@ Pattern.prototype.designPattern = function(name, row, stitches){
        this.design[r] ="U" + s.repeat(this.stitches -1) + "W";
      }
   }
-
+  console.log(this.design);
 }
 Pattern.prototype.drawGrid = function(name, rows, stitches){
   this.rows = rows;
@@ -142,19 +143,18 @@ Pattern.prototype.gridToPattern = function(){
 
   this.designPattern("straight", this.rows, this.stitches);
   for(y = 1; y<= this.rows-1; y++){
+    if(y % 2 == 1){
 
+    }
     for(x = 1; x < this.stitches-1; x++){
-      if(this.grid[y][x]== 0 && this.grid[y-1][x]!= 0 &&  (y % 2)== 0){
-
+      if(this.grid[y][x]== 0 && (y % 2)== 0){
+        //-
         var apart = this.design[y].substr(0, x);
         var bpart = this.design[y].substr(x+1, this.design[y].length)
-        if(this.grid[y][x-1] !=0 && this.grid[y][x+1] ==0){
+        if(this.grid[y][x-1] !=0){
           this.design[y] = apart.concat("M").concat(bpart);
         }
-        else if(this.grid[y][x-1] !=0 && this.grid[y][x+1] !=0){
-          this.design[y] = apart.concat("-").concat(bpart);
-        }
-        else if(this.grid[y][x+1] !=0 ){
+        else if(this.grid[y][x+1] !=0){
           this.design[y] = apart.concat("O").concat(bpart);
         }
         else{
@@ -162,82 +162,30 @@ Pattern.prototype.gridToPattern = function(){
         }
 
       }
-      else if(this.grid[y][x]== 0 && this.grid[y-1][x]!= 0 && (y % 2)== 1){
-        var q = (this.design[y].length-1) - x;
-        var apart = this.design[y].substr(0, q);
-        var bpart = this.design[y].substr(q+1, this.design[y].length)
-        if(this.grid[y][x-1] !=0 && this.grid[y][x+1] ==0){
-          this.design[y] = apart.concat("G").concat(bpart);
-        }
-        else if(this.grid[y][x-1] !=0 && this.grid[y][x+1] !=0){
-          this.design[y] = apart.concat("_").concat(bpart);
-        }
-        else if(this.grid[y][x+1] !=0 ){
+      else if(this.grid[y][x]== 0 && (y % 2)== 1){
+        //-
+        var apart = this.design[y].substr(0, x);
+        var bpart = this.design[y].substr(x+1, this.design[y].length)
+        if(this.grid[y][x-1] !=0){
           this.design[y] = apart.concat("D").concat(bpart);
+        }
+        else if(this.grid[y][x+1] !=0){
+          this.design[y] = apart.concat("G").concat(bpart);
         }
         else{
           this.design[y] = apart.concat("E").concat(bpart);
         }
 
       }
-      else if(this.grid[y][x]== 0 && this.grid[y-1][x]== 0 && (y % 2)== 0){
-
-        var apart = this.design[y].substr(0, x);
-        var bpart = this.design[y].substr(x+1, this.design[y].length)
-        if(this.grid[y][x-1] !=0){
-          this.design[y] = apart.concat("-").concat(bpart);
-        }
-        else if(this.grid[y][x+1] !=0){
-          this.design[y] = apart.concat("-").concat(bpart);
-        }
-        else{
-          this.design[y] = apart.concat("-").concat(bpart);
-        }
-
-      }
-      else if(this.grid[y][x]== 0 && this.grid[y-1][x]== 0 &&  (y % 2)== 1){
-        q = (this.design[y].length-1) - x;
-        var apart = this.design[y].substr(0, q);
-        var bpart = this.design[y].substr(q+1, this.design[y].length);
-        if(this.grid[y][x-1] !=0){
-          this.design[y] = apart.concat("_").concat(bpart);
-        }
-        else if(this.grid[y][x+1] !=0){
-          this.design[y] = apart.concat("_").concat(bpart);
-        }
-        else{
-          this.design[y] = apart.concat("_").concat(bpart);
-        }
-
-      }
-      else if(this.grid[y][x] != 0 && this.grid[y-1][x]== 0 && (y%2) == 0){
-          //als dit een even regel
-          var apart = this.design[y].substr(0, x);
-          var bpart = this.design[y].substr(x+1, this.design[y].length)
-          if(this.grid[y-1][x-1]!= 0 && this.grid[y-1][x+1]== 0){
-            this.design[y] = apart.concat("I").concat(bpart);
-          }
-          else if(this.grid[y-1][x-1]!= 0 && this.grid[y-1][x+1]!=0){
-            //this.design[y] = apart.concat("-").concat(bpart);
-          }
-          else if(this.grid[y-1][x+1]!= 0){
-            this.design[y] = apart.concat("J").concat(bpart);
-          }
-          else{
-            this.design[y] = apart.concat("H").concat(bpart);
-          }
-        }
-      else if(this.grid[y][x] != 0 && this.grid[y-1][x]== 0 && (y%2) ==1){
+      else if(this.grid[y-1][x]== 0){
         //look at de vorige regel
         q = (this.design[y].length-1) - x;
         var apart = this.design[y].substr(0, q);
         var bpart = this.design[y].substr(q+1, this.design[y].length);
-
-          if(this.grid[y-1][x-1]!= 0 && this.grid[y-1][x+1]== 0){
+        if((y % 2)== 1){
+          //als dit een oneven regel
+          if(this.grid[y-1][x-1]!= 0){
             this.design[y] = apart.concat("T").concat(bpart);
-          }
-          else if(this.grid[y-1][x-1]!= 0 && this.grid[y-1][x+1]!= 0){
-            //this.design[y] = apart.concat("_").concat(bpart);
           }
           else if(this.grid[y-1][x+1]!= 0){
             this.design[y] = apart.concat("P").concat(bpart);
@@ -245,13 +193,25 @@ Pattern.prototype.gridToPattern = function(){
           else{
             this.design[y] = apart.concat("Q").concat(bpart);
           }
+        }
+        if((y % 2)== 0){
+          //als dit een even regel
+          if(this.grid[y-1][x-1]!= 0){
+            this.design[y] = apart.concat("J").concat(bpart);
+          }
+          else if(this.grid[y-1][x+1]!= 0){
+            this.design[y] = apart.concat("I").concat(bpart);
+          }
+          else{
+            this.design[y] = apart.concat("H").concat(bpart);
+          }
+        }
+
       }
-
-
     }
 
   }
-  this.createPatternCommands();
+  this.checkPattern();
   var stitchwscale = ((width -100)/4) /this.stitches;
   var stitchhscale = ((height -100)/2.15)/(this.rows);
   var start = this.p.length ;
@@ -271,36 +231,38 @@ Pattern.prototype.gridToPattern = function(){
     }
   }
 
-  console.log(this.showDesign());
+  console.log(this.design);
 
 
 }
-Pattern.prototype.showDesign = function(){
-  var showdesign =[];
-  for(var y = 0; y < this.design.length; y++){
-    if(y % 2 == 0){
-      showdesign[y] = this.design[y];
-    }
-    else{
-      showdesign[y] = this.design[y].split("").reverse().join("");
-    }
-  }
-  return showdesign;
-}
-
-Pattern.prototype.createPatternCommands = function(){
-
+Pattern.prototype.checkPattern = function(){
   for(var y =0; y < this.rows; y++){
     for(var x = 0; x < this.stitches; x++){
       if(x > 0 && x < this.stitches-1 && y>0 && y < this.rows-1){
         if(this.design[y].charAt(x) ==  "-" && (this.design[y-1].charAt(x) =="L" || this.design[y-1].charAt(x) =="B") ){
+          // var apart = this.design[y-1].substring(0,x);
+          // var bpart = this.design[y-1].substring(x+1,this.design[y-1].length);
+          // this.design[y-1] = apart + "Y" + bpart;
           q = (this.design[y-1].length-1) - x;
           var apart = this.design[y-1].substr(0, q);
           var bpart = this.design[y-1].substr(q+1, this.design[y-1].length);
+          // if(this.design[y].charAt(x-1) ==  "R"){ //first
+          //   this.design[y-1] = apart.concat("X").concat(bpart);
+          // }
+          // else{
+          //   this.design[y-1] = apart.concat("Y").concat(bpart);
+          // }
+
         }
         else if(this.design[y].charAt(x) ==  "_" && (this.design[y-1].charAt(x) =="R" || this.design[y-1].charAt(x) =="B") ){
           var apart = this.design[y-1].substring(0,x);
           var bpart = this.design[y-1].substring(x+1,this.design[y-1].length);
+          // if(this.design[y].charAt(x-1) ==  "L"){ //first
+          //   this.design[y-1] = apart.concat("U").concat(bpart);
+          // }
+          // else{
+          //   this.design[y-1] = apart.concat("V").concat(bpart);
+          // }
         }
       }
     }
