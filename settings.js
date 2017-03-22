@@ -25,10 +25,19 @@ Settings.prototype.init = function(){
         this.initStyle(0.4, 0.09, 200); //test OK
       }
       else if(this.material == "TPC FLEX" && this.style == "fine"){
-        this.initStyle(0.4, 0.2, 800); //not tested - TE DUN 0.1
+        this.initStyle(0.4, 0.15, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
       }
       else if(this.material == "PLA" && this.style == "normal"){
         this.initStyle(0.4, 0.12, 800);//test OK
+      }
+      else if(this.material == "Messing" && this.style == "normal"){
+        this.initStyle(0.4, 0.12, 800);//test OK
+      }
+      else if(this.material == "Brons" && this.style == "normal"){
+        this.initStyle(0.4, 0.15, 800);//
+      }
+      else if(this.material == "Coper" && this.style == "normal"){
+        this.initStyle(0.4, 0.15, 800);//
       }
       break;
     }
@@ -45,8 +54,6 @@ Settings.prototype.init = function(){
       break;
     }
   }
-
-
 }
 Settings.prototype.initMaterial = function(){
     switch(this.material){
@@ -58,6 +65,21 @@ Settings.prototype.initMaterial = function(){
     case "TPC FLEX":{
       this.nozzletemp = 210;
       this.bedtemp = 80;
+      break;
+    }
+    case "Messing":{
+      this.nozzletemp = 160;
+      this.bedtemp = 40;
+      break;
+    }
+    case "Brons":{
+      this.nozzletemp = 160;
+      this.bedtemp = 80;
+      break;
+    }
+    case "Coper":{
+      this.nozzletemp = 165;
+      this.bedtemp = 70;
       break;
     }
   }

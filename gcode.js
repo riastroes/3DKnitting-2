@@ -8,8 +8,8 @@ function Gcode(settings){
 
 Gcode.prototype.startCode = function(){
     append(this.commands, ";start code");
-    append(this.commands, "M140 S52");
-    append(this.commands, "M109 T0 S210");
+    append(this.commands, "M140 S"+ this.bedtemp);
+    append(this.commands, "M109 T0 S" + this.nozzletemp);
     append(this.commands, "T0");
 
     append(this.commands, "M190 S" + this.bedtemp + "           ;bed temperature on");

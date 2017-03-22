@@ -25,6 +25,11 @@ Knitting.prototype.generateGcode = function(){
 }
 Knitting.prototype.gcode = function(layer){
 
+
+  if(layer.layer > 0){
+    append(this.commands, "G4 P20000");
+    layer.layerheight = settings.layerheight + 0.3;
+  }
   var lz = ((layer.layer+1) * layer.layerheight);
   append(this.commands, "G0 Z" + lz);
   append(this.commands, "G0 X" + layer.p[0].x * layer.scale + " Y" + layer.p[0].y * layer.scale  );

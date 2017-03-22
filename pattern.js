@@ -7,8 +7,12 @@ function Pattern(name, first, rows, stitches){
   this.design = [];
   this.scale = 0;
   this.grid = [];
-  this.gridwidth =0;
-  this.gridheight =0;
+  this.gridwidth =width/this.stitches;
+  this.gridheight =height/this.rows;
+  this.stitchwscale = this.gridwidth / 4.3;//4
+  this.stitchhscale = this.gridwidth / 4.3;   //2.15
+  println(this.stitchwscale);
+  println(this.stitchhscale);
   this.create(name);
 }
 Pattern.prototype.create =function(name){
@@ -44,8 +48,8 @@ Pattern.prototype.create =function(name){
           var next = start + i;
           var last = start;
           this.p[next] = this.p[next-1].copy();
-          this.p[next].x =  this.p[last].x + astitch.stitch[i].x * 10 ;
-          this.p[next].y = this.p[last].y + astitch.stitch[i].y * 10;
+          this.p[next].x =  this.p[last].x + astitch.stitch[i].x * this.stitchwscale ;
+          this.p[next].y = this.p[last].y + astitch.stitch[i].y * this.stitchhscale ;
           this.p[next].z = this.p[last].z + astitch.stitch[i].z * 10;
         }
       }
@@ -106,34 +110,34 @@ Pattern.prototype.drawGrid = function(name, rows, stitches){
   this.rows = rows;
   this.stitches = stitches;
   this.grid = [];
-  this.gridwidth = (width  - 100)/this.stitches ;
-  this.gridheight = (width  - 100)/this.rows ;
+  this.gridwidth = width/this.stitches ;
+  this.gridheight = width/this.rows ;
   stroke(0);
   noFill();
   strokeWeight(5);
-  rect(50,50, this.scale * this.stitches, this.scale * this.rows);
+  rect(0,0, this.scale * this.stitches, this.scale * this.rows);
   strokeWeight(1);
   for(x = 0; x <= this.stitches; x++){
     this.grid[x] =[];
-    line(50 + (x*this.gridwidth), 50, 50 + (x*this.gridwidth) , 50 + (this.rows * this.gridheight));
+    line( (x*this.gridwidth), 0,0 + (x*this.gridwidth) , (this.rows * this.gridheight));
   }
   for(y = 0; y<= this.rows; y++){
     this.grid[y] =[];
     for(x = 0; x <= this.stitches; x++){
-      line(50 + (x*this.gridwidth), 50, 50 + (x*this.gridwidth) , 50 + (this.rows * this.gridheight));
+      line((x*this.gridwidth), 0, (x*this.gridwidth) ,  (this.rows * this.gridheight));
       this.grid[y][x] = 255;
     }
-    line(50, 50 + (y*this.gridheight), 50 + (this.stitches * this.gridwidth) ,50 + (y*this.gridheight) );
+    line(0,  (y*this.gridheight),  (this.stitches * this.gridwidth) , (y*this.gridheight) );
   }
 }
 Pattern.prototype.designStitch = function(mousex,mousey, acolor){
-  var x = floor((mousex-50) / this.gridwidth);
-  var y = floor((mousey-50) / this.gridheight);
+  var x = floor((mousex) / this.gridwidth);
+  var y = floor((mousey) / this.gridheight);
 
   if (x >=0 && x < this.stitches && y >= 0 && y < this.rows ){
       noStroke();
       fill(0);
-      rect(51 + (x * this.gridwidth), 51 + (y * this.gridheight),this.gridwidth-2, this.gridheight-2);
+      rect(1 + (x * this.gridwidth), 1 + (y * this.gridheight),this.gridwidth-2, this.gridheight-2);
       this.grid[y][x] = acolor;
     }
 
@@ -252,8 +256,10 @@ Pattern.prototype.gridToPattern = function(){
 
   }
   this.createPatternCommands();
-  var stitchwscale = ((width -100)/4) /this.stitches;
-  var stitchhscale = ((height -100)/2.15)/(this.rows);
+  //var stitchwscale = ((width -100)/4) /this.stitches;
+  //var stitchhscale = ((height -100)/2.15)/(this.rows);
+  this.skirt(this.p[0],600);
+
   var start = this.p.length ;
   for(var r = 0 ; r < this.design.length; r++){
     for(var s = 0; s < this.design[r].length; s++){
@@ -264,9 +270,9 @@ Pattern.prototype.gridToPattern = function(){
         var next = start + i;
         var last = start;
         this.p[next] = this.p[next-1].copy();
-        this.p[next].x =  this.p[last].x + astitch.stitch[i].x * stitchwscale ;
-        this.p[next].y = this.p[last].y + astitch.stitch[i].y * stitchhscale;
-        this.p[next].z = this.p[last].z + astitch.stitch[i].z * 10;
+        this.p[next].x =  this.p[last].x + astitch.stitch[i].x * this.stitchwscale;
+        this.p[next].y = this.p[last].y + astitch.stitch[i].y  * this.stitchhscale;
+        this.p[next].z = this.p[last].z + astitch.stitch[i].z //* 10;
       }
     }
   }
