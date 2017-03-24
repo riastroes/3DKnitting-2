@@ -64,15 +64,24 @@ Pattern.prototype.skirt = function(pos, len){
   this.p[next] = pos.copy();
   this.p[next].x += 5;
   this.p[next].y = this.p[next].y/2;
-  this.p[next + 1] = pos.copy();
-  this.p[next + 1].x += len;
-  this.p[next + 1].y = this.p[next].y/2;
-  this.p[next + 2] = pos.copy();
-  this.p[next + 2].x += len;
-  this.p[next + 2].y = ( this.p[next].y/2) -1;
-  this.p[next + 3] = pos.copy();
-  this.p[next + 3].y =  ( this.p[next].y/2) -1;
-  this.p[next + 4] = pos.copy();
+  for(var i = 1; i < len/10; i++){
+    this.p[next + i] = pos.copy();
+    this.p[next + i].x += 10;
+    this.p[next + i].y = this.p[next].y/2;
+  }
+  next = this.p.length;
+  for(var i = 0; i < len/10; i++){
+
+    this.p[next] = pos.copy();
+    this.p[next].x -= 10;
+    this.p[next].y = this.p[next].y/2;
+    next = next + 1;
+  }
+
+
+  this.p[next] = pos.copy();
+  this.p[next].y =  ( this.p[next].y/2) -1;
+  this.p[next+1] = pos.copy();
 }
 Pattern.prototype.testDesign = function(strDesign){
   this.design=[];
@@ -146,8 +155,21 @@ Pattern.prototype.gridToPattern = function(){
 
   this.designPattern("straight", this.rows, this.stitches);
   for(y = 1; y<= this.rows-1; y++){
-
-    for(x = 1; x < this.stitches-1; x++){
+      for(x = 1; x < this.stitches-1; x++){
+      // if(y == 0 || x == 0 || x == this.stitches-2 || y == this.rows-1){
+      //   if(y % 2== 0){
+      //     var apart = this.design[y].substr(0, x);
+      //     var bpart = this.design[y].substr(x+1, this.design[y].length);
+      //     this.design[y] = apart.concat("-").concat(bpart);
+      //   }
+      //   else{
+      //     var q = (this.design[y].length-1) - x;
+      //     var apart = this.design[y].substr(0, q);
+      //     var bpart = this.design[y].substr(q+1, this.design[y].length);
+      //     this.design[y] = apart.concat("_").concat(bpart);
+      //   }
+      //}
+      //else{
       if(this.grid[y][x]== 0 && this.grid[y-1][x]!= 0 &&  (y % 2)== 0){
 
         var apart = this.design[y].substr(0, x);
@@ -250,6 +272,7 @@ Pattern.prototype.gridToPattern = function(){
             this.design[y] = apart.concat("Q").concat(bpart);
           }
       }
+    //}
 
 
     }
@@ -258,7 +281,7 @@ Pattern.prototype.gridToPattern = function(){
   this.createPatternCommands();
   //var stitchwscale = ((width -100)/4) /this.stitches;
   //var stitchhscale = ((height -100)/2.15)/(this.rows);
-  this.skirt(this.p[0],600);
+  this.skirt(this.p[0],900);
 
   var start = this.p.length ;
   for(var r = 0 ; r < this.design.length; r++){
@@ -272,7 +295,13 @@ Pattern.prototype.gridToPattern = function(){
         this.p[next] = this.p[next-1].copy();
         this.p[next].x =  this.p[last].x + astitch.stitch[i].x * this.stitchwscale;
         this.p[next].y = this.p[last].y + astitch.stitch[i].y  * this.stitchhscale;
-        this.p[next].z = this.p[last].z + astitch.stitch[i].z //* 10;
+        if(astitch.type == "-" || astitch.type =="_"){
+          this.p[next].z = 0;
+        }
+        else{
+          this.p[next].z = 1;
+        }
+
       }
     }
   }

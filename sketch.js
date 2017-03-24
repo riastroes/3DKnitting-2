@@ -15,18 +15,20 @@ function setup() {
     background(255,0,0);
 
     //settings = new Settings("Anet","TPC FLEX","fine");
-    settings = new Settings("Anet","Coper","normal");
+    //settings = new Settings("Anet","Coper","normal");
+    settings = new Settings("Ultimaker2+", "PLA", "fine");
     gcode = new Gcode(settings);
     layers = [];
     layers[0] = new Layer(0, settings);
     layers[1] = new Layer(1, settings);
 
+
     //knitting = new Knitting(layers, "6xknoopje-random50", createVector(100,100,0));
     //knitting = new Knitting(layers, "straight", createVector(20,150,0), 5, 23);
-    knitting = new Knitting(layers, "new", createVector(30,250,0),41,40);//4118
+    knitting = new Knitting(layers, "new", createVector(30,250,0),41,46);//4118
     isDesign = true;
     if(isDesign){
-      knitting.pattern.drawGrid(name, 9,40);
+      knitting.pattern.drawGrid(name, 7,40);
       isToGrid = false;
     }
     else{
@@ -51,7 +53,7 @@ function mousePressed(){
   else{
     if(!isSaved){
 
-      gcode.save("MA" + "PLACOP30|9*40" + settings.style);
+      gcode.save("ST" + "9*39" + settings.style);
       isSaved = true;
     }
   }

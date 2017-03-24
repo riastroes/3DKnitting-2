@@ -45,7 +45,8 @@ Settings.prototype.init = function(){
       this.scale = 0.23;         //canvas = 1000 px, bed = 220 mm
       this.filement = 2.85;
       if(this.material == "PLA" && this.style == "fine"){
-        this.initStyle(1, 0.03, 600);   //test // 1  0.05   1000 test OK
+        //this.initStyle(1, 0.03, 600);   //test  OK// 1  0.05   1000 test OK
+        this.initStyle(0.8, 0.05, 600);   //test 
       }
       else if(this.material == "PLA" && this.style == "grof" ){
         //nozzle 0.08

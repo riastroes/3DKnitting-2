@@ -28,7 +28,7 @@ Knitting.prototype.gcode = function(layer){
 
   if(layer.layer > 0){
     append(this.commands, "G4 P20000");
-    layer.layerheight = settings.layerheight + 0.3;
+    layer.layerheight = settings.layerheight + 0.1;
   }
   var lz = ((layer.layer+1) * layer.layerheight);
   append(this.commands, "G0 Z" + lz);
@@ -44,14 +44,25 @@ Knitting.prototype.gcode = function(layer){
     var dvector = p5.Vector.sub(layer.p[i], layer.p[i-1]);
     var d = dvector.mag()* layer.scale;
 
-    gcode.extrude += (d * layer.thickness);
+    //gcode.extrude += (d * layer.thickness);
+    // var kz = ((layer.layer+1) * layer.layerheight) + floor(z  * 100)/100;
+    // if(kz != lz){
+    //   append(this.commands, "G1 X" + x + " Y" + y + " Z" + z + " E" + gcode.extrude );
+    // }
+    // else{
+    //   append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude );
+    // }
 
-
-    var kz = ((layer.layer+1) * layer.layerheight) + floor(z  * 100)/100;
-    if(kz != lz){
-      append(this.commands, "G1 X" + x + " Y" + y + " Z" + z + " E" + gcode.extrude );
+    var kz = ((layer.layer+1) * layer.layerheight) * z;
+    if(z == 0){
+      append(this.commands, "G0 X" + x + " Y" + y );
     }
-    else{
+    else if(kz != lz){
+      gcode.extrude += (d * layer.thickness);
+      append(this.commands, "G1 X" + x + " Y" + y + " Z" + kz + " E" + gcode.extrude );
+    }
+    else if(kz == lz){
+      gcode.extrude += (d * layer.thickness);
       append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude );
     }
   }
