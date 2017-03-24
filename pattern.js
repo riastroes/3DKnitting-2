@@ -1,4 +1,4 @@
-function Pattern(name, first, rows, stitches){
+function Pattern(name, first, stitches, rows){
   this.commands =[];
   this.p = [];
   this.p[0] = first.copy();

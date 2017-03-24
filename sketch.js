@@ -1,6 +1,7 @@
 
 "use strict";
 var settings;
+var grid;
 var gcode;
 var layers;
 var knitting;
@@ -12,23 +13,38 @@ var isDesigned;
 
 function setup() {
     createCanvas(1100,1100);
-    background(255,0,0);
+    //background(255,0,0);
 
     //settings = new Settings("Anet","TPC FLEX","fine");
     //settings = new Settings("Anet","Coper","normal");
-    settings = new Settings("Ultimaker2+", "PLA", "fine");
+    //settings = new Settings("Ultimaker2+", "PLA", "fine");
+    settings = new Settings("Anet", "PLA","fine");
+    grid = new Grid(100,100, 6,4, 2);
+
+
+    grid.draw();
+
+
+    //grid.getKnitGrid(6, 3 , 5, 11); //start.x, start.y, stitches, rows
+
     gcode = new Gcode(settings);
     layers = [];
     layers[0] = new Layer(0, settings);
-    layers[1] = new Layer(1, settings);
+
+    //grid.createSkirt(layers[0], 2,2, 5,10);
+
+
+    grid.drawKnitGrid(7, 4 , 5, 11);
+
+    grid.drawKnitGrid(8, 16 , 5, 11);
 
 
     //knitting = new Knitting(layers, "6xknoopje-random50", createVector(100,100,0));
     //knitting = new Knitting(layers, "straight", createVector(20,150,0), 5, 23);
-    knitting = new Knitting(layers, "new", createVector(30,250,0),41,46);//4118
+      knitting = new Knitting(layers, "new", grid.start ,5,11);
     isDesign = true;
     if(isDesign){
-      knitting.pattern.drawGrid(name, 7,40);
+      knitting.pattern.drawGrid(name, 5,11);
       isToGrid = false;
     }
     else{
@@ -45,6 +61,7 @@ function draw(){
   strokeWeight(2)
   noFill();
   rect(0,0, width-1, height-1);
+
 }
 function mousePressed(){
   if(isDesign){

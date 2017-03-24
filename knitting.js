@@ -1,8 +1,8 @@
-function Knitting(layers, name, first, rows, stitches){
+function Knitting(layers, name, first, stitches, rows){
   this.commands = new Array(";knitting");
   this.layers = layers;
   if(name == "new"){
-    this.pattern = new Pattern(name, first, rows, stitches);
+    this.pattern = new Pattern(name, first, stitches, rows);
     this.createPattern();
   }
   else{

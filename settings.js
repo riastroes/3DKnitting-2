@@ -19,7 +19,7 @@ Settings.prototype.init = function(){
   this.initMaterial();
   switch(this.printer){
     case "Anet":{
-      this.scale = 0.2;         //canvas = 1000 px, bed = 220 mm
+      this.scale = 0.2;         //canvas = 1100 px, bed = 220 mm
       this.filement = 1.75;
       if(this.material == "PLA" && this.style == "fine"){
         this.initStyle(0.4, 0.09, 200); //test OK
@@ -46,7 +46,7 @@ Settings.prototype.init = function(){
       this.filement = 2.85;
       if(this.material == "PLA" && this.style == "fine"){
         //this.initStyle(1, 0.03, 600);   //test  OK// 1  0.05   1000 test OK
-        this.initStyle(0.8, 0.05, 600);   //test 
+        this.initStyle(0.8, 0.05, 600);   //test
       }
       else if(this.material == "PLA" && this.style == "grof" ){
         //nozzle 0.08
