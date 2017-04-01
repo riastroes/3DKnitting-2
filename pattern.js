@@ -48,7 +48,7 @@ Pattern.prototype.create =function(name){
           var next = start + i;
           var last = start;
           this.p[next] = this.p[next-1].copy();
-          this.p[next].x =  this.p[last].x + astitch.stitch[i].x * this.stitchwscale ;
+          this.p[next].x = this.p[last].x + astitch.stitch[i].x * this.stitchwscale ;
           this.p[next].y = this.p[last].y + astitch.stitch[i].y * this.stitchhscale ;
           this.p[next].z = this.p[last].z + astitch.stitch[i].z * 10;
         }

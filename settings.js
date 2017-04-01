@@ -39,10 +39,27 @@ Settings.prototype.init = function(){
       else if(this.material == "Coper" && this.style == "normal"){
         this.initStyle(0.4, 0.15, 800);//
       }
+      else if(this.material == "PETGCARBON" && this.style == "normal"){
+        this.initStyle(0.4, 0.15, 800);//
+      }
+
       break;
     }
-    case "Ultimaker2+":{
-      this.scale = 0.23;         //canvas = 1000 px, bed = 220 mm
+
+    case "Ultimaker2+":{ //nozzle 0.4
+      //nozzle 0.08
+      this.scale = 0.23;         //canvas = 1000 px, bed = 230 mm
+      this.filement = 2.85;
+      if(this.material == "PETGCARBON" && this.style == "normal" ){
+        this.initStyle(0.4, 0.03, 2400);  //0.4, 0.03, 1600 ok
+      }
+      if(this.material == "PETGCARBON" && this.style == "fine" ){
+        this.initStyle(0.2, 0.03, 1200);  //0.4, 0.03, 1600 ok
+      }
+      break;
+    }
+    case "Ultimaker2++":{ //nozzle 0.8
+      this.scale = 0.23;         //canvas = 1000 px, bed = 230 mm
       this.filement = 2.85;
       if(this.material == "PLA" && this.style == "fine"){
         //this.initStyle(1, 0.03, 600);   //test  OK// 1  0.05   1000 test OK
@@ -51,6 +68,10 @@ Settings.prototype.init = function(){
       else if(this.material == "PLA" && this.style == "grof" ){
         //nozzle 0.08
         this.initStyle(1.5, 1, 800);  //not tested
+      }
+      else if(this.material == "PETGCARBON" && this.style == "normal" ){
+        //nozzle 0.08
+        this.initStyle(0.4, 0.05, 800);  //ok
       }
       break;
     }
@@ -81,6 +102,11 @@ Settings.prototype.initMaterial = function(){
     case "Coper":{
       this.nozzletemp = 165;
       this.bedtemp = 70;
+      break;
+    }
+    case "PETGCARBON":{
+      this.nozzletemp = 210;
+      this.bedtemp = 30;
       break;
     }
   }

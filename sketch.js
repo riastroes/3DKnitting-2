@@ -4,11 +4,13 @@ var settings;
 var grid;
 var gcode;
 var layers;
+var skirt;
 var knitting;
 var isSaved;
 var isDesign;
 var isToGrid;
 var isDesigned;
+var knittings;
 
 
 function setup() {
@@ -18,43 +20,36 @@ function setup() {
     //settings = new Settings("Anet","TPC FLEX","fine");
     //settings = new Settings("Anet","Coper","normal");
     //settings = new Settings("Ultimaker2+", "PLA", "fine");
-    settings = new Settings("Anet", "PLA","fine");
-    grid = new Grid(100,100, 6,4, 2);
-
+    settings = new Settings("Ultimaker2+", "PETGCARBON","fine");
+    grid = new Grid(200,200, 20,20,5); // 6X6
 
     grid.draw();
 
 
-    //grid.getKnitGrid(6, 3 , 5, 11); //start.x, start.y, stitches, rows
+    grid.testPos(3,4); //row, stitches
 
     gcode = new Gcode(settings);
     layers = [];
-    layers[0] = new Layer(0, settings);
-
-    //grid.createSkirt(layers[0], 2,2, 5,10);
-
-
-    grid.drawKnitGrid(7, 4 , 5, 11);
-
-    grid.drawKnitGrid(8, 16 , 5, 11);
-
-
-    //knitting = new Knitting(layers, "6xknoopje-random50", createVector(100,100,0));
-    //knitting = new Knitting(layers, "straight", createVector(20,150,0), 5, 23);
-      knitting = new Knitting(layers, "new", grid.start ,5,11);
-    isDesign = true;
-    if(isDesign){
-      knitting.pattern.drawGrid(name, 5,11);
-      isToGrid = false;
+    for(var i = 0; i < 4; i++){
+      layers[i] = new Layer(i, settings);
     }
-    else{
-      knitting.generateGcode(layers);
-      gcode.generate(layers, knitting);
-      knitting.draw();
-      //settings.report(gcode);
+
+    skirt = new Skirt(grid, 60,5);
+    skirt.draw();
+    skirt.gcode(layers[0]);
+    //
+    knittings = [];
+    for(i = 0; i < 2; i++){
+      knittings[i] = new Knitting(layers[i], "straight", 30,10, 19,20, true);
+      knittings[i].gcode(layers[i]);
+    }
+
+    gcode.generate(layers,skirt, knittings);
+              //knitting.draw();
+              //settings.report(gcode);
       isSaved = false;
       noLoop();
-    }
+    // }
 }
 function draw(){
   stroke(0);
@@ -70,7 +65,7 @@ function mousePressed(){
   else{
     if(!isSaved){
 
-      gcode.save("ST" + "9*39" + settings.style);
+      gcode.save("MAPETGCARBON8X5" + settings.style);
       isSaved = true;
     }
   }
@@ -88,7 +83,7 @@ function keyPressed(){
   if(keyCode == 66 || keyCode == 98 ){ // b of B
     if(isToGrid && !isDesigned){
       knitting.generateGcode(layers);
-      gcode.generate(layers, knitting);
+      gcode.generate(layers,skirt, knitting);
       knitting.draw();
       //settings.report(gcode);
       isDesigned = true;

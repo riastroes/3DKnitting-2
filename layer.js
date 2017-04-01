@@ -9,6 +9,6 @@ function Layer(layer, settings){
   append(this.commands, ";param thickness:   " + this.thickness);
   append(this.commands, ";param speed:       " + this.speed);
   append(this.commands, "G0 F" + this.speed);
-  
+
   this.p = [];
 }

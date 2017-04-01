@@ -19,15 +19,16 @@ Gcode.prototype.startCode = function(){
     append(this.commands, "M107               ;start with the fan off");
     append(this.commands, "G28 X0 Y0          ;move X/Y to min endstops, so the head is out of the way");
     append(this.commands, "G28 Z0             ;move Z to min endstops");
-    append(this.commands, "G0 Z15.0 F800      ;move the platform up 15mm");
+    append(this.commands, "G0 Z15.0           ;move the platform up 15mm");
     append(this.commands, "G92 E0             ;zero the extruded");
     append(this.commands, "G1 F200 E10        ;extrude 10mm of feed stock");
     append(this.commands, "G92 E0             ;zero the extruded length again");
     append(this.commands, "G0 Z10             ;move the platform up 15mm");
+    append(this.commands, "G0 F800            ;speed");
     append(this.commands, "M117 Printing...");
 }
-Gcode.prototype.getCode = function(knitting){
-    this.commands  = concat(this.commands, knitting.commands);
+Gcode.prototype.getCode = function(commands){
+    this.commands = concat(this.commands, commands);
 }
 Gcode.prototype.endCode = function(){
     append(this.commands, ";end code");
@@ -61,8 +62,13 @@ Gcode.prototype.save = function(name){
     save(this.commands,name + ".gcode");
     console.log(name + " is saved.");
 }
-Gcode.prototype.generate = function(layers, knitting){
+Gcode.prototype.generate = function(layers, skirt, knittings){
   this.startCode();
-  this.getCode(knitting);
+  this.getCode(skirt.commands);
+  for(var i = 0; i < knittings.length; i++){
+    this.getCode(layers[i].commands);
+    this.getCode(knittings[i].commands);
+  }
+
   this.endCode();
 }

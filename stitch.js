@@ -84,41 +84,93 @@ Stitch.prototype.create =function(){
 
          break;
        }
-        case 'A': {                         //R opzetten naar rechts, eerste steek
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(1,0,0,0);
-        this.stitch[2] = new Pos(4,2,0,0);
-        this.stitch[3] = new Pos(3,3,0,0);
-        this.stitch[4] = new Pos(2,3,0,0);
-        this.stitch[5] = new Pos(1,2,0,0);
-        this.stitch[6] = new Pos(4,0,0,0);
-        break;
-       }
-       case 'B': {                         //R opzetten naar rechts
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(1,0,0,0);
-        this.stitch[2] = new Pos(4,2,0,0);
-        this.stitch[3] = new Pos(3,3,0,0);
-        this.stitch[4] = new Pos(2,3,0,0);
-        this.stitch[5] = new Pos(1,2,0,0);
-        this.stitch[6] = new Pos(4,0,0,0);
-        break;
-       }
-       case 'C': {                         //R opzetten naar rechts, laatste steek
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(1,0,0,0);
-        this.stitch[2] = new Pos(4,2,0,0);
-        this.stitch[3] = new Pos(3,3,0,0);
-        this.stitch[4] = new Pos(2,3,0,0);
-        this.stitch[5] = new Pos(1,2,0,0);
-        this.stitch[6] = new Pos(4,0,0,0);
-        this.stitch[7] = new Pos(5,0,0,0);
-        this.stitch[8] = new Pos(5,1,0,0);
-        this.stitch[9] = new Pos(4,1,0,0);
+        case 'A': {             //ok            //R opzetten naar rechts, eerste steek
+        this.stitch[0] = new Pos(0,0,1,0);
+        //this.stitch[1] = new Pos(0,3,0,0);
+        this.stitch[1] = new Pos(0,3,1,0);
+        this.stitch[2] = new Pos(3,4,1,0);
+        this.stitch[3] = new Pos(3,6,1,0);
+        this.stitch[4] = new Pos(2,7,1,0);
+        this.stitch[5] = new Pos(1,7,1,0);
+        this.stitch[6] = new Pos(0,6,1,0);
+        this.stitch[7] = new Pos(0,5,1,0);
+        this.stitch[8] = new Pos(3,3,1,0);
+        this.stitch[9] = new Pos(4,3,1,0);
 
         break;
        }
-       case 'D': {                         //L afhechten, eerste steek, intern
+       case 'B': {            //ok             //R opzetten naar rechts
+         this.stitch[0] = new Pos(0,3,1,0);
+         this.stitch[1] = new Pos(1,3,1,0);
+         this.stitch[2] = new Pos(3,4,1,0);
+         this.stitch[3] = new Pos(3,6,1,0);
+         this.stitch[4] = new Pos(2,7,1,0);
+         this.stitch[5] = new Pos(1,7,1,0);
+         this.stitch[6] = new Pos(0,6,1,0);
+         this.stitch[7] = new Pos(0,4,1,0);
+         this.stitch[8] = new Pos(3,3,1,0);
+         this.stitch[9] = new Pos(4,3,1,0);
+        break;
+       }
+       case 'C': {             //ok            //R opzetten naar rechts, laatste steek
+         this.stitch[0] = new Pos(0,3,1,0);
+         this.stitch[1] = new Pos(0,3,1,0);
+         this.stitch[2] = new Pos(3,4,1,0);
+         this.stitch[3] = new Pos(3,6,1,0);
+         this.stitch[4] = new Pos(2,7,1,0);
+         this.stitch[5] = new Pos(1,7,1,0);
+         this.stitch[6] = new Pos(0,6,1,0);
+         this.stitch[7] = new Pos(0,4,1,0);
+         this.stitch[8] = new Pos(3,3,1,0);
+         this.stitch[9] = new Pos(4,3,1,0);
+         this.stitch[10] = new Pos(4,4,1,0);
+
+        break;
+       }
+       case 'D': {            // ok            //R opzetten naar rechts, eerste steek
+         this.stitch[0] = new Pos(0,0,1,0);
+         this.stitch[1] = new Pos(-1,0,1,0);
+         this.stitch[2] = new Pos(-4,3,1,0);
+         this.stitch[3] = new Pos(-4,5,1,0);
+         this.stitch[4] = new Pos(-3,6,1,0);
+         this.stitch[5] = new Pos(-2,6,1,0);
+         this.stitch[6] = new Pos(-1,5,1,0);
+         this.stitch[7] = new Pos(-1,3,1,0);
+         this.stitch[8] = new Pos(-4,0,1,0);
+
+       break;
+      }
+      case 'E': {               //ok          //R opzetten naar rechts
+        this.stitch[0] = new Pos(0,0,1,0);
+        this.stitch[1] = new Pos(-1,0,1,0);
+        this.stitch[2] = new Pos(-4,3,1,0);
+        this.stitch[3] = new Pos(-4,5,1,0);
+        this.stitch[4] = new Pos(-3,6,1,0);
+        this.stitch[5] = new Pos(-2,6,1,0);
+        this.stitch[6] = new Pos(-1,5,1,0);
+        this.stitch[7] = new Pos(-1,3,1,0);
+        this.stitch[8] = new Pos(-4,0,1,0);
+        this.stitch[9] = new Pos(-5,0,1,0);
+       break;
+      }
+      case 'F': {               //ok          //R opzetten naar rechts, laatste steek
+        this.stitch[0] = new Pos(0,0,1,0);
+        this.stitch[1] = new Pos(-1,0,1,0);
+        this.stitch[2] = new Pos(-4,3,1,0);
+        this.stitch[3] = new Pos(-4,5,1,0);
+        this.stitch[4] = new Pos(-3,6,1,0);
+        this.stitch[5] = new Pos(-2,6,1,0);
+        this.stitch[6] = new Pos(-1,5,1,0);
+        this.stitch[7] = new Pos(-1,3,1,0);
+        this.stitch[8] = new Pos(-4,0,1,0);
+        this.stitch[9] = new Pos(-5,0,1,0);
+        this.stitch[10] = new Pos(-5,1,1,0);
+        this.stitch[11] = new Pos(-4,1,1,0);
+
+
+       break;
+      }
+       case 'D1': {                         //L afhechten, eerste steek, intern
         this.stitch[0] = new Pos(0,0,0,0);
         this.stitch[1] = new Pos(-1,1,0,0);
         this.stitch[2] = new Pos(0,3,0,0);
@@ -132,7 +184,7 @@ Stitch.prototype.create =function(){
 
         break;
        }
-       case 'E': {                         //R afhechten naar rechts intern
+       case 'E1': {                         //R afhechten naar rechts intern
         this.stitch[0] = new Pos(0,0,0,0);
         this.stitch[1] = new Pos(-1,0,0,0);
         this.stitch[2] = new Pos(-4,-2,0,0);
@@ -142,7 +194,7 @@ Stitch.prototype.create =function(){
         this.stitch[6] = new Pos(-4,0,0,0);
         break;
        }
-       case 'G': {                         //laatste afhechten naar rechts intern
+       case 'G1': {                         //laatste afhechten naar rechts intern
         this.stitch[0] = new Pos(0,0,0,0);
       //  this.stitch[1] = new Pos(-1,0,0,2);
       //  this.stitch[2] = new Pos(-4,-2,0,2);
@@ -191,56 +243,74 @@ Stitch.prototype.create =function(){
         break;
        }
 
-       case 'R': {                         //R naar rechts
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(1,0,0,0);
-        this.stitch[2] = new Pos(2,1,0,0);
-        this.stitch[3] = new Pos(1,3,0,0);
-        this.stitch[4] = new Pos(2,4,0,0);
-        this.stitch[5] = new Pos(3,4,0,0);
-        this.stitch[6] = new Pos(4,3,0,0);
-        this.stitch[7] = new Pos(3,1,0,0);
-        this.stitch[8] = new Pos(4,0,0,0);
+       case 'R': {          //OK               //R naar rechts
+         this.stitch[0] = new Pos(0,0,1,0);
+         this.stitch[1] = new Pos(1,1,1,0);
+         this.stitch[2] = new Pos(1,3,1,0);
+         this.stitch[3] = new Pos( 0,4,1,0);
+         this.stitch[4] = new Pos( 0,6,1,0);
+         this.stitch[5] = new Pos(1,7,1,0);
+         this.stitch[6] = new Pos(2,7,1,0);
+         this.stitch[7] = new Pos(3,6,1,0);
+         this.stitch[8] = new Pos(3,4,1,0);
+         this.stitch[9] = new Pos(2,3,1,0);
+         this.stitch[10] = new Pos(2,1,1,0);
+         this.stitch[11] = new Pos(3,0,1,0);
+         this.stitch[12] = new Pos(4,0,1,0);
         break;
        }
-       case 'S': {                         //R laatste rechts
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(1,0,0,0);
-        this.stitch[2] = new Pos(2,1,0,0);
-        this.stitch[3] = new Pos(1,3,0,0);
-        this.stitch[4] = new Pos(2,4,0,0);
-        this.stitch[5] = new Pos(3,4,0,0);
-        this.stitch[6] = new Pos(4,3,0,0);
-        this.stitch[7] = new Pos(3,1,0,0);
-        this.stitch[8] = new Pos(4,0,0,0);
-        this.stitch[9] = new Pos(5,0,0,0);
-        this.stitch[10] = new Pos(5,2,0,0);
-        this.stitch[11] = new Pos(4,2,0,0);
+       case 'S': {         //OK                //R laatste rechts
+         this.stitch[0] = new Pos(0,0,1,0);
+         this.stitch[1] = new Pos(1,1,1,0);
+         this.stitch[2] = new Pos(1,3,1,0);
+         this.stitch[3] = new Pos( 0,4,1,0);
+         this.stitch[4] = new Pos( 0,6,1,0);
+         this.stitch[5] = new Pos(1,7,1,0);
+         this.stitch[6] = new Pos(2,7,1,0);
+         this.stitch[7] = new Pos(3,6,1,0);
+         this.stitch[8] = new Pos(3,4,1,0);
+         this.stitch[9] = new Pos(2,3,1,0);
+         this.stitch[10] = new Pos(2,1,1,0);
+         this.stitch[11] = new Pos(3,0,1,0);
+         this.stitch[12] = new Pos(4,0,1,0);
+         this.stitch[13] = new Pos(4,4,1,0);
         break;
        }
-        case 'L': {                         //R naar links
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(-1,1,0,0);
-        this.stitch[2] = new Pos(0,3,0,0);
-        this.stitch[3] = new Pos(-1,4,0,0);
-        this.stitch[4] = new Pos(-2,4,0,0);
-        this.stitch[5] = new Pos(-3,3,0,0);
-        this.stitch[6] = new Pos(-2,1,0,0);
-        this.stitch[7] = new Pos(-3,0,0,0);
-        this.stitch[8] = new Pos(-4,0,0,0);
+        case 'L': {    //ok                     //R naar links
+        this.stitch[0] = new Pos(0,0,1,0);
+        this.stitch[1] = new Pos(-1,0,1,0);
+        this.stitch[2] = new Pos(-2,1,1,0);
+        this.stitch[3] = new Pos(-2,3,1,0);
+        this.stitch[4] = new Pos(-1,4,1,0);
+        this.stitch[5] = new Pos(-1,6,1,0);
+        this.stitch[6] = new Pos(-2,7,1,0);
+        this.stitch[7] = new Pos(-3,7,1,0);
+        this.stitch[8] = new Pos(-4,6,1,0);
+        this.stitch[9] = new Pos(-4,4,1,0);
+        this.stitch[10] = new Pos(-3,3,1,0);
+        this.stitch[11] = new Pos(-3,1,1,0);
+        this.stitch[12] = new Pos(-4,0,1,0);
+        //this.stitch[13] = new Pos(-5,0,0,0);
+
         break;
        }
-       case 'K': {                         //R laatste links
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(-1,1,0,0);
-        this.stitch[2] = new Pos(0,3,0,0);
-        this.stitch[3] = new Pos(-1,4,0,0);
-        this.stitch[4] = new Pos(-2,4,0,0);
-        this.stitch[5] = new Pos(-3,3,0,0);
-        this.stitch[6] = new Pos(-2,1,0,0);
-        this.stitch[7] = new Pos(-3,0,0,0);
-        this.stitch[8] = new Pos(-4,0,0,0);
-        this.stitch[9] = new Pos(-4,2,0,0);
+       case 'K': {      //OK                 //R laatste links
+         this.stitch[0] = new Pos(0,0,1,0);
+         this.stitch[1] = new Pos(-1,0,1,0);
+         this.stitch[2] = new Pos(-2,1,1,0);
+         this.stitch[3] = new Pos(-2,3,1,0);
+         this.stitch[4] = new Pos(-1,4,1,0);
+         this.stitch[5] = new Pos(-1,6,1,0);
+         this.stitch[6] = new Pos(-2,7,1,0);
+         this.stitch[7] = new Pos(-3,7,1,0);
+         this.stitch[8] = new Pos(-4,6,1,0);
+         this.stitch[9] = new Pos(-4,4,1,0);
+         this.stitch[10] = new Pos(-3,3,1,0);
+         this.stitch[11] = new Pos(-3,1,1,0);
+         this.stitch[12] = new Pos(-4,0,1,0);
+         this.stitch[13] = new Pos(-5,0,1,0);
+         this.stitch[14] = new Pos(-5,4,1,0);
+         this.stitch[15] = new Pos(-4,4,1,0);
         break;
        }
        case 'M': {                         //R afhechten, eerste steek
@@ -298,62 +368,87 @@ Stitch.prototype.create =function(){
         this.stitch[8] = new Pos(-5,-1,0,0);
         break;
        }
-        case 'U': {                         //R afhechten, laatste steek links
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(-1,0,0,0);
-        this.stitch[2] = new Pos(-3,-2,0,0);
-        this.stitch[3] = new Pos(-3,-3,0,0);
-        this.stitch[4] = new Pos(-2,-3,0,0);
-        this.stitch[5] = new Pos(-1,-2,0,0);
-        this.stitch[6] = new Pos(-3,0,0,0);
-        break;
-       }
-
-       case 'V': {                         //R afhechten naar links
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(-1,0,0,0);
-        this.stitch[2] = new Pos(-4,-2,0,0);
-        this.stitch[3] = new Pos(-3,-3,0,0);
-        this.stitch[4] = new Pos(-2,-3,0,0);
-        this.stitch[5] = new Pos(-1,-2,0,0);
-        this.stitch[6] = new Pos(-4,0,0,0);
-        break;
-       }
-      case 'W': {                         //R afhechten, eerste steek naar links
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(-1,1,0,0);
-        this.stitch[2] = new Pos(0,2,0,0);
-        this.stitch[3] = new Pos(-1,3,0,0);
+       case 'U': {                 //ok        //naar links afhechten, eerste steek
+         this.stitch[0] = new Pos(0,0,1,0);
+         this.stitch[1] = new Pos(-1,0,1,0);
+         this.stitch[2] = new Pos(-2,1,1,0);
+         this.stitch[3] = new Pos(-2,3,1,0);
+         this.stitch[4] = new Pos(-1,4,1,0);
+         this.stitch[5] = new Pos(-2,4,1,0);
 
         break;
        }
-       case 'X': {                         //R afhechten, eerste steek
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(1,0,0,0);
-        this.stitch[2] = new Pos(2,1,0,0);
-        this.stitch[3] = new Pos(0,2,0,0);
-        this.stitch[4] = new Pos(1,3,0,0);
-        this.stitch[5] = new Pos(2,3,0,0);
+       case 'V': {                 //ok        // afhechten naar links
+         //this.stitch[0] = new Pos(2,4,1,0);
+         this.stitch[0] = new Pos(1,4,1,0);
+         this.stitch[1] = new Pos(-2,3,1,0);
+         this.stitch[2] = new Pos(-2,1,1,0);
+         this.stitch[3] = new Pos(-1,0,1,0);
+         this.stitch[4] = new Pos(0,0,1,0);
+         this.stitch[5] = new Pos(1,1,1,0);
+         this.stitch[6] = new Pos(1,3,1,0);
+         this.stitch[7] = new Pos(-2,4,1,0);
+         this.stitch[8] = new Pos(-3,4,1,0);
         break;
        }
-       case 'Y': {                         //R afhechten naar rechts
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(1,0,0,0);
-        this.stitch[2] = new Pos(4,-2,0,0);
-        this.stitch[3] = new Pos(3,-3,0,0);
-        this.stitch[4] = new Pos(2,-3,0,0);
-        this.stitch[5] = new Pos(1,-2,0,0);
-        this.stitch[6] = new Pos(4,0,0,0);
+       case 'W': {                //ok         //naar links afhechten, laatste steek
+         this.stitch[0] = new Pos(1,4,1,0);
+         this.stitch[1] = new Pos(-2,3,1,0);
+         this.stitch[2] = new Pos(-2,1,1,0);
+         this.stitch[3] = new Pos(-1,0,1,0);
+         this.stitch[4] = new Pos(0,0,1,0);
+         this.stitch[5] = new Pos(1,1,1,0);
+         this.stitch[6] = new Pos(1,3,1,0);
+         this.stitch[7] = new Pos(-2,4,1,0);
+         this.stitch[8] = new Pos(-3,4,1,0);
+         this.stitch[9] = new Pos(-5,3,1,0);
+         this.stitch[10] = new Pos(-5,0,1,0);
+         this.stitch[11] = new Pos(-4,0,1,0);
+         this.stitch[12] = new Pos(-3,1,1,0);
+         this.stitch[13] = new Pos(-3,3,1,0);
+         this.stitch[14] = new Pos(-5,4,1,0);
+
         break;
        }
-       case 'Z': {                         //R afhechten, laatste steek
-        this.stitch[0] = new Pos(0,0,0,0);
-        this.stitch[1] = new Pos(1,0,0,0);
-        this.stitch[2] = new Pos(3,-1,0,0);
-        this.stitch[3] = new Pos(3,-3,0,0);
-        this.stitch[4] = new Pos(2,-3,0,0);
-        this.stitch[5] = new Pos(1,-2,0,0);
-        this.stitch[6] = new Pos(3,0,0,0);
+       case 'X': {              //OK           //R afhechten, eerste steek
+         this.stitch[0] = new Pos(0,0,1,0);
+         this.stitch[1] = new Pos(1,1,1,0);
+         this.stitch[2] = new Pos(1,3,1,0);
+         this.stitch[3] = new Pos(0,4,1,0);
+         this.stitch[4] = new Pos(1,4,1,0);
+         this.stitch[5] = new Pos(2,4,1,0);
+
+        break;
+       }
+       case 'Y': {            //OK             //R afhechten naar rechts
+         this.stitch[0] = new Pos(0,0,1,0);
+         this.stitch[1] = new Pos(3,-1,1,0);
+         this.stitch[2] = new Pos(3,-3,1,0);
+         this.stitch[3] = new Pos(2,-4,1,0);
+         this.stitch[4] = new Pos(1,-4,1,0);
+         this.stitch[5] = new Pos(0,-3,1,0);
+         this.stitch[6] = new Pos(0,-1,1,0);
+         this.stitch[7] = new Pos(3,0,1,0);
+         this.stitch[8] = new Pos(4,0,1,0);
+        break;
+       }
+       case 'Z': {          //OK               //R afhechten, laatste steek
+         this.stitch[0] = new Pos(0,0,1,0);
+         this.stitch[1] = new Pos(3,-1,1,0);
+         this.stitch[2] = new Pos(3,-3,1,0);
+         this.stitch[3] = new Pos(2,-4,1,0);
+         this.stitch[4] = new Pos(1,-4,1,0);
+         this.stitch[5] = new Pos(0,-3,1,0);
+         this.stitch[6] = new Pos(0,-1,1,0);
+         this.stitch[7] = new Pos(3,0,1,0);
+         this.stitch[8] = new Pos(4,0,1,0);
+         this.stitch[9] = new Pos(6,-1,1,0);
+         this.stitch[10] = new Pos(6,-4,1,0);
+         this.stitch[11] = new Pos(5,-4,1,0);
+         this.stitch[12] = new Pos(4,-3,1,0);
+         this.stitch[13] = new Pos(4,-1,1,0);
+         this.stitch[14] = new Pos(6,0,1,0);
+
         break;
        }
   case 'a': {                         //R opzetten naar rechts, eerste steek
