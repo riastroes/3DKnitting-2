@@ -155,7 +155,7 @@ Grid.prototype.first = function(row, stitchnr){
 }
 Grid.prototype.drawKnitGrid = function(knitgrid, row, stitchnr){
 
-  var rows = knitgrid.length-1;
+  var rows = knitgrid.length-8;
   var stitches = knitgrid[0].length-1;
 
   for(var r = 0; r <= rows; r++){
