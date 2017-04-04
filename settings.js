@@ -1,6 +1,7 @@
 function Settings(printer, material, style){
   this.printer = printer;
   this.material = material;
+  this.materialcode;
   this.style = style;
   this.width = width;
   this.height = height;
@@ -16,42 +17,68 @@ function Settings(printer, material, style){
 
 }
 Settings.prototype.init = function(){
+  this.initPrinter();
   this.initMaterial();
+
+}
+Settings.prototype.initMaterial = function(){
   switch(this.printer){
     case "Anet":{
-      this.scale = 0.2;         //canvas = 1100 px, bed = 220 mm
+      this.scale = 0.2;         //canvas = 2200 px, bed = 220 mm
       this.filement = 1.75;
-      if(this.material == "PLA" && this.style == "fine"){
-        this.initStyle(0.4, 0.09, 200); //test OK
-      }
-      else if(this.material == "TPC FLEX" && this.style == "fine"){
-        this.initStyle(0.4, 0.15, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
-      }
-      else if(this.material == "PLA" && this.style == "normal"){
-        this.initStyle(0.4, 0.12, 800);//test OK
-      }
-      else if(this.material == "Messing" && this.style == "normal"){
-        this.initStyle(0.4, 0.12, 800);//test OK
-      }
-      else if(this.material == "Brons" && this.style == "normal"){
-        this.initStyle(0.4, 0.15, 800);//
-      }
-      else if(this.material == "Coper" && this.style == "normal"){
-        this.initStyle(0.4, 0.15, 800);//
-      }
-      else if(this.material == "PETGCARBON" && this.style == "normal"){
-        this.initStyle(0.4, 0.15, 800);//
-      }
 
+      switch(this.material){
+        case "PLA":{
+            this.materialcode ="PLA";
+            if(this.style == "fine"){
+              this.initStyle(0.4, 0.09, 200); //test OK
+            }
+            else if(this.style == "normal"){
+              this.initStyle(0.4, 0.12, 800); //test OK
+            }
+            break;
+          }
+        case "TPC FLEX":{
+          this.materialcode ="TPCFLEX";
+          if(this.style == "fine"){
+            this.initStyle(0.4, 0.15, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
+          }
+          else if(this.material == "Messing" && this.style == "normal"){
+            this.materialcode ="PLAMES";
+            this.initStyle(0.4, 0.12, 800);//test OK
+          }
+          break;
+        }
+        case "Brons":{
+          this.materialcode ="PLABRO";
+          if(this.style == "normal"){
+            this.initStyle(0.4, 0.15, 800);
+          }
+          break;
+        }
+        case "Coper":{
+          this.materialcode ="PLACOP";
+          if(this.style == "normal"){
+            this.initStyle(0.4, 0.15, 800);//
+          }
+          break;
+        }
+        case "PETGCARBON":{
+          this.materialcode ="PETGCARBON";
+          if(this.style == "normal"){
+            this.initStyle(0.4, 0.15, 800);//
+          }
+          break;
+        }
+      }
       break;
     }
-
     case "Ultimaker2+":{ //nozzle 0.4
       //nozzle 0.08
-      this.scale = 0.23;         //canvas = 1000 px, bed = 230 mm
+      this.scale = 0.1;         //canvas = 2300 px, bed = 230 mm
       this.filement = 2.85;
       if(this.material == "PETGCARBON" && this.style == "normal" ){
-        this.initStyle(0.4, 0.03, 2400);  //0.4, 0.03, 1600 ok
+        this.initStyle(0.4, 0.03, 1200);  //0.4, 0.03, 1600 ok
       }
       if(this.material == "PETGCARBON" && this.style == "fine" ){
         this.initStyle(0.2, 0.03, 1200);  //0.4, 0.03, 1600 ok
@@ -77,7 +104,7 @@ Settings.prototype.init = function(){
     }
   }
 }
-Settings.prototype.initMaterial = function(){
+Settings.prototype.initPrinter = function(){
     switch(this.material){
     case "PLA":{
       this.nozzletemp = 210;

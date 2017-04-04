@@ -37,6 +37,25 @@ Grid.prototype.disorderWidth = function(knitgrid){
      a += 0.2;
   }
 }
+Grid.prototype.createKnitGrid = function(row, stitchnr, rows, stitches){
+//1 extra rij voor opzetten
+/*formule afmeting breiwerk:
+hoogte = rows * celhoogte + (celhoogte*4), waarbij celhoogte is 4
+breedte = stitches * celbreedte + (celbreedte*4), waarbij celbreedte is 4
+*/
+
+//1 extra voor stitches want je moet ook de buitenste positie hebben. voor de afmeting
+//van het breiwerk.
+//HET BREIWERK MOET 1 HOKJE OPSCHUIVEN
+  var knitgrid = [];
+  for(var r = 0; r < ((rows+1) * 4)+1; r++){
+    knitgrid[r]=[];
+    for(var s = 0; s < ((stitches+1) * 4)+1 ; s++){
+      knitgrid[r][s] = this.getPos((row*4) + r , (stitchnr*4) + s  - 4).copy();
+    }
+  }
+  return knitgrid;
+}
 Grid.prototype.draw = function(){
 
   //forbidden area
@@ -111,22 +130,7 @@ Grid.prototype.error = function(msg){
   textAlign(CENTER);
   text(msg, width/2, height/2);
 }
-Grid.prototype.getKnitGrid = function(row, stitchnr, rows, stitches){
-//2 extra rows voor opzetten en afhechten en bij afhechten de onderste grid punten pakken,
-// dus dat zijn de bovenste van de volgende rij.
 
-//1 extra voor stitches want je moet ook de buitenste positie hebben. voor de afmeting
-//van het breiwerk.
-//HET BREIWERK MOET 1 HOKJE OPSCHUIVEN
-  var knitgrid = [];
-  for(var r = 0; r < ((rows+3) * 4)+1; r++){
-    knitgrid[r]=[];
-    for(var s = 0; s < ((stitches+1) * 4)+1 ; s++){
-      knitgrid[r][s] = this.getPos((row*4) + r , (stitchnr*4) + s  - 4).copy();
-    }
-  }
-  return knitgrid;
-}
 Grid.prototype.first = function(row, stitchnr){
   var pos = createVector(0,0);
   var ok = true;
@@ -155,11 +159,11 @@ Grid.prototype.first = function(row, stitchnr){
 }
 Grid.prototype.drawKnitGrid = function(knitgrid, row, stitchnr){
 
-  var rows = knitgrid.length-8;
-  var stitches = knitgrid[0].length-1;
+  var rows = knitgrid.length;
+  var stitches = knitgrid[0].length;
 
-  for(var r = 0; r <= rows; r++){
-    for(var s = 0; s <= stitches; s++){
+  for(var r = 0; r < rows; r++){
+    for(var s = 0; s < stitches; s++){
       stroke(0);
       strokeWeight(1);
       point(knitgrid[r][s].x, knitgrid[r][s].y);
@@ -173,8 +177,8 @@ Grid.prototype.drawKnitGrid = function(knitgrid, row, stitchnr){
   strokeWeight(1);
   fill(0,0,255,10);
   quad( knitgrid[0][0].x, knitgrid[0][0].y,
-        knitgrid[0][stitches].x, knitgrid[0][stitches].y,
-        knitgrid[rows][stitches].x, knitgrid[rows][stitches].y,
-        knitgrid[rows][0].x, knitgrid[rows][0].y);
+        knitgrid[0][stitches-1].x, knitgrid[0][stitches-1].y,
+        knitgrid[rows-1][stitches-1].x, knitgrid[rows-1][stitches-1].y,
+        knitgrid[rows-1][0].x, knitgrid[rows-1][0].y);
 
 }

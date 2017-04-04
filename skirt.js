@@ -25,9 +25,10 @@ Skirt.prototype.create = function(){
     ok = false;
   }
   if(ok){
-    this.skirt[0] = this.grid[this.gridmarge][ this.gridmarge].copy();
-    this.skirt[1] = this.grid[this.gridmarge][ this.gridmarge + this.length].copy();
-    var next = 2;
+    this.skirt[0] = this.grid[this.gridmarge][0];
+    this.skirt[1] = this.grid[this.gridmarge][ this.gridmarge].copy();
+    this.skirt[2] = this.grid[this.gridmarge][ this.gridmarge + this.length].copy();
+    var next = 3;
     for(var l = this.length; l >= 0; l--){
       var zig = this.gridmarge + 1;
       var zag = this.gridmarge + this.height;

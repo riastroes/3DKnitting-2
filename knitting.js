@@ -2,27 +2,16 @@ function Knitting(layer, patternname,row, stitchnr, rows, stitches, show){
   this.commands = new Array(";knitting");
   this.layer = layer;
 
-  this.knitgrid = grid.getKnitGrid(row, stitchnr, rows, stitches);
+  this.knitgrid = grid.createKnitGrid(row, stitchnr, rows, stitches);
   //grid.disorderWidth(this.knitgrid);
   if(show){
     grid.drawKnitGrid(this.knitgrid,row, stitchnr);
   }
-
-  this.createPattern(this.layer,this.knitgrid,"straight");
-  //this.testPattern(this.layer, this.knitgrid, "ABBBBCLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSUVVVVW");
-  this.drawPattern(this.layer);
-//  this.gcode(this.layer);
-
-          //this.createPattern(layer,knitgrid, patternname);
-          // this.patternname = patternname;
-          //
-          // if(patternname == "new"){
-          //   this.pattern = new Pattern(this.layer, this.patternname, this.grid);
-          //   this.createPattern();
-          // }
-          // else{
-          //   this.pattern = "";
-          // }
+   if(patternname != "wall"){
+    this.createPattern(this.layer,this.knitgrid,"straight");
+    //this.testPattern(this.layer, this.knitgrid, "ABBBBCLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSUVVVVW");
+    this.drawPattern(this.layer);
+  }
 
 }
 Knitting.prototype.createStitch = function(layer,type, r, s){
@@ -48,12 +37,6 @@ Knitting.prototype.createStitch = function(layer,type, r, s){
                                  kz).copy());
     }
   }
-
-
-  // pos.x += stitch[i-1].x * w;
-  // pos.y += stitch[i-1].y * h;
-  // pos.z = stitch[i-1].z;
-  // return pos;
 }
 Knitting.prototype.testPattern = function(layer, knitgrid, strpattern){
     this.patternToGrid(layer, knitgrid, strpattern);
@@ -61,85 +44,80 @@ Knitting.prototype.testPattern = function(layer, knitgrid, strpattern){
 Knitting.prototype.createPattern = function(layer,knitgrid, patternname){
   var strpattern = "";
   var pos = knitgrid[0][0];
-  rows = (knitgrid.length/4);
-  stitches = (knitgrid[0].length/4) - 1;
+  rows = (knitgrid.length-1)/4;
+  stitches = (knitgrid[0].length - 5)/4;
+  if(patternname == "straight"){
+    if(pos.x % 8 == 0){
+          //EVEN START
 
-  if(pos.x % 8 == 0){
-    if(patternname == "straight"){
-
-        rows = knitgrid.length/4;
-        stitches = (knitgrid[0].length/4) - 1;
-        for(var r = 0; r < rows; r+=1){
-          if(r == 0 ){
-            var E = "E";
-            strpattern = strpattern.concat("D",E.repeat(stitches-2),"F");
-          }
-          else if(r > 0 && r < rows -2){
-            if(r % 2 == 1){
-              //oneven
-              var L = "L";
-              strpattern = strpattern.concat(L.repeat(stitches-1),"K");
+          for(var r = 0; r < rows; r+=1){
+            if(r == 0 ){
+              var E = "E";
+              strpattern = strpattern.concat("D",E.repeat(stitches-2),"F");
             }
-            else {
-              //even
-              var R = "R";
-              strpattern = strpattern.concat(R.repeat(stitches-1),"S");
+            else if(r > 0 && r < rows-1){
+              if(r % 2 == 1){
+                //oneven
+                var L = "L";
+                strpattern = strpattern.concat(L.repeat(stitches-1),"K");
+              }
+              else {
+                //even
+                var R = "R";
+                strpattern = strpattern.concat(R.repeat(stitches-1),"S");
+              }
             }
-          }
-          else if(r == rows-2){
-            if(r % 2 == 0){
-              //even
-              var Y = "Y";
-              strpattern = strpattern.concat("X",Y.repeat(stitches-2),"Z");
-            }
-            else {
-            var V = "V";
-            strpattern = strpattern.concat("U",V.repeat(stitches-2),"W");
-            }
-          }
-        }
-      }
-      println(strpattern);
-      println(strpattern.length);
-    }
-  else{
-    if(patternname == "straight"){
-        //ONEVEN
-        rows = (knitgrid.length/4 )-1;
-        stitches = (knitgrid[0].length/4) - 1;
-        for(var r = 0; r < rows-2; r+=1){
-          if(r == 0 ){
-              var B = "B";
-            strpattern = strpattern.concat("A",B.repeat(stitches-2),"C");
-          }
-          else if(r > 0 && r < floor(rows -2)){
-            if(r % 2 == 1){
-              //oneven
-              var L = "L";
-              strpattern = strpattern.concat(L.repeat(stitches-1),"K");
-            }
-            else {
-              //even
-              var R = "R";
-              strpattern = strpattern.concat(R.repeat(stitches-1),"S");
-            }
-          }
-          else if(r == floor(rows-2)){
-            if(r % 2 == rows){
-              var Y = "Y";
-              strpattern = strpattern.concat("X",Y.repeat(stitches-2),"Z");
-            }
-            else{
+            else if(r == rows-1){
+              if(r % 2 == 0){
+                //even
+                var Y = "Y";
+                strpattern = strpattern.concat("X",Y.repeat(stitches-2),"Z");
+              }
+              else {
               var V = "V";
               strpattern = strpattern.concat("U",V.repeat(stitches-2),"W");
+              }
             }
           }
-
-        }
-      }
-
     }
+    else{
 
+          //ONEVEN START
+
+          for(var r = 0; r < rows; r+=1){
+            if(r == 0 ){
+                var B = "B";
+                strpattern = strpattern.concat("A",B.repeat(stitches-2),"C");
+              }
+            else if(r > 0 && r < rows-1){
+              if(r % 2 == 0){
+                  //even
+                  var R = "R";
+                  strpattern = strpattern.concat(R.repeat(stitches-1),"S");
+                }
+                else {
+                  //oneven
+                  var L = "L";
+                  strpattern = strpattern.concat(L.repeat(stitches-1),"K");
+                }
+            }
+            else if(r == rows-1){
+              if(r % 2 == 0){
+                //EVEN
+                var Y = "Y";
+                strpattern = strpattern.concat("X",Y.repeat(stitches-2),"Z");
+              }
+              else{
+                //ONEVEN
+                var V = "V";
+                strpattern = strpattern.concat("U",V.repeat(stitches-2),"W");
+              }
+            }
+
+          }
+        }
+
+  }
   println(strpattern);
   println(strpattern.length);
   this.patternToGrid(layer, knitgrid, strpattern);
@@ -176,7 +154,13 @@ Knitting.prototype.patternToGrid = function(layer, knitgrid, strpattern ){
         }
       }
     }
-    append(layer.p, grid.getPos(100,0));
+    append(layer.p, grid.getPos(132,72,0));
+    append(layer.p, grid.getPos(132,24,0));
+    append(layer.p, grid.getPos(44,24,0));
+    append(layer.p, grid.getPos(44,32,0));
+
+
+
 
 }
 Knitting.prototype.drawPattern = function(layer){
@@ -263,4 +247,9 @@ Knitting.prototype.draw = function(layer){
         line( layer.p[i-1].x,  layer.p[i-1].y,x,y);
 
     }
+}
+Knitting.prototype.test = function(pos){
+  stroke(0,255,0);
+  strokeWeight(5);
+  point(pos.x, pos.y);
 }
