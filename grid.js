@@ -113,14 +113,10 @@ Grid.prototype.testPos = function(x, y, z){
   println(this.grid[x][y].x +","+ this.grid[x][y].y);
 }
 Grid.prototype.getPos = function(row, stitchnr){
-  var pos = createVector(0,0);
-  // if(row % 2 == 1){
-  //  pos.x = (this.grid[0].length -(stitchnr*4)) * (this.cellwidth/4);
-  // }
-  // else{
-    pos.x = stitchnr * this.cellwidth/4;
-  //}
+  var pos = createVector(0,0,0);
+  pos.x = stitchnr * (this.cellwidth/4);
   pos.y = row * (this.cellheight/4);
+  pos.z = 0;
   return pos;
 }
 Grid.prototype.error = function(msg){

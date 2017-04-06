@@ -1,6 +1,10 @@
 function Knitting(layer, patternname,row, stitchnr, rows, stitches, show){
   this.commands = new Array(";knitting");
   this.layer = layer;
+  this.row = row;
+  this.rows = rows;
+  this.stitches = stitches;
+  this.stitchnr = stitchnr;
 
   this.knitgrid = grid.createKnitGrid(row, stitchnr, rows, stitches);
   //grid.disorderWidth(this.knitgrid);
@@ -12,6 +16,39 @@ function Knitting(layer, patternname,row, stitchnr, rows, stitches, show){
     //this.testPattern(this.layer, this.knitgrid, "ABBBBCLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSUVVVVW");
     this.drawPattern(this.layer);
   }
+  if(patternname == "wall"){
+    this.createWall();
+  }
+
+
+}
+Knitting.prototype.createWall = function(){
+  var wall = [];
+  var w = this.knitgrid[0].length;
+  var h = this.knitgrid.length;
+  this.test(this.knitgrid[4][11]);
+  this.test(this.knitgrid[4][8]);
+  this.test(this.knitgrid[4][4]);
+  this.test(this.knitgrid[h-2][4]);
+  this.test(this.knitgrid[h-2][w-2]);
+  this.test(this.knitgrid[4][w-2]);
+
+  append(wall, this.knitgrid[4][11]);
+  append(wall, this.knitgrid[4][8]);
+  append(wall, this.knitgrid[4][4]);
+  append(wall, this.knitgrid[h-2][4]);
+  append(wall, this.knitgrid[h-2][w-2]);
+  append(wall, this.knitgrid[4][w-2]);
+  for(var i = 1; i < 6; i++){
+    wall[i].z = 1;
+  }
+  //
+    append(this.layer.p , wall[0]);
+    append(this.layer.p , wall[1]);
+    append(this.layer.p , wall[2]);
+    append(this.layer.p , wall[3]);
+    append(this.layer.p , wall[4]);
+    append(this.layer.p , wall[5]);
 
 }
 Knitting.prototype.createStitch = function(layer,type, r, s){
@@ -154,10 +191,15 @@ Knitting.prototype.patternToGrid = function(layer, knitgrid, strpattern ){
         }
       }
     }
-    append(layer.p, grid.getPos(132,72,0));
-    append(layer.p, grid.getPos(132,24,0));
-    append(layer.p, grid.getPos(44,24,0));
-    append(layer.p, grid.getPos(44,32,0));
+
+
+    grid.testPos(this.row + this.rows + 2  ,this.stitchnr + this.stitches);
+    grid.testPos(this.row + this.rows + 2  ,this.stitchnr -2);
+    grid.testPos(this.row ,this.stitchnr -2);
+    append(layer.p, grid.getPos((this.row + this.rows + 2)*4 , ( this.stitchnr + this.stitches)*4).copy());
+    append(layer.p, grid.getPos((this.row + this.rows + 2)*4 , ( this.stitchnr -2)*4).copy());
+    append(layer.p, grid.getPos((this.row)*4 , ( this.stitchnr -2)*4).copy());
+
 
 
 
@@ -184,27 +226,25 @@ Knitting.prototype.drawPattern = function(layer){
 //       this.layers[i].p = concat(this.layers[i].p, this.pattern.p);
 //   }
 // }
-Knitting.prototype.generateGcode = function(layer){
-
-  //for(var i = 0; i < this.layers.length; i++){
-    this.commands = concat(this.commands, layer.commands);
-    //this.commands = concat(this.commands, this.pattern.commands);
-    this.gcode(layer);
-  //}
-}
+// Knitting.prototype.generateGcode = function(layer){
+//
+//   //for(var i = 0; i < this.layers.length; i++){
+//     this.commands = concat(this.commands, layer.commands);
+//     //this.commands = concat(this.commands, this.pattern.commands);
+//     this.gcode(layer);
+//   //}
+// }
 Knitting.prototype.gcode = function(layer){
 
-
-  if(layer.layer > 0){
-    //append(this.commands, "G4 P20000");
-    layer.layerheight = settings.layerheight + 0.1;
-  }
-  var lz = ((layer.layer+1) * layer.layerheight);
   append(this.commands, "G0 F" + layer.speed);
-  append(this.commands, "G0 Z" + lz);
+  append(this.commands, "G0 Z" + layer.totallayerheight);
   append(this.commands, "G0 X" + layer.p[0].x * layer.scale + " Y" + layer.p[0].y * layer.scale  );
-
+  if(layer.layer == 0){
+    append(this.commands, "G4 P5000" );
+  }
   for(var i = 1; i < layer.p.length; i++){
+
+
     var x = layer.p[i].x * layer.scale;
     x = floor(x * 100)/100;
     var y = layer.p[i].y * layer.scale;
@@ -215,15 +255,11 @@ Knitting.prototype.gcode = function(layer){
     var d = dvector.mag()* layer.scale;
 
 
-    var kz = ((layer.layer+1) * layer.layerheight) * z;
+    var kz = layer.totallayerheight * z;
     if(z == 0){
       append(this.commands, "G0 X" + x + " Y" + y );
     }
-    else if(kz != lz){
-      gcode.extrude += (d * layer.thickness);
-      append(this.commands, "G1 X" + x + " Y" + y + " Z" + kz + " E" + gcode.extrude );
-    }
-    else if(kz == lz){
+    else{
       gcode.extrude += (d * layer.thickness);
       append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude );
     }

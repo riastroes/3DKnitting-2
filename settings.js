@@ -1,7 +1,7 @@
 function Settings(printer, material, style){
   this.printer = printer;
   this.material = material;
-  this.materialcode;
+  this.materialcode ="";
   this.style = style;
   this.width = width;
   this.height = height;
@@ -40,8 +40,8 @@ Settings.prototype.initMaterial = function(){
           }
         case "TPC FLEX":{
           this.materialcode ="TPCFLEX";
-          if(this.style == "fine"){
-            this.initStyle(0.4, 0.15, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
+          if(this.style == "normal"){
+            this.initStyle(0.5, 0.2, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
           }
           else if(this.material == "Messing" && this.style == "normal"){
             this.materialcode ="PLAMES";
@@ -52,7 +52,7 @@ Settings.prototype.initMaterial = function(){
         case "Brons":{
           this.materialcode ="PLABRO";
           if(this.style == "normal"){
-            this.initStyle(0.4, 0.15, 800);
+            this.initStyle(0.4, 0.15, 800); //test ok armband.
           }
           break;
         }
@@ -67,6 +67,13 @@ Settings.prototype.initMaterial = function(){
           this.materialcode ="PETGCARBON";
           if(this.style == "normal"){
             this.initStyle(0.4, 0.15, 800);//
+          }
+          break;
+        }
+        case "SATIN":{
+          this.materialcode ="SATIN";
+          if(this.style == "normal"){
+            this.initStyle(0.5, 0.2, 800);//test ok (iphone etui)
           }
           break;
         }
@@ -134,6 +141,11 @@ Settings.prototype.initPrinter = function(){
     case "PETGCARBON":{
       this.nozzletemp = 210;
       this.bedtemp = 30;
+      break;
+    }
+    case "SATIN":{
+      this.nozzletemp =190;
+      this.bedtemp = 0;
       break;
     }
   }

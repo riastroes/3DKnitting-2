@@ -7,9 +7,32 @@ function Skirt(grid, skirtlength, skirtheight){
   append(this.commands,";param length: " + this.length);
   append(this.commands,";param height: " + this.height);
   this.skirt = [];
-  this.create();
+  this.createRect();
 }
-Skirt.prototype.create = function(){
+Skirt.prototype.createRect = function(){
+  var ok = true;
+  var maxlength = this.grid[0].length - (2* this.gridmarge);
+  var maxheight = this.grid.height - (2* this.gridmarge);
+  if(this.length < this.gridmarge || this.length > maxlength){
+    this.error("Error Skirt: skirtlength ("+ this.length + ") is in a forbidden region.");
+    noLoop();
+    ok = false;
+  }
+  if(this.height < this.gridmarge || this.height > maxheight){
+    this.error("Error Skirt: skirtheight ("+ this.height + ") is in a forbidden region.");
+    noLoop();
+    ok = false;
+  }
+  if(ok){
+    this.skirt[0] = this.grid[this.gridmarge][0];
+    this.skirt[1] = this.grid[this.gridmarge][ this.gridmarge].copy();
+    this.skirt[2] = this.grid[this.gridmarge][ this.gridmarge + this.length].copy();
+    this.skirt[3] = this.grid[this.gridmarge + this.height][ this.gridmarge + this.length].copy();
+    this.skirt[4] = this.grid[this.gridmarge + this.height][ this.gridmarge].copy();
+  }
+
+}
+Skirt.prototype.createZigZag = function(){
   //first check size
   var ok = true
   var maxlength = this.grid[0].length - (2* this.gridmarge);
@@ -69,7 +92,7 @@ Skirt.prototype.error = function(msg){
 }
 Skirt.prototype.draw = function(){
   this.showFirst();
-  for(var l = 1; l < this.length+2; l++){
+  for(var l = 1; l < this.skirt.length; l++){
     stroke(255,0,255);
     strokeWeight(1);
     line(this.skirt[l-1].x, this.skirt[l-1].y, this.skirt[l].x, this.skirt[l].y);
@@ -94,4 +117,5 @@ Skirt.prototype.gcode = function(layer){
     append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude );
 
   }
+  
 }
