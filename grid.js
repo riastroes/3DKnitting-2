@@ -40,7 +40,7 @@ Grid.prototype.disorderWidth = function(knitgrid){
 Grid.prototype.createKnitGrid = function(row, stitchnr, rows, stitches){
 //1 extra rij voor opzetten
 /*formule afmeting breiwerk:
-hoogte = rows * celhoogte + (celhoogte*4), waarbij celhoogte is 4
+hoogte = rows * celhoogte + (celhoogte*5), waarbij celhoogte is 4
 breedte = stitches * celbreedte + (celbreedte*4), waarbij celbreedte is 4
 */
 
@@ -48,10 +48,10 @@ breedte = stitches * celbreedte + (celbreedte*4), waarbij celbreedte is 4
 //van het breiwerk.
 //HET BREIWERK MOET 1 HOKJE OPSCHUIVEN
   var knitgrid = [];
-  for(var r = 0; r < ((rows+1) * 4)+1; r++){
+  for(var r = 0; r < ((rows+1) * 5)+1; r++){
     knitgrid[r]=[];
     for(var s = 0; s < ((stitches+1) * 4)+1 ; s++){
-      knitgrid[r][s] = this.getPos((row*4) + r , (stitchnr*4) + s  - 4).copy();
+      knitgrid[r][s] = this.getPos((row*5) + r , (stitchnr*4) + s  - 4).copy();
     }
   }
   return knitgrid;
@@ -115,7 +115,7 @@ Grid.prototype.testPos = function(x, y, z){
 Grid.prototype.getPos = function(row, stitchnr){
   var pos = createVector(0,0,0);
   pos.x = stitchnr * (this.cellwidth/4);
-  pos.y = row * (this.cellheight/4);
+  pos.y = row * (this.cellheight/5);
   pos.z = 0;
   return pos;
 }

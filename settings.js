@@ -87,10 +87,12 @@ Settings.prototype.initMaterial = function(){
       if(this.material == "PETGCARBON" && this.style == "normal" ){
         this.initStyle(0.4, 0.03, 1200);  //0.4, 0.03, 1600 ok
       }
-      if(this.material == "PETGCARBON" && this.style == "fine" ){
+      else if(this.material == "PETGCARBON" && this.style == "fine" ){
         this.initStyle(0.2, 0.03, 1200);  //0.4, 0.03, 1600 ok
       }
-      break;
+      else if(this.material == "PLABRO" && this.style == "normal" ){
+          this.initStyle(0.4, 0.03, 800); //test ok armband.
+      }
     }
     case "Ultimaker2++":{ //nozzle 0.8
       this.scale = 0.23;         //canvas = 1000 px, bed = 230 mm
@@ -128,9 +130,9 @@ Settings.prototype.initPrinter = function(){
       this.bedtemp = 40;
       break;
     }
-    case "Brons":{
-      this.nozzletemp = 160;
-      this.bedtemp = 80;
+    case "PLABRO":{
+      this.nozzletemp = 190;
+      this.bedtemp = 50;
       break;
     }
     case "Coper":{

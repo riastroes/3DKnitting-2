@@ -26,29 +26,36 @@ Knitting.prototype.createWall = function(){
   var wall = [];
   var w = this.knitgrid[0].length;
   var h = this.knitgrid.length;
-  this.test(this.knitgrid[4][11]);
-  this.test(this.knitgrid[4][8]);
+  //this.test(this.knitgrid[4][11]);
+  //this.test(this.knitgrid[4][8]);
   this.test(this.knitgrid[4][4]);
   this.test(this.knitgrid[h-2][4]);
   this.test(this.knitgrid[h-2][w-2]);
   this.test(this.knitgrid[4][w-2]);
 
-  append(wall, this.knitgrid[4][11]);
-  append(wall, this.knitgrid[4][8]);
-  append(wall, this.knitgrid[4][4]);
-  append(wall, this.knitgrid[h-2][4]);
-  append(wall, this.knitgrid[h-2][w-2]);
-  append(wall, this.knitgrid[4][w-2]);
-  for(var i = 1; i < 6; i++){
-    wall[i].z = 1;
+  //append(wall, this.knitgrid[4][11]);
+  //append(wall, this.knitgrid[4][8]);
+  var pos = [];
+  pos[0] = this.knitgrid[4][4].copy();
+  pos[1] = this.knitgrid[h-2][4].copy();
+  pos[2] = this.knitgrid[h-2][w-2].copy();
+  pos[3] = this.knitgrid[4][w-2].copy();
+  pos[4] = this.knitgrid[4][w-2].copy();
+  pos[4].x += 1;
+  pos[5] = this.knitgrid[h-2][w-2].copy();
+  pos[5].x += 1;
+  pos[5].y -= 1;
+  pos[6] = this.knitgrid[h-2][4].copy();
+  pos[6].x -= 1;
+  pos[6].y -= 1;
+  pos[7] = this.knitgrid[4][4].copy();
+  pos[7].x -= 1;
+
+  for(var i = 0; i < 8; i++){
+    pos[i].z = 1;
+    append(this.layer.p , pos[i]);
   }
-  //
-    append(this.layer.p , wall[0]);
-    append(this.layer.p , wall[1]);
-    append(this.layer.p , wall[2]);
-    append(this.layer.p , wall[3]);
-    append(this.layer.p , wall[4]);
-    append(this.layer.p , wall[5]);
+
 
 }
 Knitting.prototype.createStitch = function(layer,type, r, s){
@@ -59,7 +66,7 @@ Knitting.prototype.createStitch = function(layer,type, r, s){
   for(i = 0; i < stitch.length; i++){
     var ok = true
     //test on the knitgrid;
-    kr = (r*4) + stitch[i].y;
+    kr = (r*5) + stitch[i].y;
     ks = (s*4) + stitch[i].x + 4; //HET BREIWERK MOET 1 HOKJE OPSCHUIVEN
     kz = stitch[i].z;
     if(kr < 0 || kr >= this.knitgrid.length){
@@ -81,7 +88,7 @@ Knitting.prototype.testPattern = function(layer, knitgrid, strpattern){
 Knitting.prototype.createPattern = function(layer,knitgrid, patternname){
   var strpattern = "";
   var pos = knitgrid[0][0];
-  rows = (knitgrid.length-1)/4;
+  rows = (knitgrid.length-1)/5;
   stitches = (knitgrid[0].length - 5)/4;
   if(patternname == "straight"){
     if(pos.x % 8 == 0){
@@ -169,7 +176,7 @@ Knitting.prototype.patternToGrid = function(layer, knitgrid, strpattern ){
         type = strpattern.substring(i,i+1);
       }
       r = floor(i / ((knitgrid[0].length-5)/4)); //min 5, want min 1 rij en 1 stip
-      //if(r == knitgrid.length - 5 ){r += 4;}
+
       s = i % ((knitgrid[0].length-5)/4);
       var maxs =  floor((knitgrid[0].length-5)/4);
       if(pos.x % 2 == 0 ){
@@ -193,12 +200,12 @@ Knitting.prototype.patternToGrid = function(layer, knitgrid, strpattern ){
     }
 
 
-    grid.testPos(this.row + this.rows + 2  ,this.stitchnr + this.stitches);
+    grid.testPos(this.row + this.rows + 2  ,this.stitchnr );
     grid.testPos(this.row + this.rows + 2  ,this.stitchnr -2);
     grid.testPos(this.row ,this.stitchnr -2);
-    append(layer.p, grid.getPos((this.row + this.rows + 2)*4 , ( this.stitchnr + this.stitches)*4).copy());
-    append(layer.p, grid.getPos((this.row + this.rows + 2)*4 , ( this.stitchnr -2)*4).copy());
-    append(layer.p, grid.getPos((this.row)*4 , ( this.stitchnr -2)*4).copy());
+    append(layer.p, grid.getPos((this.row + this.rows + 2)*5 , ( this.stitchnr )*4).copy());
+    append(layer.p, grid.getPos((this.row + this.rows + 2)*5 , ( this.stitchnr -2)*4).copy());
+    append(layer.p, grid.getPos((this.row)*5 , ( this.stitchnr -2)*4).copy());
 
 
 

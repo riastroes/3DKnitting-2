@@ -67,9 +67,6 @@ Gcode.prototype.generate = function(layers, skirt, knittings){
   this.getCode(skirt.commands);
   for(var i = 0; i < knittings.length; i++){
     this.getCode(layers[i].commands);
-    if(i == 21){
-      append(layers[i+1].commands,"G4 P20000    ; pauze");
-    }
     this.getCode(knittings[i].commands);
   }
   this.endCode();

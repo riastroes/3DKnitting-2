@@ -18,14 +18,15 @@ function setup() {
     createCanvas(2200,2200);
     //background(255,0,0);
 
-    settings = new Settings("Anet","TPC FLEX","normal");
+    //settings = new Settings("Anet","TPC FLEX","normal");
     //settings = new Settings("Anet","Coper","normal");
     //settings = new Settings("Ultimaker2+", "PLA", "fine");
     //settings = new Settings("Ultimaker2+", "PETGCARBON","normal");
     //settings = new Settings("Anet", "PLA", "normal");
     //settings = new Settings("Anet", "SATIN", "normal");
-    grid = new Grid(100,100, 4,4,2); // 6X6
-    grid.draw();
+    settings = new Settings("Ultimaker2+", "PLABRO", "normal");
+    grid = new Grid(100,100, 5,4,2); // 6X6
+    //grid.draw();
     grid.testPos(5,5); //row, stitches
     gcode = new Gcode(settings);
 
@@ -42,19 +43,22 @@ function setup() {
 
 
     knittings = [];
+    var i;
     for(i = 0; i < 1; i++){
 
-       knittings[i] = new Knitting(layers[i], "straight", 6,6, 24,13, true);
+       knittings[i] = new Knitting(layers[i], "straight", 6,6, 21,14, false);
        knittings[i].gcode(layers[i]);
     }
     for(i = 1; i < 23; i++){
-      knittings[i] = new Knitting(layers[i], "wall", 6,6, 24,13, true);
+      knittings[i] = new Knitting(layers[i], "wall", 6,6, 21,14, false);
       knittings[i].gcode(layers[i]);
     }
 
-
+      if(i == 23){
+      append(layers[23].commands,"G4 P20000    ; pauze");
+      }
     for(i = 23; i < 25; i++){
-      knittings[i] = new Knitting(layers[i], "straight", 6,6, 24,13, true);
+      knittings[i] = new Knitting(layers[i], "straight", 6,6,21,14, false);
       knittings[i].gcode(layers[i]);
     }
 
