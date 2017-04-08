@@ -72,7 +72,10 @@ Settings.prototype.initMaterial = function(){
         }
         case "SATIN":{
           this.materialcode ="SATIN";
-          if(this.style == "normal"){
+          if(this.style == "fine"){
+            this.initStyle(0.5, 0.2, 800);//
+          }
+          else if(this.style == "normal"){
             this.initStyle(0.5, 0.2, 800);//test ok (iphone etui)
           }
           break;
@@ -146,7 +149,7 @@ Settings.prototype.initPrinter = function(){
       break;
     }
     case "SATIN":{
-      this.nozzletemp =190;
+      this.nozzletemp =200;
       this.bedtemp = 0;
       break;
     }

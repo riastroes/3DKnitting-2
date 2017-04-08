@@ -22,11 +22,11 @@ function setup() {
     //settings = new Settings("Anet","Coper","normal");
     //settings = new Settings("Ultimaker2+", "PLA", "fine");
     //settings = new Settings("Ultimaker2+", "PETGCARBON","normal");
-    //settings = new Settings("Anet", "PLA", "normal");
+    settings = new Settings("Anet", "SATIN", "fine");
     //settings = new Settings("Anet", "SATIN", "normal");
-    settings = new Settings("Ultimaker2+", "PLABRO", "normal");
-    grid = new Grid(100,100, 5,4,2); // 6X6
-    //grid.draw();
+    //settings = new Settings("Ultimaker2+", "PLABRO", "normal");
+    grid = new Grid(100,100, 6,6,2); // 6X6
+    grid.draw();
     grid.testPos(5,5); //row, stitches
     gcode = new Gcode(settings);
 
@@ -37,31 +37,31 @@ function setup() {
 
     skirt = new Skirt(grid, 25,2);
     skirt.draw();
-    skirt.gcode(layers[0]);
+    //skirt.gcode(layers[0]);
     wall = [];
 
 
 
     knittings = [];
     var i;
-    for(i = 0; i < 1; i++){
-
-       knittings[i] = new Knitting(layers[i], "straight", 6,6, 21,14, false);
-       knittings[i].gcode(layers[i]);
+    for(i = 0; i < 2; i++){
+      layers[0].totallayerheight= 12.5;
+       knittings[i] = new Knitting(layers[i], "straight", 6,6,32,20, true);
+     knittings[i].gcode(layers[i]);
     }
-    for(i = 1; i < 23; i++){
-      knittings[i] = new Knitting(layers[i], "wall", 6,6, 21,14, false);
-      knittings[i].gcode(layers[i]);
-    }
-
-      if(i == 23){
-      append(layers[23].commands,"G4 P20000    ; pauze");
-      }
-    for(i = 23; i < 25; i++){
-      knittings[i] = new Knitting(layers[i], "straight", 6,6,21,14, false);
-      knittings[i].gcode(layers[i]);
-    }
-
+    // for(i = 2; i < 23; i++){
+    //   knittings[i] = new Knitting(layers[i], "wall", 6,6, 32,20, true);
+    //   knittings[i].gcode(layers[i]);
+    // }
+    //
+    //   if(i == 23){
+    // //  append(layers[23].commands,"G4 P20000    ; pauze");
+    //   }
+    // for(i = 23; i < 25; i++){
+    //   knittings[i] = new Knitting(layers[i], "straight", 6,6,32,20, true);
+    //   knittings[i].gcode(layers[i]);
+    // }
+    //
 
     gcode.generate(layers,skirt, knittings);
     isSaved = false;
