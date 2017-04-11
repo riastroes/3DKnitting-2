@@ -15,7 +15,7 @@ var wall;
 
 
 function setup() {
-    createCanvas(2200,2200);
+    createCanvas(1000,1000);
     //background(255,0,0);
 
     //settings = new Settings("Anet","TPC FLEX","normal");
@@ -31,13 +31,14 @@ function setup() {
     gcode = new Gcode(settings);
 
     layers = [];
-    for(var i = 0; i < 25; i++){
+    for(var i = 0; i < 48; i++){
       layers[i] = new Layer(i, settings);
+
     }
 
     skirt = new Skirt(grid, 25,2);
     skirt.draw();
-    //skirt.gcode(layers[0]);
+    skirt.gcode(layers[0]);
     wall = [];
 
 
@@ -45,23 +46,24 @@ function setup() {
     knittings = [];
     var i;
     for(i = 0; i < 2; i++){
-      layers[0].totallayerheight= 12.5;
-       knittings[i] = new Knitting(layers[i], "straight", 6,6,32,20, true);
-     knittings[i].gcode(layers[i]);
+
+      knittings[i] = new Knitting(layers[i], "straight", 6,6,50,24, true);
+      knittings[i].gcode(layers[i]);
     }
-    // for(i = 2; i < 23; i++){
-    //   knittings[i] = new Knitting(layers[i], "wall", 6,6, 32,20, true);
+    // for(i = 2; i < 46; i++){
+    //   layers[i].speed = 1800;
+    //   knittings[i] = new Knitting(layers[i], "wall", 6,6, 34,20, true);
     //   knittings[i].gcode(layers[i]);
     // }
     //
-    //   if(i == 23){
-    // //  append(layers[23].commands,"G4 P20000    ; pauze");
+    //   if(i == 46){
+    //     append(layers[i].commands,"G4 P20000    ; pauze");
     //   }
-    // for(i = 23; i < 25; i++){
-    //   knittings[i] = new Knitting(layers[i], "straight", 6,6,32,20, true);
+    // for(i = 46; i < 48; i++){
+    //   knittings[i] = new Knitting(layers[i], "straight", 6,6,34,20, true);
     //   knittings[i].gcode(layers[i]);
     // }
-    //
+
 
     gcode.generate(layers,skirt, knittings);
     isSaved = false;
@@ -82,7 +84,7 @@ function mousePressed(){
   else{
     if(!isSaved){
 
-      gcode.save("ETUI" + settings.materialcode + settings.style);
+      gcode.save("IPHONE5" + settings.materialcode + settings.style);
       isSaved = true;
     }
   }

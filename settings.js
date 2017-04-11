@@ -73,7 +73,7 @@ Settings.prototype.initMaterial = function(){
         case "SATIN":{
           this.materialcode ="SATIN";
           if(this.style == "fine"){
-            this.initStyle(0.5, 0.2, 800);//
+            this.initStyle(0.25, 0.1, 600);//
           }
           else if(this.style == "normal"){
             this.initStyle(0.5, 0.2, 800);//test ok (iphone etui)

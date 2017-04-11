@@ -6,8 +6,8 @@ function Grid(cellwidth, cellheight, wstitchpercell, hstitchpercell, marge){
   this.cellwidth = cellwidth / wstitchpercell;
   this.cellheight = cellheight/ hstitchpercell;
 
-  this.wmax = width / this.cellwidth;
-  this.hmax = height / this.cellheight;
+  this.wmax = floor(width / this.cellwidth);
+  this.hmax = floor(height / this.cellheight);
 
   this.marge = marge;
 
@@ -32,6 +32,18 @@ Grid.prototype.disorderWidth = function(knitgrid){
     for(s = 0; s < knitgrid[0].length; s++){
 
         knitgrid[r][s].x += 40 * sin(a);
+
+     }
+     a += 0.2;
+  }
+}
+Grid.prototype.disorderHalfRound = function(knitgrid){
+  var a=0;
+  for(r = 0; r< knitgrid.length; r++){
+
+    for(s = 0; s < knitgrid[0].length; s++){
+
+        knitgrid[r][s].x +=20 * cos(a);
 
      }
      a += 0.2;

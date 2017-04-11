@@ -29,6 +29,11 @@ Skirt.prototype.createRect = function(){
     this.skirt[2] = this.grid[this.gridmarge][ this.gridmarge + this.length].copy();
     this.skirt[3] = this.grid[this.gridmarge + this.height][ this.gridmarge + this.length].copy();
     this.skirt[4] = this.grid[this.gridmarge + this.height][ this.gridmarge].copy();
+    this.skirt[5] = this.grid[this.gridmarge +  this.length][ this.gridmarge].copy();
+    this.skirt[6] = this.grid[this.gridmarge +  this.length][ this.gridmarge + 2].copy();
+    this.skirt[7] = this.grid[this.gridmarge + this.height + 1][ this.gridmarge + 2].copy();
+    this.skirt[8] = this.grid[this.gridmarge + this.height + 1][ this.gridmarge + 4].copy();
+    this.skirt[9] = this.grid[this.gridmarge + this.height + 2][ this.gridmarge + 4].copy();
   }
 
 }
@@ -117,5 +122,5 @@ Skirt.prototype.gcode = function(layer){
     append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude );
 
   }
-  
+
 }

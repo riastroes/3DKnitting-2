@@ -7,7 +7,8 @@ function Knitting(layer, patternname,row, stitchnr, rows, stitches, show){
   this.stitchnr = stitchnr;
 
   this.knitgrid = grid.createKnitGrid(row, stitchnr, rows, stitches);
-  //grid.disorderWidth(this.knitgrid);
+  grid.disorderHalfRound(this.knitgrid);
+
   if(show){
     grid.drawKnitGrid(this.knitgrid,row, stitchnr);
   }
@@ -41,15 +42,15 @@ Knitting.prototype.createWall = function(){
   pos[2] = this.knitgrid[h-2][w-2].copy();
   pos[3] = this.knitgrid[4][w-2].copy();
   pos[4] = this.knitgrid[4][w-2].copy();
-  pos[4].x += 1;
+  pos[4].x += 3;
   pos[5] = this.knitgrid[h-2][w-2].copy();
-  pos[5].x += 1;
-  pos[5].y -= 1;
+  pos[5].x += 3;
+  pos[5].y -= 3;
   pos[6] = this.knitgrid[h-2][4].copy();
-  pos[6].x -= 1;
-  pos[6].y -= 1;
+  pos[6].x -= 3;
+  pos[6].y -= 3;
   pos[7] = this.knitgrid[4][4].copy();
-  pos[7].x -= 1;
+  pos[7].x -= 3;
 
   for(var i = 0; i < 8; i++){
     pos[i].z = 1;
@@ -200,12 +201,12 @@ Knitting.prototype.patternToGrid = function(layer, knitgrid, strpattern ){
     }
 
 
-    grid.testPos(this.row + this.rows + 2  ,this.stitchnr );
-    grid.testPos(this.row + this.rows + 2  ,this.stitchnr -2);
+    grid.testPos(this.row + this.rows + 2  ,this.stitchnr + stitches );
+    grid.testPos(this.row + this.rows + 2  ,this.stitchnr -3);
     grid.testPos(this.row ,this.stitchnr -2);
-    append(layer.p, grid.getPos((this.row + this.rows + 2)*5 , ( this.stitchnr )*4).copy());
-    append(layer.p, grid.getPos((this.row + this.rows + 2)*5 , ( this.stitchnr -2)*4).copy());
-    append(layer.p, grid.getPos((this.row)*5 , ( this.stitchnr -2)*4).copy());
+    append(layer.p, grid.getPos((this.row + this.rows + 2)*5 , ( this.stitchnr + stitches)*4).copy());
+    append(layer.p, grid.getPos((this.row + this.rows + 2)*5 , ( this.stitchnr -3)*4).copy());
+    append(layer.p, grid.getPos((this.row)*5 , ( this.stitchnr -3)*4).copy());
 
 
 
@@ -246,9 +247,9 @@ Knitting.prototype.gcode = function(layer){
   append(this.commands, "G0 F" + layer.speed);
   append(this.commands, "G0 Z" + layer.totallayerheight);
   append(this.commands, "G0 X" + layer.p[0].x * layer.scale + " Y" + layer.p[0].y * layer.scale  );
-  if(layer.layer == 0){
-    append(this.commands, "G4 P5000" );
-  }
+  // if(layer.layer == 0){
+  //   append(this.commands, "G4 P5000" );
+  // }
   for(var i = 1; i < layer.p.length; i++){
 
 
