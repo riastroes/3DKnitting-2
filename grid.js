@@ -98,7 +98,7 @@ Grid.prototype.disorderGrowWidth = function(knitgrid, from,to, force){
 
      for(s = 0; s < knitgrid[0].length; s++){
        pos = knitgrid[r][floor(knitgrid[r].length/2)+1].copy();
-      
+
        d = p5.Vector.sub(pos,knitgrid[r][s]);
        d.mult(nr* force);
        knitgrid[r][s].x  += d.x ;
@@ -164,12 +164,12 @@ Grid.prototype.draw = function(){
           //even regels
           stroke(0);
           strokeWeight(3);
-          point(grid.grid[r][0].x, grid.grid[r][0].y);
+          point(this.grid[r][0].x, this.grid[r][0].y);
         }
         else {
             stroke(0);
             strokeWeight(3);
-            point(grid.grid[r][this.wmax].x, grid.grid[r][this.wmax].y);
+            point(this.grid[r][this.wmax].x, this.grid[r][this.wmax].y);
         }
 
     if(r % this.hstitchpercell == 0){

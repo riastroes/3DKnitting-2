@@ -10,7 +10,7 @@ var isSaved;
 var isDesign;
 var isToGrid;
 var isDesigned;
-var knittings;
+var knitting;
 var wall;
 
 
@@ -26,50 +26,12 @@ function setup() {
     //settings = new Settings("Ultimaker2+", "PLABRO", "normal");
     //settings = new Settings("Anet", "SATIN", "normal");
     //settings = new Settings("Ultimaker2+", "PLABRO", "normal");
-    settings = new Settings("Anet", "BRICK", "normal");
-    grid = new Grid(100,100, 6,6,2); // 6X6
-    grid.draw();
-    grid.testPos(5,5); //row, stitches
-    gcode = new Gcode(settings);
 
-    layers = [];
-    for(var i = 0; i < 48; i++){
-      layers[i] = new Layer(i, settings);
+  //  this.knitting = new Etui("Anet","SATIN", "normal", 34,20, 7.5);
+    //this.knitting = new Hanger("Anet","BRICK", "extrafine", 34,20);
 
-    }
+    knitting = new Hanger("Anet", "BRICK", "fine", 51,12 );
 
-    skirt = new Skirt(grid, 25,2);
-    skirt.draw();
-    skirt.gcode(layers[0]);
-    wall = [];
-
-
-
-    knittings = [];
-    var i;
-    for(i = 0; i < 4; i++){
-
-      knittings[i] = new Knitting(layers[i], "straight", 4,20,51,12, false);
-      knittings[i].gcode(layers[i]);
-    }
-    // for(i = 2; i < 46; i++){
-    //   layers[i].speed = 1800;
-    //   knittings[i] = new Knitting(layers[i], "wall", 6,6, 34,20, true);
-    //   knittings[i].gcode(layers[i]);
-    // }
-    //
-    //   if(i == 46){
-    //     append(layers[i].commands,"G4 P20000    ; pauze");
-    //   }
-    // for(i = 46; i < 48; i++){
-    //   knittings[i] = new Knitting(layers[i], "straight", 6,6,34,20, true);
-    //   knittings[i].gcode(layers[i]);
-    // }
-
-
-    gcode.generate(layers,skirt, knittings);
-    isSaved = false;
-    noLoop();
 
 }
 function draw(){
@@ -84,10 +46,10 @@ function mousePressed(){
       knitting.pattern.designStitch(mouseX, mouseY,0);
   }
   else{
-    if(!isSaved){
+    if(!knitting.isSaved){
 
-      gcode.save("IPHONE5" + settings.materialcode + settings.style);
-      isSaved = true;
+      knitting.save();
+
     }
   }
 

@@ -86,6 +86,12 @@ Settings.prototype.initMaterial = function(){
           if(this.style == "normal"){
             this.initStyle(0.5, 0.2, 800);//
           }
+          if(this.style == "fine"){
+            this.initStyle(0.18, 0.1, 800);//
+          }
+          if(this.style == "extrafine"){
+            this.initStyle(0.08, 0.07, 800);//
+          }
           break;
         }
         break;
@@ -162,7 +168,7 @@ Settings.prototype.initPrinter = function(){
       break;
     }
     case "BRICK":{
-      this.nozzletemp =230;
+      this.nozzletemp =245;
       this.bedtemp = 100;
       break;
     }

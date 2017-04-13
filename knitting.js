@@ -1,5 +1,6 @@
-function Knitting(layer, patternname,row, stitchnr, rows, stitches, show){
+function Knitting(grid, layer, patternname,row, stitchnr, rows, stitches, show){
   this.commands = new Array(";knitting");
+  this.grid = grid;
   this.layer = layer;
   this.row = row;
   this.rows = rows;
@@ -208,12 +209,12 @@ Knitting.prototype.patternToGrid = function(layer, knitgrid, strpattern ){
 }
 Knitting.prototype.transportToStart = function(layer){
 
-      grid.testPos(grid.hmax-grid.marge  ,this.stitchnr  );
-      grid.testPos(grid.hmax-grid.marge  ,grid.marge);
-      grid.testPos(this.row ,grid.marge);
-      append(layer.p, grid.getPos((grid.hmax-grid.marge)*4 , ( this.stitchnr)*4).copy());
-      append(layer.p, grid.getPos((grid.hmax-grid.marge)*4 , grid.marge*4).copy());
-      append(layer.p, grid.getPos((this.row)*5 , grid.marge*4).copy());
+      this.grid.testPos(this.grid.hmax-this.grid.marge  ,this.stitchnr  );
+      this.grid.testPos(this.grid.hmax-this.grid.marge  ,this.grid.marge);
+      this.grid.testPos(this.row ,this.grid.marge);
+      append(layer.p, this.grid.getPos((this.grid.hmax-this.grid.marge)*4 , ( this.stitchnr)*4).copy());
+      append(layer.p, this.grid.getPos((this.grid.hmax-this.grid.marge)*4 , this.grid.marge*4).copy());
+      append(layer.p, this.grid.getPos((this.row)*5 , this.grid.marge*4).copy());
 
 }
 Knitting.prototype.drawPattern = function(layer){
@@ -245,7 +246,7 @@ Knitting.prototype.drawPattern = function(layer){
 //     this.gcode(layer);
 //   //}
 // }
-Knitting.prototype.gcode = function(layer){
+Knitting.prototype.gcode = function(gcode, layer){
 
   append(this.commands, "G0 F" + layer.speed);
   append(this.commands, "G0 Z" + layer.totallayerheight);

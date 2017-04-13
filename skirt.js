@@ -103,7 +103,7 @@ Skirt.prototype.draw = function(){
     line(this.skirt[l-1].x, this.skirt[l-1].y, this.skirt[l].x, this.skirt[l].y);
   }
 }
-Skirt.prototype.gcode = function(layer){
+Skirt.prototype.gcode = function(gcode, layer){
 
   append(this.commands, "G0 X" + this.skirt[0].x * layer.scale + " Y" + this.skirt[0].y * layer.scale + " Z10" );
   append(this.commands, "G0 X" + this.skirt[0].x * layer.scale + " Y" + this.skirt[0].y * layer.scale + " Z" + layer.layerheight );
