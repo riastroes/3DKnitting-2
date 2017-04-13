@@ -49,10 +49,11 @@ Settings.prototype.initMaterial = function(){
           }
           break;
         }
-        case "Brons":{
+        case "PLABRO":{
           this.materialcode ="PLABRO";
           if(this.style == "normal"){
-            this.initStyle(0.4, 0.15, 800); //test ok armband.
+            this.initStyle(0.4, 0.12, 800); //test
+            //this.initStyle(0.4, 0.15, 800); //test ok armband.
           }
           break;
         }
@@ -80,8 +81,15 @@ Settings.prototype.initMaterial = function(){
           }
           break;
         }
+        case "BRICK":{
+          this.materialcode ="BRICK";
+          if(this.style == "normal"){
+            this.initStyle(0.5, 0.2, 800);//
+          }
+          break;
+        }
+        break;
       }
-      break;
     }
     case "Ultimaker2+":{ //nozzle 0.4
       //nozzle 0.08
@@ -151,6 +159,11 @@ Settings.prototype.initPrinter = function(){
     case "SATIN":{
       this.nozzletemp =200;
       this.bedtemp = 0;
+      break;
+    }
+    case "BRICK":{
+      this.nozzletemp =230;
+      this.bedtemp = 100;
       break;
     }
   }

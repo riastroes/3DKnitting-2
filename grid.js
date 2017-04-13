@@ -37,7 +37,7 @@ Grid.prototype.disorderWidth = function(knitgrid){
      a += 0.2;
   }
 }
-Grid.prototype.disorderHalfRound = function(knitgrid){
+Grid.prototype.disorderSinWave = function(knitgrid){
   var a=0;
   for(r = 0; r< knitgrid.length; r++){
 
@@ -49,21 +49,86 @@ Grid.prototype.disorderHalfRound = function(knitgrid){
      a += 0.2;
   }
 }
+Grid.prototype.disorderToPoint = function(knitgrid, from){
+  var a=0;
+  for(r = from; r< knitgrid.length; r++){
+
+     for(s = 0; s < floor(knitgrid[0].length/2)-1; s++){
+        knitgrid[r][s].y +=s * a;
+     }
+     for(s = floor(knitgrid[0].length/2)-1; s < knitgrid[0].length; s++){
+         knitgrid[r][s].y += (floor(knitgrid[0].length)-s) * a;
+      }
+
+     a += 0.025;
+  }
+}
+Grid.prototype.disorderShrinkWidth = function(knitgrid, from,to,force){
+
+  var pos;
+  var d;
+  var force=force;
+  var nr= 0;  // next row
+  for(r = from; r< to; r++){
+
+     for(s = 0; s < knitgrid[0].length; s++){
+       pos = knitgrid[r][floor(knitgrid[r].length/2)+1].copy();
+
+       d = p5.Vector.sub(pos,knitgrid[r][s]);
+       d.mult(nr* force);
+       knitgrid[r][s].x  += d.x ;
+     }
+
+     if(r > from + ((to-from)/2)){
+       nr-=1;
+     }
+     else{
+       nr+=1;
+     }
+
+  }
+}
+Grid.prototype.disorderGrowWidth = function(knitgrid, from,to, force){
+
+  var pos;
+  var d;
+  var force= -force;
+  var nr= 0;           //next row
+  for(r = from; r< to; r++){
+
+     for(s = 0; s < knitgrid[0].length; s++){
+       pos = knitgrid[r][floor(knitgrid[r].length/2)+1].copy();
+      
+       d = p5.Vector.sub(pos,knitgrid[r][s]);
+       d.mult(nr* force);
+       knitgrid[r][s].x  += d.x ;
+     }
+
+     if(r > from + ((to-from)/2)){
+       nr-=1;
+     }
+     else{
+       nr+=1;
+     }
+
+  }
+}
 Grid.prototype.createKnitGrid = function(row, stitchnr, rows, stitches){
 //1 extra rij voor opzetten
 /*formule afmeting breiwerk:
 hoogte = rows * celhoogte + (celhoogte*5), waarbij celhoogte is 4
 breedte = stitches * celbreedte + (celbreedte*4), waarbij celbreedte is 4
-*/
+
 
 //1 extra voor stitches want je moet ook de buitenste positie hebben. voor de afmeting
 //van het breiwerk.
 //HET BREIWERK MOET 1 HOKJE OPSCHUIVEN
+*/
   var knitgrid = [];
-  for(var r = 0; r < ((rows+1) * 5)+1; r++){
+  for(var r = 0; r < ((rows+1) * 4)+1; r++){
     knitgrid[r]=[];
     for(var s = 0; s < ((stitches+1) * 4)+1 ; s++){
-      knitgrid[r][s] = this.getPos((row*5) + r , (stitchnr*4) + s  - 4).copy();
+      knitgrid[r][s] = this.getPos((row*4) + r , (stitchnr*4) + s  - 4).copy();
     }
   }
   return knitgrid;
@@ -127,7 +192,7 @@ Grid.prototype.testPos = function(x, y, z){
 Grid.prototype.getPos = function(row, stitchnr){
   var pos = createVector(0,0,0);
   pos.x = stitchnr * (this.cellwidth/4);
-  pos.y = row * (this.cellheight/5);
+  pos.y = row * (this.cellheight/4);
   pos.z = 0;
   return pos;
 }

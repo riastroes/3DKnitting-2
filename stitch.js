@@ -151,7 +151,7 @@ Stitch.prototype.create =function(){
          this.stitch[10] = new Pos(-3,1,1,0);
          this.stitch[11] = new Pos(-4,0,1,0);
          this.stitch[12] = new Pos(-5,1,1,0);
-         this.stitch[13] = new Pos(-5,4,1,0);
+         this.stitch[13] = new Pos(-5,3,1,0);
          //this.stitch[14] = new Pos(-4,4,1,0);
         break;
        }

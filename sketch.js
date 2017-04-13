@@ -22,9 +22,11 @@ function setup() {
     //settings = new Settings("Anet","Coper","normal");
     //settings = new Settings("Ultimaker2+", "PLA", "fine");
     //settings = new Settings("Ultimaker2+", "PETGCARBON","normal");
-    settings = new Settings("Anet", "SATIN", "fine");
+    //settings = new Settings("Anet", "SATIN", "fine");
+    //settings = new Settings("Ultimaker2+", "PLABRO", "normal");
     //settings = new Settings("Anet", "SATIN", "normal");
     //settings = new Settings("Ultimaker2+", "PLABRO", "normal");
+    settings = new Settings("Anet", "BRICK", "normal");
     grid = new Grid(100,100, 6,6,2); // 6X6
     grid.draw();
     grid.testPos(5,5); //row, stitches
@@ -45,9 +47,9 @@ function setup() {
 
     knittings = [];
     var i;
-    for(i = 0; i < 2; i++){
+    for(i = 0; i < 4; i++){
 
-      knittings[i] = new Knitting(layers[i], "straight", 6,6,50,24, true);
+      knittings[i] = new Knitting(layers[i], "straight", 4,20,51,12, false);
       knittings[i].gcode(layers[i]);
     }
     // for(i = 2; i < 46; i++){

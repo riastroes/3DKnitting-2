@@ -6,8 +6,11 @@ function Knitting(layer, patternname,row, stitchnr, rows, stitches, show){
   this.stitches = stitches;
   this.stitchnr = stitchnr;
 
+
   this.knitgrid = grid.createKnitGrid(row, stitchnr, rows, stitches);
-  grid.disorderHalfRound(this.knitgrid);
+  grid.disorderGrowWidth(this.knitgrid, 80,160, 0.05);
+  grid.disorderShrinkWidth(this.knitgrid, 160, 208, 0.02);
+  //grid.disorderToPoint(this.knitgrid, rows/4*3);
 
   if(show){
     grid.drawKnitGrid(this.knitgrid,row, stitchnr);
@@ -67,7 +70,7 @@ Knitting.prototype.createStitch = function(layer,type, r, s){
   for(i = 0; i < stitch.length; i++){
     var ok = true
     //test on the knitgrid;
-    kr = (r*5) + stitch[i].y;
+    kr = (r*4) + stitch[i].y;
     ks = (s*4) + stitch[i].x + 4; //HET BREIWERK MOET 1 HOKJE OPSCHUIVEN
     kz = stitch[i].z;
     if(kr < 0 || kr >= this.knitgrid.length){
@@ -89,7 +92,7 @@ Knitting.prototype.testPattern = function(layer, knitgrid, strpattern){
 Knitting.prototype.createPattern = function(layer,knitgrid, patternname){
   var strpattern = "";
   var pos = knitgrid[0][0];
-  rows = (knitgrid.length-1)/5;
+  rows = (knitgrid.length-1)/4;
   stitches = (knitgrid[0].length - 5)/4;
   if(patternname == "straight"){
     if(pos.x % 8 == 0){
@@ -200,17 +203,17 @@ Knitting.prototype.patternToGrid = function(layer, knitgrid, strpattern ){
       }
     }
 
+  this.transportToStart(layer);
 
-    grid.testPos(this.row + this.rows + 2  ,this.stitchnr + stitches );
-    grid.testPos(this.row + this.rows + 2  ,this.stitchnr -3);
-    grid.testPos(this.row ,this.stitchnr -2);
-    append(layer.p, grid.getPos((this.row + this.rows + 2)*5 , ( this.stitchnr + stitches)*4).copy());
-    append(layer.p, grid.getPos((this.row + this.rows + 2)*5 , ( this.stitchnr -3)*4).copy());
-    append(layer.p, grid.getPos((this.row)*5 , ( this.stitchnr -3)*4).copy());
+}
+Knitting.prototype.transportToStart = function(layer){
 
-
-
-
+      grid.testPos(grid.hmax-grid.marge  ,this.stitchnr  );
+      grid.testPos(grid.hmax-grid.marge  ,grid.marge);
+      grid.testPos(this.row ,grid.marge);
+      append(layer.p, grid.getPos((grid.hmax-grid.marge)*4 , ( this.stitchnr)*4).copy());
+      append(layer.p, grid.getPos((grid.hmax-grid.marge)*4 , grid.marge*4).copy());
+      append(layer.p, grid.getPos((this.row)*5 , grid.marge*4).copy());
 
 }
 Knitting.prototype.drawPattern = function(layer){
