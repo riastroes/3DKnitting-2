@@ -60,7 +60,7 @@ Grid.prototype.disorderToPoint = function(knitgrid, from){
          knitgrid[r][s].y += (floor(knitgrid[0].length)-s) * a;
       }
 
-     a += 0.025;
+     a += 0.15;
   }
 }
 Grid.prototype.disorderShrinkWidth = function(knitgrid, from,to,force){
@@ -69,7 +69,7 @@ Grid.prototype.disorderShrinkWidth = function(knitgrid, from,to,force){
   var d;
   var force=force;
   var nr= 0;  // next row
-  for(r = from; r< to; r++){
+  for(var r = from; r < to; r++){
 
      for(s = 0; s < knitgrid[0].length; s++){
        pos = knitgrid[r][floor(knitgrid[r].length/2)+1].copy();

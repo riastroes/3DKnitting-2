@@ -8,13 +8,13 @@ function Knitting(grid, layer, patternname,row, stitchnr, rows, stitches, show){
   this.stitchnr = stitchnr;
 
 
-  this.knitgrid = grid.createKnitGrid(row, stitchnr, rows, stitches);
-  grid.disorderGrowWidth(this.knitgrid, 80,160, 0.05);
-  grid.disorderShrinkWidth(this.knitgrid, 160, 208, 0.02);
-  //grid.disorderToPoint(this.knitgrid, rows/4*3);
+  this.knitgrid = this.grid.createKnitGrid(row, stitchnr, rows, stitches);
+  this.grid.disorderShrinkWidth(this.knitgrid, 60, 80, 0.02);
+  this.grid.disorderGrowWidth(this.knitgrid, 80,185, 0.05);
+  this.grid.disorderToPoint(this.knitgrid, 160);
 
   if(show){
-    grid.drawKnitGrid(this.knitgrid,row, stitchnr);
+    this.grid.drawKnitGrid(this.knitgrid,row, stitchnr);
   }
    if(patternname != "wall"){
     this.createPattern(this.layer,this.knitgrid,"straight");

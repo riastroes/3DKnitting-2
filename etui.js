@@ -3,6 +3,17 @@ function Etui(printer, material,style,  rows, stitches, content){
   //printer:   Anet
   //materiaal: SATIN
   //style:     normal, fine
+
+  //settings = new Settings("Anet","TPC FLEX","normal");
+  //settings = new Settings("Anet","Coper","normal");
+  //settings = new Settings("Ultimaker2+", "PLA", "fine");
+  //settings = new Settings("Ultimaker2+", "PETGCARBON","normal");
+  //settings = new Settings("Anet", "SATIN", "fine");
+  //settings = new Settings("Ultimaker2+", "PLABRO", "normal");
+  //settings = new Settings("Anet", "SATIN", "normal");
+  //settings = new Settings("Ultimaker2+", "PLABRO", "normal");
+
+
   this.name = "Etui";
   this.rows = rows;
   this.stitches = stitches;
