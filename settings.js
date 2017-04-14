@@ -31,7 +31,7 @@ Settings.prototype.initMaterial = function(){
         case "PLA":{
             this.materialcode ="PLA";
             if(this.style == "fine"){
-              this.initStyle(0.4, 0.09, 200); //test OK
+              this.initStyle(0.4, 0.07, 800); //test OK 0.3, 0.07, 800
             }
             else if(this.style == "normal"){
               this.initStyle(0.4, 0.12, 800); //test OK
@@ -74,7 +74,7 @@ Settings.prototype.initMaterial = function(){
         case "SATIN":{
           this.materialcode ="SATIN";
           if(this.style == "fine"){
-            this.initStyle(0.25, 0.1, 600);//
+            this.initStyle(0.25, 0.1, 600);//test ok (iphone etui)
           }
           else if(this.style == "normal"){
             this.initStyle(0.5, 0.2, 800);//test ok (iphone etui)
@@ -96,6 +96,7 @@ Settings.prototype.initMaterial = function(){
         }
         break;
       }
+      break;
     }
     case "Ultimaker2+":{ //nozzle 0.4
       //nozzle 0.08

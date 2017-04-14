@@ -12,7 +12,7 @@ function Grid(cellwidth, cellheight, wstitchpercell, hstitchpercell, marge){
   this.marge = marge;
 
   this.grid = [];
-
+  
   this.createGrid();
   println(this.cellwidth, this.cellheight);
 }
@@ -25,114 +25,39 @@ Grid.prototype.createGrid = function(){
      }
   }
 }
-Grid.prototype.disorderWidth = function(knitgrid){
-  var a = 0;
-  for(r = 0; r< knitgrid.length; r++){
+// Grid.prototype.disorderWidth = function(knitgrid){
+//   var a = 0;
+//   for(r = 0; r< knitgrid.length; r++){
+//
+//     for(s = 0; s < knitgrid[0].length; s++){
+//
+//         knitgrid[r][s].x += 40 * sin(a);
+//
+//      }
+//      a += 0.2;
+//   }
+// }
 
-    for(s = 0; s < knitgrid[0].length; s++){
-
-        knitgrid[r][s].x += 40 * sin(a);
-
-     }
-     a += 0.2;
-  }
-}
-Grid.prototype.disorderSinWave = function(knitgrid){
-  var a=0;
-  for(r = 0; r< knitgrid.length; r++){
-
-    for(s = 0; s < knitgrid[0].length; s++){
-
-        knitgrid[r][s].x +=20 * cos(a);
-
-     }
-     a += 0.2;
-  }
-}
-Grid.prototype.disorderToPoint = function(knitgrid, from){
-  var a=0;
-  for(r = from; r< knitgrid.length; r++){
-
-     for(s = 0; s < floor(knitgrid[0].length/2)-1; s++){
-        knitgrid[r][s].y +=s * a;
-     }
-     for(s = floor(knitgrid[0].length/2)-1; s < knitgrid[0].length; s++){
-         knitgrid[r][s].y += (floor(knitgrid[0].length)-s) * a;
-      }
-
-     a += 0.15;
-  }
-}
-Grid.prototype.disorderShrinkWidth = function(knitgrid, from,to,force){
-
-  var pos;
-  var d;
-  var force=force;
-  var nr= 0;  // next row
-  for(var r = from; r < to; r++){
-
-     for(s = 0; s < knitgrid[0].length; s++){
-       pos = knitgrid[r][floor(knitgrid[r].length/2)+1].copy();
-
-       d = p5.Vector.sub(pos,knitgrid[r][s]);
-       d.mult(nr* force);
-       knitgrid[r][s].x  += d.x ;
-     }
-
-     if(r > from + ((to-from)/2)){
-       nr-=1;
-     }
-     else{
-       nr+=1;
-     }
-
-  }
-}
-Grid.prototype.disorderGrowWidth = function(knitgrid, from,to, force){
-
-  var pos;
-  var d;
-  var force= -force;
-  var nr= 0;           //next row
-  for(r = from; r< to; r++){
-
-     for(s = 0; s < knitgrid[0].length; s++){
-       pos = knitgrid[r][floor(knitgrid[r].length/2)+1].copy();
-
-       d = p5.Vector.sub(pos,knitgrid[r][s]);
-       d.mult(nr* force);
-       knitgrid[r][s].x  += d.x ;
-     }
-
-     if(r > from + ((to-from)/2)){
-       nr-=1;
-     }
-     else{
-       nr+=1;
-     }
-
-  }
-}
-Grid.prototype.createKnitGrid = function(row, stitchnr, rows, stitches){
-//1 extra rij voor opzetten
-/*formule afmeting breiwerk:
-hoogte = rows * celhoogte + (celhoogte*5), waarbij celhoogte is 4
-breedte = stitches * celbreedte + (celbreedte*4), waarbij celbreedte is 4
-
-
-//1 extra voor stitches want je moet ook de buitenste positie hebben. voor de afmeting
-//van het breiwerk.
-//HET BREIWERK MOET 1 HOKJE OPSCHUIVEN
-*/
-  var knitgrid = [];
-  for(var r = 0; r < ((rows+1) * 4)+1; r++){
-    knitgrid[r]=[];
-    for(var s = 0; s < ((stitches+1) * 4)+1 ; s++){
-      knitgrid[r][s] = this.getPos((row*4) + r , (stitchnr*4) + s  - 4).copy();
-    }
-  }
-  return knitgrid;
-}
+// Grid.prototype.createKnitGrid = function(row, stitchnr, rows, stitches){
+// //1 extra rij voor opzetten
+// /*formule afmeting breiwerk:
+// hoogte = rows * celhoogte + (celhoogte*5), waarbij celhoogte is 4
+// breedte = stitches * celbreedte + (celbreedte*4), waarbij celbreedte is 4
+//
+//
+// //1 extra voor stitches want je moet ook de buitenste positie hebben. voor de afmeting
+// //van het breiwerk.
+// //HET BREIWERK MOET 1 HOKJE OPSCHUIVEN
+// */
+//
+//   for(var r = 0; r < ((rows+1) * 4)+1; r++){
+//     this.knitgrid[r]=[];
+//     for(var s = 0; s < ((stitches+1) * 4)+1 ; s++){
+//       this.knitgrid[r][s] = this.getPos((row*4) + r , (stitchnr*4) + s  - 4).copy();
+//     }
+//   }
+//   return this.knitgrid;
+// }
 Grid.prototype.draw = function(){
 
   //forbidden area
@@ -146,10 +71,9 @@ Grid.prototype.draw = function(){
   //vertical lines
   for(var s = 0; s <= this.wmax; s++){
       if(s % this.wstitchpercell == 0){
-      //black vertical lines
+       //black vertical lines
         stroke(0);
         strokeWeight(1);
-        //line((s*this.cellwidth), 0, (s*this.cellwidth) ,  (this.hmax * this.cellheight));
       }
       else{
         //red vertical lines

@@ -1,4 +1,4 @@
-function Hanger(printer, material,style,  rows, stitches){
+function Hanger(printer, material,style, pos,  rows, stitches){
   //TEST OK VOOR:
   //printer:   Anet
   //materiaal: BRICK
@@ -7,31 +7,36 @@ function Hanger(printer, material,style,  rows, stitches){
 //  style:     extrafine
 
   this.name = "Hanger";
-  this.rows = rows;
-  this.stitches = stitches;
+  this.rows = 70;
+  this.stitches = 20;
   this.isSaved = false;
   this.settings =new Settings(printer, material, style);
-  this.grid = new Grid(100,100, 6,6,2); // 6X6
+  this.grid = new Grid(50,50, 4,4,3); // 6X6
   this.grid.draw();
-  this.grid.testPos(5,5); //row, stitches
+  this.grid.testPos(pos.x,pos.y); //row, stitches
+
+  this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.rows, this.stitches);
+  this.knitgrid.disorderCosWave(10,30,8, 0.5);
+  this.knitgrid.disorderShrinkWidth(41,47, 0.7)
+  this.knitgrid.disorderSinWave(41,51, 2, 0.4);
+  this.knitgrid.disorderSinWave(53,60, 2, 0.4);
+  this.knitgrid.disorderGrowWidth(4,35,3);
+
+  this.knitgrid.draw();
+
   this.gcode = new Gcode(this.settings);
-
   this.layers = [];
-  for(var i = 0; i < 4; i++){
-    this.layers[i] = new Layer(i, this.settings);
-
-  }
-
-  this.skirt = new Skirt(this.grid, 25,2);
-  this.skirt.draw();
-  this.skirt.gcode(this.gcode, this.layers[0]);
-  this.wall = [];
   this.knittings = [];
-  var i;
-  for(i = 0; i < 4; i++){
-
-    this.knittings[i] = new Knitting(this.grid, this.layers[i], "straight", 4,20, rows, stitches, false);
-    this.knittings[i].gcode(this.gcode, this.layers[i]);
+  for(var i = 0; i < 2; i++){
+    this.layers[i] = new Layer(i, this.settings);
+    if(i == 0){
+      this.skirt = new Skirt(this.grid, 25,3);
+      this.skirt.draw();
+      this.skirt.gcode(this.gcode, this.layers[0]);
+    }
+     this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], "straight");
+     this.knittings[i].gcode(this.gcode, this.layers[i]);
+  //
   }
   this.gcode.generate(this.layers,this.skirt, this.knittings);
   noLoop();

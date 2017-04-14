@@ -7,8 +7,8 @@ var knitting;
 function setup() {
     createCanvas(1000,1000);
     //background(255,0,0);
-
-    knitting = new Hanger("Anet", "BRICK", "fine", 45,12 );
+    var pos = createVector(7, 24);
+    knitting = new Hanger("Anet", "PLA", "fine",pos );  //47,12
 
 
 }
@@ -20,16 +20,13 @@ function draw(){
 
 }
 function mousePressed(){
-  if(isDesign){
-      knitting.knitting.pattern.designStitch(mouseX, mouseY,0);
-  }
-  else{
+
     if(!knitting.isSaved){
 
       knitting.save();
 
     }
-  }
+
 
 }
 function keyPressed(){

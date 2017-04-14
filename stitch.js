@@ -6,16 +6,16 @@ function Stitch(type){
 Stitch.prototype.create =function(){
     switch(this.type){
        case 'A': {               //R opzetten, eerste steek
-          this.stitch[0] = new Pos(-4,0,1,0);
-          this.stitch[1] = new Pos(-4,3,1,0);
-          this.stitch[2] = new Pos(0,3,1,0);
-          this.stitch[3] = new Pos(3,4,1,0);
-          this.stitch[4] = new Pos(3,6,1,0);
-          this.stitch[5] = new Pos(2,7,1,0);
-          this.stitch[6] = new Pos(1,7,1,0);
-          this.stitch[7] = new Pos(0,6,1,0);
-          this.stitch[8] = new Pos(0,5,1,0);
-          this.stitch[9] = new Pos(3,3,1,0);
+        //  this.stitch[0] = new Pos(-4,0,1,0);
+        //  this.stitch[1] = new Pos(-4,3,1,0);
+          this.stitch[0] = new Pos(0,3,1,0);
+          this.stitch[1] = new Pos(3,4,1,0);
+          this.stitch[2] = new Pos(3,6,1,0);
+          this.stitch[3] = new Pos(2,7,1,0);
+          this.stitch[4] = new Pos(1,7,1,0);
+          this.stitch[5] = new Pos(0,6,1,0);
+          this.stitch[6] = new Pos(0,5,1,0);
+          this.stitch[7] = new Pos(3,3,1,0);
         //  this.stitch[9] = new Pos(4,3,1,0);
           break;
         }
