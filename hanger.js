@@ -7,7 +7,7 @@ function Hanger(printer, material,style, pos,  rows, stitches){
 //  style:     extrafine
 
   this.name = "Hanger";
-  this.rows = 70;
+  this.rows =45;
   this.stitches = 20;
   this.isSaved = false;
   this.settings =new Settings(printer, material, style);
@@ -16,11 +16,13 @@ function Hanger(printer, material,style, pos,  rows, stitches){
   this.grid.testPos(pos.x,pos.y); //row, stitches
 
   this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.rows, this.stitches);
-  this.knitgrid.disorderCosWave(10,30,8, 0.5);
-  this.knitgrid.disorderShrinkWidth(41,47, 0.7)
-  this.knitgrid.disorderSinWave(41,51, 2, 0.4);
-  this.knitgrid.disorderSinWave(53,60, 2, 0.4);
-  this.knitgrid.disorderGrowWidth(4,35,3);
+  //this.knitgrid.disorderCosWave(10,30,8, 0.5);
+//  this.knitgrid.disorderShrinkWidth(41,47, 0.7)
+  //this.knitgrid.disorderSinWave(41,51, 2, 0.4);
+//  this.knitgrid.disorderSinWave(53,60, 2, 0.4);
+//  this.knitgrid.disorderGrowWidth(4,35,3);
+  this.knitgrid.disorderHeight(20,60, 100);
+  this.knitgrid.disorderHeight(40,60, 100);
 
   this.knitgrid.draw();
 
