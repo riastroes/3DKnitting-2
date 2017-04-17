@@ -1,6 +1,6 @@
 //meerderen en minderen
 
-function Hanger(printer, material,style, pos,  rows, stitches){
+function MoreOrLess(printer, material,style, pos,  rows, stitches){
 
 
   this.name = "Hanger";
@@ -13,7 +13,7 @@ function Hanger(printer, material,style, pos,  rows, stitches){
   this.grid.testPos(pos.x,pos.y); //row, stitches
 
   this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.rows, this.stitches);
-  
+
   this.knitgrid.draw();
 
   this.gcode = new Gcode(this.settings);
@@ -33,7 +33,7 @@ function Hanger(printer, material,style, pos,  rows, stitches){
   this.gcode.generate(this.layers,this.skirt, this.knittings);
   noLoop();
 }
-Hanger.prototype.save = function(){
+MoreOrLess.prototype.save = function(){
   this.gcode.save(this.name + this.settings.materialcode + this.settings.style + this.rows + "x"+ this.stitches);
   this.isSaved = true;
 }
