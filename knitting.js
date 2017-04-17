@@ -131,7 +131,6 @@ Knitting.prototype.createPattern = function(patternname){
           }
     }
     else{
-
           //ONEVEN START
 
           for(var r = 0; r <= this.rows; r+=1){

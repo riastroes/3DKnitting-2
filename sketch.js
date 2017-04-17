@@ -8,7 +8,7 @@ function setup() {
     createCanvas(1000,1000);
     //background(255,0,0);
     var pos = createVector(4, 30);
-    knitting = new Hanger("Anet", "PLA", "fine",pos );  //47,12
+    knitting = new Hanger("Anet", "PLA", "fine",pos );  
 
 
 }
