@@ -11,18 +11,19 @@ function Hanger(printer, material,style, pos,  rows, stitches){
   this.stitches = 20;
   this.isSaved = false;
   this.settings =new Settings(printer, material, style);
-  this.grid = new Grid(50,50, 4,4,3); // 6X6
+  this.grid = new Grid(50,50, 3,3,3); // 6X6
   this.grid.draw();
   this.grid.testPos(pos.x,pos.y); //row, stitches
 
   this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.rows, this.stitches);
   //this.knitgrid.disorderCosWave(10,30,8, 0.5);
-//  this.knitgrid.disorderShrinkWidth(41,47, 0.7)
+  //this.knitgrid.disorderShrinkWidth(11,37, 0.7)
   //this.knitgrid.disorderSinWave(41,51, 2, 0.4);
 //  this.knitgrid.disorderSinWave(53,60, 2, 0.4);
 //  this.knitgrid.disorderGrowWidth(4,35,3);
-  this.knitgrid.disorderHeight(20,60, 100);
-  this.knitgrid.disorderHeight(40,60, 100);
+  this.knitgrid.disorderHeight(0,100, 20, 50);
+  this.knitgrid.disorderHeight(0,100, 20, 34);
+  this.knitgrid.disorderHeight(0,100, -20, 14);
 
   this.knitgrid.draw();
 

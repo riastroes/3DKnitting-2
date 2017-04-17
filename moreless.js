@@ -26,7 +26,7 @@ function MoreOrLess(printer, material,style, pos,  rows, stitches){
       this.skirt.draw();
       this.skirt.gcode(this.gcode, this.layers[0]);
     }
-     this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], "straight");
+     this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], "less");
      this.knittings[i].gcode(this.gcode, this.layers[i]);
   //
   }

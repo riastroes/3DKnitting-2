@@ -125,16 +125,18 @@ Knitgrid.prototype.disorderGrowHeight = function(from,to, force){
      }
   }
 }
-Knitgrid.prototype.disorderHeight = function(from,to, force){
+Knitgrid.prototype.disorderHeight = function(from,to, force, stitches){
 
 
   var diffheight  = force/ ((to) - (from));
   var d=0;
   var nr= 0;           //next row
+  var st = floor((this.grid[0].length/2) - (stitches /2));
+
   for(r = 4 + (from*4); r<  4 + (to*4); r++){
      if(r > 1 && r < this.grid.length){
        d += diffheight;
-       for(s = 0; s < this.grid[0].length; s++){
+       for(s = st; s < st + stitches; s++){
 
          this.grid[r][s].y +=d;
        }
