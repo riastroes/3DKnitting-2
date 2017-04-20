@@ -7,10 +7,9 @@ var knitting;
 function setup() {
     createCanvas(1000,1000);
     //background(255,0,0);
-    var pos = createVector(4, 30);
 
-    knitting = new Hanger("Anet", "SATIN", "fine",pos );  //47,12
-
+    var pos = createVector(5,10);
+    knitting = new Etui("Ultimaker2+", "PLABRO", "normal",pos );
 
 }
 function draw(){
@@ -23,12 +22,8 @@ function draw(){
 function mousePressed(){
 
     if(!knitting.isSaved){
-
       knitting.save();
-
     }
-
-
 }
 function keyPressed(){
   if(keyCode == 71 || keyCode == 103 ){ // g of G
