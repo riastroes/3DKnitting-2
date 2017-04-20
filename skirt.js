@@ -1,9 +1,10 @@
-function Skirt(grid, skirtlength, skirtheight){
+function Skirt(grid, skirtlength, skirtheight, pos){
   this.commands = new Array(";skirt");
   this.grid = grid.grid;
   this.gridmarge = grid.marge;
   this.length = skirtlength;
   this.height = skirtheight;
+  this.pos = pos.copy();
   append(this.commands,";param length: " + this.length);
   append(this.commands,";param height: " + this.height);
   this.skirt = [];
@@ -34,6 +35,7 @@ Skirt.prototype.createRect = function(){
     this.skirt[7] = this.grid[this.gridmarge + this.height + 1][ this.gridmarge + 2].copy();
     this.skirt[8] = this.grid[this.gridmarge + this.height + 1][ this.gridmarge + 4].copy();
     this.skirt[9] = this.grid[this.gridmarge + this.height + 2][ this.gridmarge + 4].copy();
+    this.skirt[10] = this.grid[this.pos.x][this.pos.y];
   }
 
 }
@@ -99,7 +101,7 @@ Skirt.prototype.draw = function(){
   this.showFirst();
   for(var l = 1; l < this.skirt.length; l++){
     stroke(255,0,255);
-    strokeWeight(1);
+    strokeWeight(2);
     line(this.skirt[l-1].x, this.skirt[l-1].y, this.skirt[l].x, this.skirt[l].y);
   }
 }
