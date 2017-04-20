@@ -9,21 +9,13 @@ function Knitting(biggrid, knitgrid, layer, patternname){
   this.stitchnr =  knitgrid.stitchnr;
 
 
-  //this.knitgrid = this.grid.createKnitGrid(row, stitchnr, rows, stitches);
-//  this.grid.disorderShrinkWidth(this.knitgrid, 60, 80, 0.04);
-  //this.grid.disorderGrowWidth(this.knitgrid, 80,185, 0.04);
-  //this.grid.disorderShrinkWidth(this.knitgrid, 130, 300, 0.015);
-
-
-    //this.grid.drawKnitGrid(this.knitgrid,row, stitchnr);
-
    if(patternname != "wall"){
     this.createPattern("straight");
     //this.testPattern(this.layer, this.knitgrid, "ABBBBCLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSUVVVVW");
     this.drawPattern();
   }
   if(patternname == "wall"){
-    //this.createWall();
+    this.createWall();
   }
 
 
@@ -32,30 +24,29 @@ Knitting.prototype.createWall = function(){
   var wall = [];
   var w = this.grid[0].length;
   var h = this.grid.length;
-  //this.test(this.knitgrid[4][11]);
-  //this.test(this.knitgrid[4][8]);
-  this.test(this.grid[4][4]);
-  this.test(this.grid[h-2][4]);
-  this.test(this.grid[h-2][w-2]);
-  this.test(this.grid[4][w-2]);
+  
+  this.test(this.grid[4][1]);
+  this.test(this.grid[h-2][1]);
+  this.test(this.grid[h-2][w-3]);
+  this.test(this.grid[4][w-3]);
 
   //append(wall, this.knitgrid[4][11]);
   //append(wall, this.knitgrid[4][8]);
   var pos = [];
-  pos[0] = this.grid[4][4].copy();
-  pos[1] = this.grid[h-2][4].copy();
-  pos[2] = this.grid[h-2][w-2].copy();
-  pos[3] = this.grid[4][w-2].copy();
-  pos[4] = this.grid[4][w-2].copy();
-  pos[4].x += 3;
-  pos[5] = this.grid[h-2][w-2].copy();
-  pos[5].x += 3;
-  pos[5].y -= 3;
-  pos[6] = this.grid[h-2][4].copy();
-  pos[6].x -= 3;
+  pos[0] = this.grid[4][1].copy();
+  pos[1] = this.grid[h-2][1].copy();
+  pos[2] = this.grid[h-2][w-3].copy();
+  pos[3] = this.grid[4][w-3].copy();
+  pos[4] = this.grid[4][w-3].copy();
+  pos[4].x -= 3;
+  pos[5] = this.grid[h-2][w-3].copy();
+  pos[5].x -= 3;
+  pos[5].y += 3;
+  pos[6] = this.grid[h-2][1].copy();
+  pos[6].x += 3;
   pos[6].y -= 3;
-  pos[7] = this.grid[4][4].copy();
-  pos[7].x -= 3;
+  pos[7] = this.grid[4][1].copy();
+  pos[7].x += 3;
 
   for(var i = 0; i < 8; i++){
     pos[i].z = 1;
