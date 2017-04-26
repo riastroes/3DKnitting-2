@@ -74,7 +74,7 @@ Settings.prototype.initMaterial = function(){
         case "SATIN":{
           this.materialcode ="SATIN";
           if(this.style == "fine"){
-            this.initStyle(0.25, 0.15, 600);//test ok (iphone etui)
+            this.initStyle(0.3, 0.1, 600);//test ok 0.25, 0.1, 600
           }
           else if(this.style == "normal"){
             this.initStyle(0.5, 0.2, 800);//test ok (iphone etui)
@@ -91,6 +91,33 @@ Settings.prototype.initMaterial = function(){
           }
           if(this.style == "extrafine"){
             this.initStyle(0.08, 0.07, 800);//
+          }
+          break;
+        }
+        case "ABS":{
+          this.materialcode ="ABS";
+          if(this.style == "normal"){
+            this.initStyle(0.5, 0.2, 800);//NIET GETEST
+          }
+          if(this.style == "fine"){
+            this.initStyle(0.18, 0.1, 800);//NIET GETEST
+          }
+          if(this.style == "extrafine"){
+            this.initStyle(0.08, 0.07, 800);//NIET GETEST
+          }
+          break;
+        }
+
+        case "REFILLTRANSPARENT":{
+          this.materialcode ="RTRANS";
+          if(this.style == "normal"){
+            this.initStyle(0.5, 0.2, 800);//NIET GETEST
+          }
+          if(this.style == "fine"){
+            this.initStyle(0.18, 0.1, 800);//NIET GETEST
+          }
+          if(this.style == "extrafine"){
+            this.initStyle(0.08, 0.07, 800);//NIET GETEST
           }
           break;
         }
@@ -171,6 +198,16 @@ Settings.prototype.initPrinter = function(){
     case "BRICK":{
       this.nozzletemp =245;
       this.bedtemp = 100;
+      break;
+    }
+    case "ABS":{
+      this.nozzletemp =245;
+      this.bedtemp = 97;
+      break;
+    }
+    case "REFILLTRANSPARENT":{
+      this.nozzletemp =200;
+      this.bedtemp = 30;
       break;
     }
   }
