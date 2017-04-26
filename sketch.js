@@ -7,9 +7,9 @@ var knitting;
 function setup() {
     createCanvas(1000,1000);
     //background(255,0,0);
-    var pos = createVector(4, 30);
+    var pos = createVector(2,7);
 
-    knitting = new Hanger("Anet", "SATIN", "fine",pos );  //47,12
+    knitting = new Armband3("Anet", "REFILLTRANSPARENT", "normal",pos );  //47,12
 
 
 }
