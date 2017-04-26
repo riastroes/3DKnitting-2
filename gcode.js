@@ -64,7 +64,10 @@ Gcode.prototype.save = function(name){
 }
 Gcode.prototype.generate = function(layers, skirt, knittings){
   this.startCode();
-  this.getCode(skirt.commands);
+  if(skirt != undefined){
+    this.getCode(skirt.commands);
+  }
+
   for(var i = 0; i < knittings.length; i++){
     this.getCode(layers[i].commands);
     this.getCode(knittings[i].commands);
