@@ -9,7 +9,8 @@ function setup() {
     //background(255,0,0);
 
     var pos = createVector(5,10);
-    knitting = new Etui("Ultimaker2+", "PLABRO", "normal",pos );
+    knitting = new Hanger5("Ultimaker2+", "PLABRO", "fine",pos );
+    //knitting = new Etui("Ultimaker2+", "PLABRO", "normal",pos );
 
 }
 function draw(){

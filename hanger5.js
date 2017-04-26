@@ -1,4 +1,4 @@
-function Hanger(printer, material,style, pos,  rows, stitches){
+function Hanger5(printer, material,style, pos,  rows, stitches){
   //TEST OK VOOR:
   //printer:   Anet
   //materiaal: BRICK
@@ -31,7 +31,7 @@ function Hanger(printer, material,style, pos,  rows, stitches){
   this.gcode = new Gcode(this.settings);
   this.layers = [];
   this.knittings = [];
-  for(var i = 0; i < 2; i++){
+  for(var i = 0; i < 3; i++){
     this.layers[i] = new Layer(i, this.settings);
     if(i == 0){
       this.skirt = new Skirt(this.grid, 25,3, this.pos);
@@ -45,7 +45,7 @@ function Hanger(printer, material,style, pos,  rows, stitches){
   this.gcode.generate(this.layers,this.skirt, this.knittings);
   noLoop();
 }
-Hanger.prototype.save = function(){
+Hanger5.prototype.save = function(){
   this.gcode.save(this.name + this.settings.materialcode + this.settings.style + this.rows + "x"+ this.stitches);
   this.isSaved = true;
 }

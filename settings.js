@@ -112,7 +112,7 @@ Settings.prototype.initMaterial = function(){
           this.initStyle(0.4, 0.03, 1200); //test ok armband.
       }
       else if(this.material == "PLABRO" && this.style == "fine" ){
-          this.initStyle(0.2, 0.03, 600); //test ok armband.
+          this.initStyle(0.3, 0.02, 1200); //test ok armband.
       }
     }
     case "Ultimaker2++":{ //nozzle 0.8

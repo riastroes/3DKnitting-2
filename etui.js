@@ -31,7 +31,7 @@ function Etui(printer, material,style,  pos){
   this.knittings = [];
   this.wall = [];
   var i;
-  for(i = 0; i < 4; i++){
+  for(i = 0; i < 3; i++){
     if(i == 0){
       this.skirt = new Skirt(this.grid, 3,7, pos);
       this.skirt.draw();
@@ -40,7 +40,7 @@ function Etui(printer, material,style,  pos){
     this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], "straight");
     this.knittings[i].gcode(this.gcode,this.layers[i]);
   }
-  for(i = 2; i < this.maxlayer-2; i++){
+  for(i = 3; i < this.maxlayer-2; i++){
     this.layers[i].speed = 1800;
     this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], "wall");
     this.knittings[i].gcode(this.gcode,this.layers[i]);

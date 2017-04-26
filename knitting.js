@@ -7,31 +7,32 @@ function Knitting(biggrid, knitgrid, layer, patternname){
   this.rows =  knitgrid.rows;
   this.stitches =  knitgrid.stitches;
   this.stitchnr =  knitgrid.stitchnr;
+  this.patternname = patternname;
+  this.pos = createVector(knitgrid.stitchnr, knitgrid.row);
 
 
-   if(patternname != "wall"){
+   if(this.patternname != "wall"){
     this.createPattern("straight");
     //this.testPattern(this.layer, this.knitgrid, "ABBBBCLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSUVVVVW");
     this.drawPattern();
   }
-  if(patternname == "wall"){
+  if(this.patternname == "wall"){
     this.createWall();
   }
 
 
 }
 Knitting.prototype.createWall = function(){
-  var wall = [];
+
   var w = this.grid[0].length;
   var h = this.grid.length;
-  
+
   this.test(this.grid[4][1]);
   this.test(this.grid[h-2][1]);
   this.test(this.grid[h-2][w-3]);
   this.test(this.grid[4][w-3]);
 
-  //append(wall, this.knitgrid[4][11]);
-  //append(wall, this.knitgrid[4][8]);
+
   var pos = [];
   pos[0] = this.grid[4][1].copy();
   pos[1] = this.grid[h-2][1].copy();
@@ -52,8 +53,6 @@ Knitting.prototype.createWall = function(){
     pos[i].z = 1;
     append(this.layer.p , pos[i]);
   }
-
-
 }
 Knitting.prototype.createStitch = function(type, r, s){
   var stitch = new Stitch(type).stitch;
@@ -195,7 +194,7 @@ Knitting.prototype.patternToGrid = function(strpattern ){
       }
     }
 
-  this.transportToStart();
+  //this.transportToStart();
 
 }
 Knitting.prototype.transportToStart = function(){
@@ -242,9 +241,7 @@ Knitting.prototype.gcode = function(gcode){
   append(this.commands, "G0 F" + this.layer.speed);
   append(this.commands, "G0 Z" + this.layer.totallayerheight);
   append(this.commands, "G0 X" + this.layer.p[0].x * this.layer.scale + " Y" + this.layer.p[0].y * this.layer.scale  );
-  // if(layer.layer == 0){
-  //   append(this.commands, "G4 P5000" );
-  // }
+
   for(var i = 1; i < this.layer.p.length; i++){
 
 
@@ -267,6 +264,11 @@ Knitting.prototype.gcode = function(gcode){
       append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude );
     }
   }
+  if(this.patternname != "wall"){
+    append(this.commands, "G0 Z15");
+    append(this.commands, "G0 X" + this.grid[0][0].x + " Y" + this.grid[0][0].y);
+  }
+
 }
 Knitting.prototype.draw = function(){
     stroke(0);
