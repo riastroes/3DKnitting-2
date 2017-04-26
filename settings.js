@@ -126,7 +126,7 @@ Settings.prototype.initMaterial = function(){
       break;
     }
     case "Ultimaker2+":{ //nozzle 0.4
-      //nozzle 0.08
+
       this.scale = 0.1;         //canvas = 2300 px, bed = 230 mm
       this.filement = 2.85;
       if(this.material == "PETGCARBON" && this.style == "normal" ){
@@ -136,7 +136,10 @@ Settings.prototype.initMaterial = function(){
         this.initStyle(0.2, 0.03, 1200);  //0.4, 0.03, 1600 ok
       }
       else if(this.material == "PLABRO" && this.style == "normal" ){
-          this.initStyle(0.4, 0.03, 800); //test ok armband.
+          this.initStyle(0.4, 0.03, 1200); //test ok armband.
+      }
+      else if(this.material == "PLABRO" && this.style == "fine" ){
+          this.initStyle(0.3, 0.02, 1200); //test ok armband.
       }
     }
     case "Ultimaker2++":{ //nozzle 0.8
