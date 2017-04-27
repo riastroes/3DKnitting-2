@@ -8,8 +8,8 @@ function setup() {
     createCanvas(1000,1000);
     //background(255,0,0);
 
-    var pos = createVector(5,10);
-    knitting = new Hanger5("Ultimaker2+", "PLABRO", "fine",pos );
+    var pos = createVector(10,3);
+    knitting = new Hanger2("Anet", "PURECOPER", "normal",pos );
     //knitting = new Etui("Ultimaker2+", "PLABRO", "normal",pos );
 
 }

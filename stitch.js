@@ -250,7 +250,7 @@ Stitch.prototype.create =function(){
            break;
        }
        case 'Y': {                //R afhechten naar rechts
-           this.stitch[0] = new Pos(1, 0,1,0);
+            this.stitch[0] = new Pos(1, 0,1,0);
            this.stitch[1] = new Pos(4,-1,1,0);
            this.stitch[2] = new Pos(4, -3,1,0);
            this.stitch[3] = new Pos(3,-4,1,0);
@@ -262,7 +262,7 @@ Stitch.prototype.create =function(){
           break;
        }
        case 'Z': {                //R afhechten, laatste steek
-         this.stitch[0] = new Pos(1, 0,1,0);
+          this.stitch[0] = new Pos(1, 0,1,0);
          this.stitch[1] = new Pos(4,-1,1,0);
          this.stitch[2] = new Pos(4, -3,1,0);
          this.stitch[3] = new Pos(3,-4,1,0);

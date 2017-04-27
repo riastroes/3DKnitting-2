@@ -12,16 +12,15 @@ function Grid(cellwidth, cellheight, wstitchpercell, hstitchpercell, marge){
   this.marge = marge;
 
   this.grid = [];
-  
+
   this.createGrid();
   println(this.cellwidth, this.cellheight);
 }
 Grid.prototype.createGrid = function(){
-
+for(s = 0; s <= this.wmax; s++){
+  this.grid[s] = [];
   for(r = 0; r<= this.hmax; r++){
-    this.grid[r] = [];
-      for(s = 0; s <= this.wmax; s++){
-          this.grid[r][s] = createVector(s * this.cellwidth, r * this.cellheight);
+          this.grid[s][r] = createVector(s * this.cellwidth, r * this.cellheight);
      }
   }
 }
@@ -80,7 +79,7 @@ Grid.prototype.draw = function(){
         stroke(255,0,0,100);
         strokeWeight(1);
       }
-      line(this.grid[0][s].x, this.grid[0][s].y, this.grid[this.hmax][s].x, this.grid[this.hmax][s].y);
+      line(this.grid[s][0].x, this.grid[s][0].y, this.grid[s][this.hmax].x, this.grid[s][this.hmax].y);
   }
 
   for(r = 0; r<= this.hmax; r++){
@@ -88,12 +87,12 @@ Grid.prototype.draw = function(){
           //even regels
           stroke(0);
           strokeWeight(3);
-          point(this.grid[r][0].x, this.grid[r][0].y);
+          point(this.grid[0][r].x, this.grid[0][r].y);
         }
         else {
             stroke(0);
             strokeWeight(3);
-            point(this.grid[r][this.wmax].x, this.grid[r][this.wmax].y);
+            point(this.grid[this.wmax][r].x, this.grid[this.wmax][r].y);
         }
 
     if(r % this.hstitchpercell == 0){
@@ -104,7 +103,7 @@ Grid.prototype.draw = function(){
       stroke(255,0,0,100);
       strokeWeight(1);
         }
-    line(this.grid[r][0].x, this.grid[r][0].y , this.grid[r][this.wmax].x, this.grid[r][this.wmax].y );
+    line(this.grid[0][r].x, this.grid[0][r].y , this.grid[this.wmax][r].x, this.grid[this.wmax][r].y );
   }
 }
 Grid.prototype.testPos = function(x, y, z){
@@ -113,7 +112,7 @@ Grid.prototype.testPos = function(x, y, z){
   point(this.grid[x][y].x, this.grid[x][y].y);
   println(this.grid[x][y].x +","+ this.grid[x][y].y);
 }
-Grid.prototype.getPos = function(row, stitchnr){
+Grid.prototype.getPos = function(stitchnr,row){
   var pos = createVector(0,0,0);
   pos.x = stitchnr * (this.cellwidth/4);
   pos.y = row * (this.cellheight/4);
@@ -128,7 +127,7 @@ Grid.prototype.error = function(msg){
   text(msg, width/2, height/2);
 }
 
-Grid.prototype.first = function(row, stitchnr){
+Grid.prototype.first = function( stitchnr, row){
   var pos = createVector(0,0);
   var ok = true;
 
@@ -154,28 +153,25 @@ Grid.prototype.first = function(row, stitchnr){
   }
   return pos;
 }
-Grid.prototype.drawKnitGrid = function(knitgrid, row, stitchnr){
+Grid.prototype.drawKnitGrid = function(knitgrid,  stitchnr, row){
 
   var rows = knitgrid.length;
   var stitches = knitgrid[0].length;
-
+for(var s = 0; s < stitches; s++){
   for(var r = 0; r < rows; r++){
-    for(var s = 0; s < stitches; s++){
+
       stroke(0);
       strokeWeight(1);
-      point(knitgrid[r][s].x, knitgrid[r][s].y);
+      point(knitgrid[s][r].x, knitgrid[s][r].y);
     }
   }
 
-  stroke(255, 0,0);
-  strokeWeight(10);
-  point(knitgrid[0][4].x, knitgrid[0][4].y); //BEGIN POSITIE CORRECTIE
   stroke(0, 0,255);
   strokeWeight(1);
   fill(0,0,255,10);
   quad( knitgrid[0][0].x, knitgrid[0][0].y,
-        knitgrid[0][stitches-1].x, knitgrid[0][stitches-1].y,
-        knitgrid[rows-1][stitches-1].x, knitgrid[rows-1][stitches-1].y,
-        knitgrid[rows-1][0].x, knitgrid[rows-1][0].y);
+        knitgrid[stitches-1][0].x, knitgrid[stitches-1][0].y,
+        knitgrid[stitches-1][rows-1].x, knitgrid[stitches-1][rows-1].y,
+        knitgrid[0][rows-1].x, knitgrid[0][rows-1].y);
 
 }

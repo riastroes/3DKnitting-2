@@ -57,10 +57,10 @@ Settings.prototype.initMaterial = function(){
           }
           break;
         }
-        case "Coper":{
-          this.materialcode ="PLACOP";
+        case "PURECOPER":{
+          this.materialcode ="PURECOPER";
           if(this.style == "normal"){
-            this.initStyle(0.4, 0.15, 800);//
+            this.initStyle(0.25, 0.18, 800);//
           }
           break;
         }
@@ -111,7 +111,7 @@ Settings.prototype.initMaterial = function(){
         case "REFILLTRANSPARENT":{
           this.materialcode ="RTRANS";
           if(this.style == "normal"){
-            this.initStyle(0.5, 0.2, 800);//NIET GETEST
+            this.initStyle(0.5, 0.2, 800);//TEST OK
           }
           if(this.style == "fine"){
             this.initStyle(0.18, 0.1, 800);//NIET GETEST
@@ -183,8 +183,8 @@ Settings.prototype.initPrinter = function(){
       this.bedtemp = 50;
       break;
     }
-    case "Coper":{
-      this.nozzletemp = 165;
+    case "PURECOPER":{
+      this.nozzletemp = 161;
       this.bedtemp = 70;
       break;
     }

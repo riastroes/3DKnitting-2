@@ -1,6 +1,6 @@
 //meerderen en minderen
 
-function MoreLess(printer, material,style, pos,  rows, stitches){
+function MoreLess(printer, material,style, pos, stitches,rows){
 
 
   this.name = "MoreLess";
@@ -12,7 +12,7 @@ function MoreLess(printer, material,style, pos,  rows, stitches){
   //this.grid.draw();
   this.grid.testPos(pos.x,pos.y); //row, stitches
 
-  this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.rows, this.stitches);
+  this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y, this.stitches,this.rows,);
 
 this.knitgrid.draw();
 
@@ -23,7 +23,7 @@ this.knitgrid.draw();
   var i = 0
   this.layers[i] = new Layer(i, this.settings);
 
-  this.skirt = new Skirt(this.grid, 10,3, pos, 8);
+  this.skirt = new Skirt(this.grid, 3,20, pos, 8);
   this.skirt.draw();
   this.skirt.gcode(this.gcode, this.layers[0]);
 

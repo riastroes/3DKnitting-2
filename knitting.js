@@ -1,4 +1,4 @@
-function Knitting(biggrid, knitgrid, layer,row,  stitchnr, stitches){
+function Knitting(biggrid, knitgrid, layer,stitchnr, row, stitches){
   this.commands = new Array(";knitting");
   this.biggrid = biggrid;
   this.grid = knitgrid.grid;
@@ -9,20 +9,20 @@ function Knitting(biggrid, knitgrid, layer,row,  stitchnr, stitches){
   this.last =0;
   this.strpattern = "";
 
-  this.stitches =  knitgrid.stitches;
-  this.stitchnr =  knitgrid.stitchnr;
-  this.patternname = patternname;
+  this.stitches =  stitches;
+  this.stitchnr =  stitchnr;
+  //this.patternname = patternname;
   this.pos = createVector(knitgrid.stitchnr, knitgrid.row);
 
 
-   if(this.patternname != "wall"){
-    this.createPattern("straight");
-    //this.testPattern(this.layer, this.knitgrid, "ABBBBCLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSUVVVVW");
-    this.drawPattern();
-  }
-  if(this.patternname == "wall"){
-    this.createWall();
-  }
+  //  if(this.patternname != "wall"){
+  //   this.createPattern("straight");
+  //   //this.testPattern(this.layer, this.knitgrid, "ABBBBCLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSLLLLLKRRRRRSUVVVVW");
+  //   this.drawPattern();
+  // }
+  // if(this.patternname == "wall"){
+  //   this.createWall();
+  // }
 
 
 
@@ -32,26 +32,26 @@ Knitting.prototype.createWall = function(){
   var w = this.grid[0].length;
   var h = this.grid.length;
 
-  this.test(this.grid[4][1]);
-  this.test(this.grid[h-2][1]);
-  this.test(this.grid[h-2][w-3]);
-  this.test(this.grid[4][w-3]);
+  this.test(this.grid[1][4]);
+  this.test(this.grid[1][h-2]);
+  this.test(this.grid[w-3][h-2]);
+  this.test(this.grid[w-3][4]);
 
 
   var pos = [];
-  pos[0] = this.grid[4][1].copy();
-  pos[1] = this.grid[h-2][1].copy();
-  pos[2] = this.grid[h-2][w-3].copy();
-  pos[3] = this.grid[4][w-3].copy();
-  pos[4] = this.grid[4][w-3].copy();
+  pos[0] = this.grid[1][4].copy();
+  pos[1] = this.grid[1][h-2].copy();
+  pos[2] = this.grid[w-3][h-2].copy();
+  pos[3] = this.grid[w-3][4].copy();
+  pos[4] = this.grid[w-3][4].copy();
   pos[4].x -= 3;
-  pos[5] = this.grid[h-2][w-3].copy();
+  pos[5] = this.grid[w-3][h-2].copy();
   pos[5].x -= 3;
   pos[5].y += 3;
-  pos[6] = this.grid[h-2][1].copy();
+  pos[6] = this.grid[1][h-2].copy();
   pos[6].x += 3;
   pos[6].y -= 3;
-  pos[7] = this.grid[4][1].copy();
+  pos[7] = this.grid[1][4].copy();
   pos[7].x += 3;
 
   for(var i = 0; i < 8; i++){
@@ -59,30 +59,31 @@ Knitting.prototype.createWall = function(){
     append(this.layer.p , pos[i]);
   }
 }
-Knitting.prototype.createStitch1 = function(type, r, s){
-  var stitch = new Stitch(type).stitch;
-  var i
-  var kr, ks, kz;
-
-  for(i = 0; i < stitch.length; i++){
-    var ok = true
-    //test on the knitgrid;
-    kr = (r*4) + stitch[i].y;
-    ks = (s*4) + stitch[i].x ;
-    kz = stitch[i].z;
-    if(kr < 0 || kr >= this.grid.length){
-      ok = false;
-    }
-    if(ks < 0 || ks >= this.grid[0].length){
-      ok = false;
-    }
-    if(ok ){
-      append(this.layer.p, createVector(this.grid[kr][ks].x,
-                                 this.grid[kr][ks].y,
-                                 kz).copy());
-    }
-  }
-}
+// Knitting.prototype.createStitch1 = function(type, r, s){
+//   var stitch = new Stitch(type).stitch;
+//   var i
+//   var kr, ks, kz;
+//
+//   for(i = 0; i < stitch.length; i++){
+//     var ok = true
+//     //test on the knitgrid;
+//     kr = (r*4) + stitch[i].y;
+//     ks = (s*4) + stitch[i].x ;
+//     kz = stitch[i].z;
+//     if(ks < 0 || ks >= this.grid.length){
+//       ok = false;
+//     }
+//     if(kr < 0 || kr >= this.grid[0].length){
+//       ok = false;
+//     }
+//
+//     if(ok ){
+//       append(this.layer.p, createVector(this.grid[ks][kr].x,
+//                                  this.grid[ks][kr].y,
+//                                  kz).copy());
+//     }
+//   }
+// }
 Knitting.prototype.createStitch = function(type){
   var stitch = new Stitch(type).stitch;
   var i
@@ -98,15 +99,16 @@ Knitting.prototype.createStitch = function(type){
     kr = this.last.y + stitch[i].y;
     ks = this.last.x + stitch[i].x;
     kz = stitch[i].z;
-    if(kr < 0 || kr >= this.grid.length){
+    if(ks < 0 || ks >= this.grid.length){
       ok = false;
     }
-    if(ks < 0 || ks >= this.grid[0].length){
+    if(kr < 0 || kr >= this.grid[0].length){
       ok = false;
     }
+
     if(ok ){
-      append(this.layer.p, createVector(this.grid[kr][ks].x,
-                                 this.grid[kr][ks].y,
+      append(this.layer.p, createVector(this.grid[ks][kr].x,
+                                 this.grid[ks][kr].y,
                                  kz).copy());
 
     }
@@ -190,42 +192,39 @@ Knitting.prototype.createPattern = function(patternname, from, to){
       }
 
   }
+  println(this.strpattern);
 }
 Knitting.prototype.patternToGrid = function( ){
 
   var type;
   for(var i = 0; i < this.strpattern.length; i++){
     type = this.strpattern.substring(i,i+1);
-    if(type =="W"){
-      println(type);
-    }
     this.createStitch(type);
   }
 
 
-  this.transportToStart();
 
 
 }
-Knitting.prototype.transportToStart = function(last){
+Knitting.prototype.gotoStart = function(pos){
       var last = this.layer.p.length-1;
-      var lastp = this.layer.p[last];
-      lastp.y += 200;
-
+      var lastp = this.layer.p[last].copy();
+      lastp.y += 10;
+      lastp.z =0;
+       point(lastp.x, lastp.y);
        append(this.layer.p, lastp);
        lastp = lastp.copy();
-       lastp.x -= 400;
+       lastp.x = 10;
+       lastp.z =0;
+       point(lastp.x, lastp.y);
        append(this.layer.p, lastp);
        lastp = lastp.copy();
-       lastp.y = this.row* 4;
+       lastp.y = this.biggrid.grid[pos.x][pos.y].y;
+       lastp.z =0;
+       point(lastp.x, lastp.y);
        append(this.layer.p, lastp);
-
-      // this.biggrid.testPos(this.biggrid.hmax-this.biggrid.marge  ,this.stitchnr);
-      // this.biggrid.testPos(this.biggrid.hmax-this.biggrid.marge  ,this.biggrid.marge);
-      // this.biggrid.testPos(this.row ,this.biggrid.marge);
-      // append(this.layer.p, this.biggrid.getPos((this.biggrid.hmax-this.biggrid.marge)*4 , ( this.stitchnr)*4).copy());
-      // append(this.layer.p, this.biggrid.getPos((this.biggrid.hmax-this.biggrid.marge)*4 , this.biggrid.marge*4).copy());
-      // append(this.layer.p, this.biggrid.getPos((this.row)*4 , this.biggrid.marge*4).copy());
+       point(this.biggrid.grid[pos.x][pos.y].x,this.biggrid.grid[pos.x][pos.y].y);
+       append(this.layer.p, createVector(this.biggrid.grid[pos.x][pos.y].x,this.biggrid.grid[pos.x][pos.y].y,0));
 
 }
 Knitting.prototype.drawPattern = function(){
@@ -244,19 +243,7 @@ Knitting.prototype.drawPattern = function(){
     }
   }
 }
-// Knitting.prototype.createPattern = function(){
-//     for(var i = 0; i < this.layers.length; i++){
-//       this.layers[i].p = concat(this.layers[i].p, this.pattern.p);
-//   }
-// }
-// Knitting.prototype.generateGcode = function(layer){
-//
-//   //for(var i = 0; i < this.layers.length; i++){
-//     this.commands = concat(this.commands, layer.commands);
-//     //this.commands = concat(this.commands, this.pattern.commands);
-//     this.gcode(layer);
-//   //}
-// }
+
 Knitting.prototype.gcode = function(gcode){
 
   append(this.commands, "G0 F" + this.layer.speed);
@@ -286,12 +273,12 @@ Knitting.prototype.gcode = function(gcode){
     }
   }
 
-  append(this.commands, "G0 Z15");
+//  append(this.commands, "G0 Z15");
 
-  if(this.patternname != "wall"){
-    append(this.commands, "G0 Z15");
-    append(this.commands, "G0 X" + this.grid[0][0].x + " Y" + this.grid[0][0].y);
-  }
+  // if(this.patternname != "wall"){
+  //   append(this.commands, "G0 Z15");
+  //   append(this.commands, "G0 X" + this.grid[0][0].x + " Y" + this.grid[0][0].y);
+  // }
 
 
 }
