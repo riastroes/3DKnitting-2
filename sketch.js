@@ -9,7 +9,7 @@ function setup() {
     //background(255,0,0);
 
     var pos = createVector(10,3);
-    knitting = new Hanger2("Anet", "PURECOPER", "normal",pos );
+    knitting = new FreeForm1("Anet", "TPCFLEX", "normal",pos );
     //knitting = new Etui("Ultimaker2+", "PLABRO", "normal",pos );
 
 }

@@ -12,7 +12,7 @@ function MoreLess(printer, material,style, pos, stitches,rows){
   //this.grid.draw();
   this.grid.testPos(pos.x,pos.y); //row, stitches
 
-  this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y, this.stitches,this.rows,);
+  this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y, this.stitches,this.rows);
 
 this.knitgrid.draw();
 
@@ -27,11 +27,11 @@ this.knitgrid.draw();
   this.skirt.draw();
   this.skirt.gcode(this.gcode, this.layers[0]);
 
-  this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], 4,8, 14);
+  this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], 8,0, 14);
   this.knittings[i].createPattern("setup", 0,1);
   this.knittings[i].createPattern("straight",1,10);
-  this.knittings[i].createPattern("more",10,21);
-  this.knittings[i].createPattern("straight",21, 25);
+  this.knittings[i].createPattern("more",11,21);
+  this.knittings[i].createPattern("straight",22, 25);
   this.knittings[i].createPattern("less", 25,47);
   this.knittings[i].createPattern("straight",47, 48);
   this.knittings[i].createPattern("end",48,49);
@@ -44,12 +44,12 @@ this.knitgrid.draw();
   i = 1
   this.layers[i] = new Layer(i, this.settings);
 
-  this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], 62,10, 10);
+  this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], 10,62, 10);
   this.knittings[i].createPattern("setup", 0,1);
   this.knittings[i].createPattern("straight",1,5);
   this.knittings[i].createPattern("less", 5,10);
-  this.knittings[i].createPattern("more",10,15);
-  this.knittings[i].createPattern("straight",15,20);
+  this.knittings[i].createPattern("more",11,15);
+  this.knittings[i].createPattern("straight",16,20);
   this.knittings[i].createPattern("end",20,21);
 
   this.knittings[i].patternToGrid();

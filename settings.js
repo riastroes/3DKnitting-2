@@ -38,10 +38,10 @@ Settings.prototype.initMaterial = function(){
             }
             break;
           }
-        case "TPC FLEX":{
+        case "TPCFLEX":{
           this.materialcode ="TPCFLEX";
           if(this.style == "normal"){
-            this.initStyle(0.5, 0.2, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
+            this.initStyle(0.3, 0.2, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
           }
           else if(this.material == "Messing" && this.style == "normal"){
             this.materialcode ="PLAMES";
@@ -168,7 +168,7 @@ Settings.prototype.initPrinter = function(){
       this.bedtemp = 50;
       break;
     }
-    case "TPC FLEX":{
+    case "TPCFLEX":{
       this.nozzletemp = 210;
       this.bedtemp = 80;
       break;
