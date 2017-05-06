@@ -72,12 +72,12 @@ Grid.prototype.createBetweenTwoLines = function(stitches, rows, a, b, c, d, show
 
   for (var t = 0; t <maxy; t++){
     this.ab[t] = createVector(0,0);
-    this.ab[t].x = bezierPoint(a.x,a.x,b.x,b.x,map(t,0,maxy,0,1));
-    this.ab[t].y = bezierPoint(a.y,a.y,b.y,b.y,map(t,0,maxy,0,1));
+    this.ab[t].x = bezierPoint(a.x,a.x,b.x,b.x,map(t,0,maxy,0,1)); //line
+    this.ab[t].y = bezierPoint(a.y,a.y,b.y,b.y,map(t,0,maxy,0,1)); //line
 
     this.cd[t] = createVector(0,0);
-    this.cd[t].x = bezierPoint(c.x,c.x,d.x,d.x,map(t,0,maxy,0,1));
-    this.cd[t].y = bezierPoint(c.y,c.y,d.y,d.y,map(t,0,maxy,0,1));
+    this.cd[t].x = bezierPoint(c.x,c.x,d.x,d.x,map(t,0,maxy,0,1)); //line
+    this.cd[t].y = bezierPoint(c.y,c.y,d.y,d.y,map(t,0,maxy,0,1)); //line
 
 
   }
@@ -96,7 +96,50 @@ Grid.prototype.createBetweenTwoLines = function(stitches, rows, a, b, c, d, show
        }
    }
 }
+Grid.prototype.createBetweenLineAndCurve = function(stitches, rows, a, b, c, e, f, d, show){
+  var maxy = (rows*4);
+  var maxx = (stitches*4) + 1;
+  if(show){
+    stroke(255,0,0);
+    strokeWeight(5);
+    point(a.x, a.y);
+    point(b.x, b.y);
+    stroke(0,255,0);
+    strokeWeight(5);
+    point(c.x, c.y);
+    point(d.x, d.y);
+    stroke(0,255,0);
+    strokeWeight(5);
+    point(e.x, e.y);
+    point(d.x, d.y);
+  }
 
+  for (var t = 0; t <maxy; t++){
+    this.ab[t] = createVector(0,0);
+    this.ab[t].x = bezierPoint(a.x,a.x,b.x,b.x,map(t,0,maxy,0,1)); //line
+    this.ab[t].y = bezierPoint(a.y,a.y,b.y,b.y,map(t,0,maxy,0,1)); //line
+
+    this.cd[t] = createVector(0,0);
+    this.cd[t].x = bezierPoint(c.x,e.x,f.x,d.x,map(t,0,maxy,0,1)); //curve
+    this.cd[t].y = bezierPoint(c.y,e.y,f.y,d.y,map(t,0,maxy,0,1)); //curve
+
+
+  }
+  this.grid = [];
+   for(var x = 0; x < maxx; x++){
+     this.grid[x] = [];
+     for(var y = 0; y < maxy; y++){
+         stroke(0);
+         strokeWeight(1);
+         this.grid[x][y] = createVector(0,0);
+         this.grid[x][y].x = curvePoint(a.x,this.ab[y].x,this.cd[y].x,b.x,map(x,0,maxx,0,1));
+         this.grid[x][y].y = curvePoint(a.y,this.ab[y].y,this.cd[y].y,b.y,map(x,0,maxx,0,1));
+         if(show){
+            point(this.grid[x][y].x, this.grid[x][y].y);
+          }
+       }
+   }
+}
 Grid.prototype.drawFreeFormGrid = function(stitches,rows, structure){
 
   var maxy = rows + 10;

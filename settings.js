@@ -41,7 +41,7 @@ Settings.prototype.initMaterial = function(){
         case "TPCFLEX":{
           this.materialcode ="TPCFLEX";
           if(this.style == "normal"){
-            this.initStyle(0.3, 0.2, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
+            this.initStyle(1.3, 0.15, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
           }
           else if(this.material == "Messing" && this.style == "normal"){
             this.materialcode ="PLAMES";
@@ -100,7 +100,7 @@ Settings.prototype.initMaterial = function(){
             this.initStyle(0.5, 0.2, 800);//NIET GETEST
           }
           if(this.style == "fine"){
-            this.initStyle(0.18, 0.1, 800);//NIET GETEST
+            this.initStyle(0.2, 0.1, 800);//NIET GETEST
           }
           if(this.style == "extrafine"){
             this.initStyle(0.08, 0.07, 800);//NIET GETEST
@@ -170,7 +170,7 @@ Settings.prototype.initPrinter = function(){
     }
     case "TPCFLEX":{
       this.nozzletemp = 210;
-      this.bedtemp = 80;
+      this.bedtemp = 80; //80 is goed, niet meer veranderen!!
       break;
     }
     case "Messing":{
@@ -204,8 +204,8 @@ Settings.prototype.initPrinter = function(){
       break;
     }
     case "ABS":{
-      this.nozzletemp =245;
-      this.bedtemp = 97;
+      this.nozzletemp =250;
+      this.bedtemp = 60;
       break;
     }
     case "REFILLTRANSPARENT":{
