@@ -9,8 +9,8 @@ function setup() {
     //background(255,0,0);
 
     var pos = createVector(10,3);
-    knitting = new FreeForm1("Anet", "ABS", "fine",pos );
-    //knitting = new Etui("Ultimaker2+", "PLABRO", "normal",pos );
+    //knitting = new FreeForm1("Anet", "ABS", "fine",pos );
+    knitting = new Hanger5("Ultimaker2+", "PETGCARBON", "fat",pos );
 
 }
 function draw(){

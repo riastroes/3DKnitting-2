@@ -33,6 +33,7 @@ Skirt.prototype.createRect = function(){
     this.skirt[1] = this.grid[this.gridmarge][this.gridmarge + this.height];
     this.skirt[2] = this.grid[this.gridmarge + this.length][this.gridmarge + this.height];
     this.skirt[3] =this.grid[this.pos.x][this.pos.y].copy();
+    this.skirt[4] = this.grid[this.pos.x + this.stitchnr][this.pos.y].copy();
     // for(var i = 0; i <= this.stitchnr; i++){
     //   this.skirt[10 + i] =this.grid[this.pos.x][this.pos.y + i].copy();
     // }
