@@ -2,22 +2,28 @@
 "use strict";
 
 var knitting;
-
+var stitches;
+var rows;
+var pos;
 
 function setup() {
     createCanvas(1000,1000);
     //background(255,0,0);
 
-    var pos = createVector(10,3);
+    pos = createVector(10,3);
     //knitting = new FreeForm1("Anet", "ABS", "fine",pos );
-    knitting = new Hanger5("Ultimaker2+", "PETGCARBON", "fat",pos );
 
+    frameRate(1);
 }
 function draw(){
   stroke(0);
   strokeWeight(2)
   noFill();
   rect(0,0, width-1, height-1);
+
+  stitches = floor(institches);
+  rows = floor(inrows);
+  knitting = new Armband1("Ultimaker2+", "PETGCARBON", "fat", pos, stitches, rows );
 
 }
 function mousePressed(){

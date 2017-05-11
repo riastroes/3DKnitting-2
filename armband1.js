@@ -1,4 +1,4 @@
-function Hanger5(printer, material,style, pos,  rows, stitches){
+function Armband1(printer, material,style, pos,  stitches, rows){
   //TEST OK VOOR:
   //printer:   Anet
   //materiaal: BRICK
@@ -7,8 +7,8 @@ function Hanger5(printer, material,style, pos,  rows, stitches){
 //  style:     extrafine
 
   this.name = "Hanger5";
-  this.rows =53;
-  this.stitches = 20;
+  this.rows = rows;
+  this.stitches = stitches;
   this.pos = pos;
   this.isSaved = false;
   this.settings =new Settings(printer, material, style);
@@ -55,9 +55,9 @@ function Hanger5(printer, material,style, pos,  rows, stitches){
   //
   }
   this.gcode.generate(this.layers,this.skirt, this.knittings);
-  noLoop();
+  //noLoop();
 }
-Hanger5.prototype.save = function(){
+Armband1.prototype.save = function(){
   this.gcode.save(this.name + this.settings.materialcode + this.settings.style + this.rows + "x"+ this.stitches);
   this.isSaved = true;
 }

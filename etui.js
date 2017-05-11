@@ -15,7 +15,7 @@ function Etui(printer, material,style,  pos){
 
 
 
-  this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.rows, this.stitches);
+  this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y, this.stitches,this.rows);
   this.knitgrid.draw();
 
   this.maxlayer = ceil(this.content / this.settings.layerheight) + 4;
@@ -37,7 +37,10 @@ function Etui(printer, material,style,  pos){
       this.skirt.draw();
       this.skirt.gcode(this.gcode,this.layers[i]);
     }
-    this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], "straight");
+    this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i], 0,0,this.stitches);
+    this.knittings[i].createPattern("setup", 0,1);
+    this.knittings[i].createPattern("straight", 0,1);
+    this.knittings[i].createPattern("end", 0,1);
     this.knittings[i].gcode(this.gcode,this.layers[i]);
   }
   for(i = 3; i < this.maxlayer-2; i++){
