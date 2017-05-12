@@ -11,6 +11,7 @@ function Knitgrid(biggrid, stitchnr,row, stitches,rows){
   this.create(biggrid);
 }
 Knitgrid.prototype.create = function(biggrid){
+  this.grid = [];
   for(var s = 0; s <= this.kstitches ; s++){
     this.grid[s]=[];
     for(var r = 0; r <= this.krows ; r++){

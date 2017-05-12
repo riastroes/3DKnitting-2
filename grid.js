@@ -6,8 +6,8 @@ function Grid(cellwidth, cellheight, wstitchpercell, hstitchpercell, marge){
   this.cellwidth = cellwidth / wstitchpercell;
   this.cellheight = cellheight/ hstitchpercell;
 
-  this.wmax = floor(width / this.cellwidth);
-  this.hmax = floor(height / this.cellheight);
+  this.wmax = floor((width-offset.x) / this.cellwidth);
+  this.hmax = floor((height-offset.y) / this.cellheight);
 
   this.marge = marge;
 
@@ -252,52 +252,20 @@ Grid.prototype.createGrid = function(){
 for(s = 0; s <= this.wmax; s++){
   this.grid[s] = [];
   for(r = 0; r<= this.hmax; r++){
-          this.grid[s][r] = createVector(s * this.cellwidth, r * this.cellheight);
+          this.grid[s][r] = createVector((s * this.cellwidth), (r * this.cellheight));
      }
   }
 }
-// Grid.prototype.disorderWidth = function(knitgrid){
-//   var a = 0;
-//   for(r = 0; r< knitgrid.length; r++){
-//
-//     for(s = 0; s < knitgrid[0].length; s++){
-//
-//         knitgrid[r][s].x += 40 * sin(a);
-//
-//      }
-//      a += 0.2;
-//   }
-// }
 
-// Grid.prototype.createKnitGrid = function(row, stitchnr, rows, stitches){
-// //1 extra rij voor opzetten
-// /*formule afmeting breiwerk:
-// hoogte = rows * celhoogte + (celhoogte*5), waarbij celhoogte is 4
-// breedte = stitches * celbreedte + (celbreedte*4), waarbij celbreedte is 4
-//
-//
-// //1 extra voor stitches want je moet ook de buitenste positie hebben. voor de afmeting
-// //van het breiwerk.
-// //HET BREIWERK MOET 1 HOKJE OPSCHUIVEN
-// */
-//
-//   for(var r = 0; r < ((rows+1) * 4)+1; r++){
-//     this.knitgrid[r]=[];
-//     for(var s = 0; s < ((stitches+1) * 4)+1 ; s++){
-//       this.knitgrid[r][s] = this.getPos((row*4) + r , (stitchnr*4) + s  - 4).copy();
-//     }
-//   }
-//   return this.knitgrid;
-// }
 Grid.prototype.draw = function(){
 
   //forbidden area
   stroke(0);
   fill(200);
   strokeWeight(1);
-  rect(0,0, (this.wmax * this.cellwidth)-1,(this.hmax * this.cellheight)-1);
+  rect(offset.x,offset.y, (this.wmax * this.cellwidth)-1,(this.hmax * this.cellheight)-1);
   fill(255);
-  rect(this.cellwidth * this.marge, this.cellheight* this.marge, (this.wmax * this.cellwidth)-(2* this.marge * this.cellwidth),  (this.hmax * this.cellheight) - (2* this.marge *this.cellheight));
+  rect((this.cellwidth * this.marge) + offset.x, (this.cellheight* this.marge) + offset.y, (this.wmax * this.cellwidth)-(2* this.marge * this.cellwidth),  (this.hmax * this.cellheight) - (2* this.marge *this.cellheight));
 
   //vertical lines
   for(var s = 0; s <= this.wmax; s++){
@@ -311,7 +279,7 @@ Grid.prototype.draw = function(){
         stroke(255,0,0,100);
         strokeWeight(1);
       }
-      line(this.grid[s][0].x, this.grid[s][0].y, this.grid[s][this.hmax].x, this.grid[s][this.hmax].y);
+      line(this.grid[s][0].x + offset.x, this.grid[s][0].y+ offset.y, this.grid[s][this.hmax].x+ offset.x, this.grid[s][this.hmax].y+ offset.y);
   }
 
   for(r = 0; r<= this.hmax; r++){
@@ -319,12 +287,12 @@ Grid.prototype.draw = function(){
           //even regels
           stroke(0);
           strokeWeight(3);
-          point(this.grid[0][r].x, this.grid[0][r].y);
+          point(this.grid[0][r].x+ offset.x, this.grid[0][r].y+ offset.y);
         }
         else {
             stroke(0);
             strokeWeight(3);
-            point(this.grid[this.wmax][r].x, this.grid[this.wmax][r].y);
+            point(this.grid[this.wmax][r].x+ offset.x, this.grid[this.wmax][r].y+ offset.y);
         }
 
     if(r % this.hstitchpercell == 0){
@@ -335,19 +303,19 @@ Grid.prototype.draw = function(){
       stroke(255,0,0,100);
       strokeWeight(1);
         }
-    line(this.grid[0][r].x, this.grid[0][r].y , this.grid[this.wmax][r].x, this.grid[this.wmax][r].y );
+    line(this.grid[0][r].x+ offset.x, this.grid[0][r].y+ offset.y , this.grid[this.wmax][r].x+ offset.x, this.grid[this.wmax][r].y + offset.y);
   }
 }
 Grid.prototype.testPos = function(x, y, z){
   stroke(255,0,0);
   strokeWeight(10);
-  point(this.grid[x][y].x, this.grid[x][y].y);
+  point(this.grid[x][y].x + offset.x, this.grid[x][y].y + offset.y);
   println(this.grid[x][y].x +","+ this.grid[x][y].y);
 }
 Grid.prototype.getPos = function(stitchnr,row){
   var pos = createVector(0,0,0);
-  pos.x = stitchnr * (this.cellwidth/4);
-  pos.y = row * (this.cellheight/4);
+  pos.x = offset.x + (stitchnr * (this.cellwidth/4));
+  pos.y = offset.y + (row * (this.cellheight/4));
   pos.z = 0;
   return pos;
 }
@@ -360,7 +328,7 @@ Grid.prototype.error = function(msg){
 }
 
 Grid.prototype.first = function( stitchnr, row){
-  var pos = createVector(0,0);
+  var pos = createVector(offset.x, offset.y);
   var ok = true;
 
 
