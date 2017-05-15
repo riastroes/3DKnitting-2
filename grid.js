@@ -314,8 +314,8 @@ Grid.prototype.testPos = function(x, y, z){
 }
 Grid.prototype.getPos = function(stitchnr,row){
   var pos = createVector(0,0,0);
-  pos.x = offset.x + (stitchnr * (this.cellwidth/4));
-  pos.y = offset.y + (row * (this.cellheight/4));
+  pos.x = (stitchnr * (this.cellwidth/4));
+  pos.y = (row * (this.cellheight/4));
   pos.z = 0;
   return pos;
 }

@@ -12,7 +12,7 @@ function Knitting(biggrid, knitgrid, layer,stitchnr, row, stitches){
   this.stitches =  stitches;
   this.stitchnr =  stitchnr;
   //this.patternname = patternname;
-  this.pos = createVector(knitgrid.stitchnr, knitgrid.row);
+  this.pos = createVector(0,0);
 
 
   //  if(this.patternname != "wall"){
@@ -206,40 +206,43 @@ Knitting.prototype.patternToGrid = function( ){
 
 
 }
-Knitting.prototype.gotoStart = function(pos){
+Knitting.prototype.gotoStart = function(pos, offset){
       var last = this.layer.p.length-1;
       var lastp = this.layer.p[last].copy();
-      lastp.y += 10;
+      lastp.y += 100;
       lastp.z =0;
-       point(lastp.x, lastp.y);
+       point(lastp.x + offset.x, lastp.y + offset.y);
        append(this.layer.p, lastp);
        lastp = lastp.copy();
        lastp.x = 10;
        lastp.z =0;
-       point(lastp.x, lastp.y);
+       point(lastp.x + offset.x, lastp.y + offset.y);
        append(this.layer.p, lastp);
        lastp = lastp.copy();
        lastp.y = this.biggrid.grid[pos.x][pos.y].y;
        lastp.z =0;
-       point(lastp.x, lastp.y);
+
+       point(lastp.x + offset.x, lastp.y + offset.y);
        append(this.layer.p, lastp);
-       point(this.biggrid.grid[pos.x][pos.y].x,this.biggrid.grid[pos.x][pos.y].y);
+       strokeWeight(10);
+
+       point(this.biggrid.grid[pos.x][pos.y].x  + offset.x,this.biggrid.grid[pos.x][pos.y].y + offset.y);
        append(this.layer.p, createVector(this.biggrid.grid[pos.x][pos.y].x,this.biggrid.grid[pos.x][pos.y].y,0));
 
 }
-Knitting.prototype.drawPattern = function(){
+Knitting.prototype.drawPattern = function(offset){
   for(var i = 1; i < this.layer.p.length; i++){
 
     if(this.layer.p[i-1].x == this.layer.p[i].x && this.layer.p[i-1].y == this.layer.p[i].y){
       //double
       stroke(255,0,0);
       strokeWeight(5);
-      point(this.layer.p[i].x, this.layer.p[i].y);
+      point(this.layer.p[i].x + offset.x, this.layer.p[i].y + offset.y);
     }
     else{
       stroke(0);
       strokeWeight(1);
-      line(this.layer.p[i-1].x, this.layer.p[i-1].y,this.layer.p[i].x, this.layer.p[i].y);
+      line(this.layer.p[i-1].x + offset.x, this.layer.p[i-1].y + offset.y,this.layer.p[i].x + offset.x, this.layer.p[i].y + offset.y);
     }
   }
 }

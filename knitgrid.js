@@ -152,13 +152,13 @@ Knitgrid.prototype.disorderHeight = function(from,to, force, stitches){
   }
 }
 
-Knitgrid.prototype.draw = function(){
+Knitgrid.prototype.draw = function(offset){
   for(var s = 0; s <  this.kstitches; s++){
   for(var r = 0; r < this.krows; r++){
 
       stroke(0);
       strokeWeight(1);
-      point( this.grid[s][r].x,  this.grid[s][r].y);
+      point( this.grid[s][r].x + offset.x,  this.grid[s][r].y + offset.y);
     }
   }
 
@@ -166,9 +166,9 @@ Knitgrid.prototype.draw = function(){
   stroke(0, 0,255);
   strokeWeight(1);
   fill(0,0,255,10);
-  quad(  this.grid[0][0].x,  this.grid[0][0].y,
-         this.grid[ this.kstitches-1][0].x,  this.grid[ this.kstitches-1][0].y,
-         this.grid[ this.kstitches-1][ this.krows-1].x,  this.grid[ this.kstitches-1][ this.krows].y,
-         this.grid[0][ this.krows-1].x,  this.grid[0][ this.krows].y);
+  quad(  this.grid[0][0].x + offset.x,  this.grid[0][0].y + offset.y,
+         this.grid[ this.kstitches-1][0].x + offset.x,  this.grid[ this.kstitches-1][0].y + offset.y,
+         this.grid[ this.kstitches-1][ this.krows-1].x + offset.x,  this.grid[ this.kstitches-1][ this.krows].y + offset.y,
+         this.grid[0][ this.krows-1].x + offset.x,  this.grid[0][ this.krows].y + offset.y);
 
 }

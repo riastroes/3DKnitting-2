@@ -133,16 +133,19 @@ Settings.prototype.initMaterial = function(){
         this.initStyle(0.4, 0.03, 1200);  //0.4, 0.03, 1600 ok
       }
       else if(this.material == "PETGCARBON" && this.style == "fat" ){
-        this.initStyle(0.5, 0.5, 1200);  //0.4, 0.03, 1600 ok
+        this.initStyle(0.3, 1, 1200);  //0.4, 0.03, 1600 ok
       }
       else if(this.material == "PETGCARBON" && this.style == "fine" ){
-        this.initStyle(0.2, 0.03, 1200);  //0.4, 0.03, 1600 ok
+        this.initStyle(0.2, 0.3, 1200);  //0.4, 0.03, 1600 ok
       }
       else if(this.material == "PLABRO" && this.style == "normal" ){
           this.initStyle(0.4, 0.03, 1200); //test ok armband.
       }
       else if(this.material == "PLABRO" && this.style == "fine" ){
           this.initStyle(0.3, 0.02, 1200); //test ok armband.
+      }
+      else if(this.material == "PLAHennep" && this.style == "fat" ){
+          this.initStyle(0.3, 0.1, 1200); //test ok armband.
       }
     }
     case "Ultimaker2++":{ //nozzle 0.8
@@ -176,6 +179,11 @@ Settings.prototype.initPrinter = function(){
       this.bedtemp = 80; //80 is goed, niet meer veranderen!!
       break;
     }
+    case "PLAHennep":{
+      this.nozzletemp = 200;
+      this.bedtemp = 30;
+      break;
+    }
     case "Messing":{
       this.nozzletemp = 160;
       this.bedtemp = 40;
@@ -192,7 +200,7 @@ Settings.prototype.initPrinter = function(){
       break;
     }
     case "PETGCARBON":{
-      this.nozzletemp = 210;
+      this.nozzletemp = 255;
       this.bedtemp = 30;
       break;
     }

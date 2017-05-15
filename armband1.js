@@ -7,20 +7,20 @@ function Armband1(printer, material,style, pos,  stitches, rows, showgrid){
 //  style:     extrafine
 
   this.name = "Armband1";
-  this.rows = rows;
-  this.stitches = stitches;
+  this.rows = 33 //rows;
+  this.stitches = 10; //stitches;
   this.pos = pos;
   this.isSaved = false;
   this.settings =new Settings(printer, material, style);
   this.gcode = new Gcode(this.settings);
-  this.grid = new Grid(50,50, 3,3,3); // 6X6
+  this.grid = new Grid(50,50,2,2,3); // 6X6
   this.grid.createGrid();
   if(showgrid){
     this.grid.draw();
   }
   this.grid.testPos(pos.x,pos.y); //row, stitches
   this.layers = [];
-  this.maxlayers= 2;
+  this.maxlayers= 4;
   for(var i = 0; i < this.maxlayers; i++){
     this.layers[i] = new Layer(i, this.settings);
   }
@@ -37,9 +37,10 @@ Armband1.prototype.create = function(showgrid){
       this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.stitches,this.rows);
 
       if(showgrid){
-        this.knitgrid.draw();
+        this.knitgrid.draw(offset);
       }
-      this.knitgrid.disorderCosWave(1,floor(this.rows/2),2, -TWO_PI/70);
+      this.knitgrid.disorderCosWave(4,12,2, -TWO_PI/70);
+      this.knitgrid.disorderCosWave(20,28,2, -TWO_PI/70);
       //this.knitgrid.disorderCosWave(32,43,2, TWO_PI/70);
       //this.knitgrid.disorderShrinkWidth(11,37, 0.7)
       //this.knitgrid.disorderSinWave(41,51, 2, 0.4);
@@ -56,7 +57,9 @@ Armband1.prototype.create = function(showgrid){
     this.knittings[i].createPattern("end",this.rows,this.rows);
 
     this.knittings[i].patternToGrid();
-    this.knittings[i].drawPattern();
+
+    this.knittings[i].gotoStart(this.pos, offset);
+    this.knittings[i].drawPattern(offset);
     this.knittings[i].gcode(this.gcode, this.layers[i]);
 
   //

@@ -62,7 +62,6 @@ function draw(){
   text(sliderRows.value(), 300,100);
 
 
-
 }
 
 function create(){
@@ -72,7 +71,7 @@ function create(){
   stitches = floor(sliderStitches.value());
   rows = floor(sliderRows.value());
   pos = createVector(6,3);
-  knitting = new Armband1("Ultimaker2+", "PETGCARBON", "fat", pos, stitches, rows,checkShowGrid.checked()  );
+  knitting = new Armband1("Ultimaker2+", "PLAHennep", "fat", pos, stitches, rows,checkShowGrid.checked()  );
   knitting.create(checkShowGrid.checked());
 }
 function downloadKnitting(){

@@ -25,6 +25,7 @@ Gcode.prototype.startCode = function(){
     append(this.commands, "G92 E0             ;zero the extruded length again");
     append(this.commands, "G0 Z10             ;move the platform up 15mm");
     append(this.commands, "G0 F800            ;speed");
+    //append(this.commands, "M106            ;fan on");
     append(this.commands, "M117 Printing...");
 }
 Gcode.prototype.getCode = function(commands){
@@ -32,6 +33,7 @@ Gcode.prototype.getCode = function(commands){
 }
 Gcode.prototype.endCode = function(){
     append(this.commands, ";end code");
+    //append(this.commands, "M107               ;fan off");
     append(this.commands, "G1 Z15 F200        ;move Z up a bit");
     append(this.commands, "G91                ;relative positioning");
     append(this.commands, "M104 S0            ;extruder heater off");
