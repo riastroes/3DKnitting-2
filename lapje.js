@@ -1,4 +1,4 @@
-function Armband1(printer, material,style, ppos,  pstitches, prows, showgrid){
+function Lapje(printer, material,style, ppos,  pstitches, prows, showgrid){
   //TEST OK VOOR:
   //printer:   Anet
   //materiaal: BRICK
@@ -6,7 +6,7 @@ function Armband1(printer, material,style, ppos,  pstitches, prows, showgrid){
   //TEST NIET OK VOOR:
 //  style:     extrafine
 
-  this.name = "Armband1";
+  this.name = "Lapje";
   this.rows = prows;
   this.stitches = pstitches;
   this.pos = ppos;
@@ -29,7 +29,7 @@ function Armband1(printer, material,style, ppos,  pstitches, prows, showgrid){
   this.skirt.gcode(this.gcode, this.layers[0]);
 
 }
-Armband1.prototype.create = function(showgrid){
+Lapje.prototype.create = function(showgrid){
   this.knittings = [];
   for(var i = 0; i < this.maxlayers; i++){
 
@@ -65,7 +65,7 @@ Armband1.prototype.create = function(showgrid){
 
 
 }
-Armband1.prototype.save = function(){
+Lapje.prototype.save = function(){
   this.gcode.generate(this.layers,this.skirt, this.knittings);
   this.gcode.save(this.name + this.settings.materialcode + this.settings.style + this.rows + "x"+ this.stitches);
   this.isSaved = true;

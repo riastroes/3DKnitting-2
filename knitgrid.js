@@ -1,12 +1,12 @@
-function Knitgrid(biggrid, stitchnr,row, stitches,rows){
+function Knitgrid(biggrid, pstitchnr,prow, pstitches,prows){
   this.grid = [];
-  this.row = row;
+  this.row = prow;
   this.krow = this.row*4;
-  this.stitchnr = stitchnr;
-  this.kstitchnr = stitchnr*4;
-  this.rows = rows;
+  this.stitchnr = pstitchnr;
+  this.kstitchnr = pstitchnr*4;
+  this.rows = prows;
   this.krows = ((this.rows)*4) + 1;
-  this.stitches = stitches;
+  this.stitches = pstitches;
   this.kstitches = (this.stitches*4) + 1 ;
   this.create(biggrid);
 }

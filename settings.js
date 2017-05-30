@@ -121,7 +121,7 @@ Settings.prototype.initMaterial = function(){
           }
           break;
         }
-        break;
+        
       }
       break;
     }
@@ -129,6 +129,9 @@ Settings.prototype.initMaterial = function(){
 
       this.scale = 0.1;         //canvas = 2300 px, bed = 230 mm
       this.filement = 2.85;
+      if(this.material == "PLA" && this.style == "normal" ){
+        this.initStyle(0.4, 0.03, 1600);  //0.4, 0.03, 1600 ok
+      }
       if(this.material == "PETGCARBON" && this.style == "normal" ){
         this.initStyle(0.4, 0.03, 1200);  //0.4, 0.03, 1600 ok
       }

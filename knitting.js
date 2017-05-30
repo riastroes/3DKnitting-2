@@ -1,4 +1,4 @@
-function Knitting(biggrid, knitgrid, layer,stitchnr, row, stitches){
+function Knitting(biggrid, knitgrid, layer,stitchnr, row, pstitches){
   this.commands = new Array(";knitting");
   this.biggrid = biggrid;
   this.grid = knitgrid.grid;
@@ -9,7 +9,7 @@ function Knitting(biggrid, knitgrid, layer,stitchnr, row, stitches){
   this.last =0;
   this.strpattern = "";
 
-  this.stitches =  stitches;
+  this.stitches =  pstitches;
   this.stitchnr =  stitchnr;
   //this.patternname = patternname;
   this.pos = createVector(0,0);
